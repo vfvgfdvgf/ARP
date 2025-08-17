@@ -1,0 +1,768 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج البحث - عرب بيديا | الموسوعة العربية الشاملة</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="نتائج البحث - عرب بيديا">
+    <meta name="description" content="نتائج البحث في الموسوعة العربية الشاملة">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
+    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
+    
+    <!-- Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <style>
+    :root {
+        --sand-beige: #baab97;
+        --light-beige: #dad1ca;
+        --dark-teal: #2c6468;
+        --off-white: #e7e2dc;
+        --gray-green: #7b9486;
+        --text-dark: #1a1a1a;
+        --text-light: #5a5a5a;
+        --hover-bg: rgba(0,0,0,0.03);
+        --card-shadow: 0 4px 30px rgba(0,0,0,0.08);
+        --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        --border-radius: 18px;
+    }
+    
+    /* Base Styles */
+    body {
+        font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--off-white);
+        color: var(--text-dark);
+        line-height: 1.8;
+        letter-spacing: 0.01em;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        quotes: "«" "»" "‹" "›";
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    
+    a {
+        text-decoration: none;
+        transition: var(--transition);
+    }
+    
+    /* Welcome Bar - Enhanced */
+    .welcome-bar {
+        background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        padding: 12px 0;
+        position: relative;
+        overflow: hidden;
+        font-size: 0.95rem;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+    
+    .welcome-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    
+    .welcome-message {
+        position: relative;
+        display: inline-block;
+        padding: 0 25px;
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+    }
+    
+    .welcome-message::before,
+    .welcome-message::after {
+        content: "✧";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.7;
+        font-size: 1.1rem;
+    }
+    
+    .welcome-message::before {
+        right: -5px;
+    }
+    
+    .welcome-message::after {
+        left: -5px;
+    }
+    
+    .marquee {
+        display: inline-block;
+        white-space: nowrap;
+        animation: marquee 20s linear infinite;
+        padding-left: 100%;
+    }
+    
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+    
+    .utility-links {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .utility-link {
+        color: rgba(255,255,255,0.9);
+        font-size: 0.9rem;
+        transition: var(--transition);
+    }
+    
+    .utility-link:hover {
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    /* Modern Apple-style Navbar */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 10px 0;
+        transition: var(--transition);
+        box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 1.6rem;
+        color: var(--dark-teal);
+        letter-spacing: -0.5px;
+    }
+    
+    .logo-img {
+        width: 40px;
+        height: 40px;
+        margin-left: 15px;
+        border-radius: 10px;
+        object-fit: contain;
+        transition: var(--transition);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand:hover .logo-img {
+        transform: rotate(15deg) scale(1.1);
+    }
+    
+    .nav-link {
+        color: var(--text-dark);
+        font-weight: 500;
+        margin-left: 1.2rem;
+        transition: var(--transition);
+        position: relative;
+        font-size: 0.95rem;
+        padding: 8px 18px;
+        border-radius: var(--border-radius);
+    }
+    
+    .nav-link:hover {
+        color: var(--dark-teal);
+        background-color: var(--hover-bg);
+        transform: translateY(-2px);
+    }
+    
+    .nav-link.active {
+        color: var(--dark-teal);
+        background-color: rgba(44, 100, 104, 0.1);
+        font-weight: 600;
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 18px;
+        right: 18px;
+        height: 3px;
+        background: var(--dark-teal);
+        border-radius: 3px;
+    }
+    
+    /* Search Results Section */
+    .search-results-section {
+        padding: 5rem 0;
+        min-height: 60vh;
+    }
+    
+    .search-results-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .search-results-header {
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+    
+    .search-results-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--dark-teal);
+        margin-bottom: 1rem;
+    }
+    
+    .search-query {
+        color: var(--sand-beige);
+        font-weight: 600;
+    }
+    
+    .results-count {
+        color: var(--text-light);
+        font-size: 1.1rem;
+    }
+    
+    .results-category {
+        margin-bottom: 3rem;
+    }
+    
+    .category-title {
+        font-size: 1.8rem;
+        color: var(--dark-teal);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 2px solid var(--light-beige);
+    }
+    
+    .result-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .result-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .result-title {
+        font-size: 1.3rem;
+        color: var(--dark-teal);
+        margin-bottom: 0.5rem;
+    }
+    
+    .result-meta {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .result-description {
+        color: var(--text-light);
+        line-height: 1.7;
+    }
+    
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .no-results-icon {
+        font-size: 3rem;
+        color: var(--sand-beige);
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Encyclopedia Footer */
+    .footer {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        padding: 6rem 0 3rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .footer-logo {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: white;
+        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer-logo img {
+        width: 44px;
+        height: 44px;
+        margin-left: 15px;
+        border-radius: 10px;
+        transition: var(--transition);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .footer-logo:hover img {
+        transform: rotate(15deg) scale(1.1);
+    }
+    
+    .footer-about p {
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+        font-size: 1.05rem;
+    }
+    
+    .footer-social {
+        display: flex;
+        gap: 1.2rem;
+    }
+    
+    .footer-social a {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        color: white;
+        font-size: 1.3rem;
+    }
+    
+    .footer-social a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px) scale(1.1);
+    }
+    
+    .footer-links h3 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 1rem;
+        color: white;
+        font-weight: 600;
+    }
+    
+    .footer-links h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: rgba(255,255,255,0.5);
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-links li {
+        margin-bottom: 1.2rem;
+    }
+    
+    .footer-links a {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 1.05rem;
+    }
+    
+    .footer-links a:hover {
+        color: white;
+        transform: translateX(-8px);
+    }
+    
+    .footer-links i {
+        font-size: 0.9rem;
+        transition: var(--transition);
+    }
+    
+    .footer-links a:hover i {
+        transform: translateX(3px);
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: 5rem;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+    }
+    
+    /* Back to Top Button */
+    #backToTop {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--dark-teal);
+        color: white;
+        border: none;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    
+    #backToTop.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    #backToTop:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .search-results-title {
+            font-size: 2rem;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .search-results-title {
+            font-size: 1.8rem;
+        }
+        
+        .result-title {
+            font-size: 1.1rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- شريط الترحيب العلوي المحسن -->
+    <div class="welcome-bar">
+        <div class="container welcome-container">
+            <div class="welcome-message">
+                <div class="marquee">مرحباً بكم في       {{ country.name }} | اكتشف ثقافات وتاريخ وجغرافية العالم العربي</div>
+            </div>
+            <div class="utility-links">
+                <a href="{% url 'country_about' country.slug %}" class="utility-link">من نحن</a>
+                <a href="{% url 'country_contact' country.slug %}" class="utility-link">اتصل بنا</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- الهيدر المحسن -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'country_home' country.slug %}">
+                <img src="https://j.top4top.io/p_3513ebspn1.png" alt="عرب بيديا" class="logo-img">
+       {{ country.name }}            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="تبديل القائمة">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_home' country.slug %}">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">التصنيفات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#featured">المميز</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'country_search' country.slug %}">البحث</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_about' country.slug %}">عن الموسوعة</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- قسم نتائج البحث -->
+    <section class="search-results-section">
+        <div class="search-results-container">
+            <div class="search-results-header animate__animated animate__fadeInUp">
+                <h1 class="search-results-title">
+                    {% if country %}
+                        نتائج البحث في <span class="search-query">"{{ query }}"</span>
+                    {% else %}
+                        نتائج البحث عن <span class="search-query">"{{ query }}"</span>
+                    {% endif %}
+                </h1>
+                <p class="results-count">
+                    {% if articles or categories %}
+                        {% if categories|length > 0 and articles|length > 0 %}
+                            تم العثور على {{ categories|length }} تصنيفات و {{ articles|length }} مقالات
+                        {% elif categories|length > 0 %}
+                            تم العثور على {{ categories|length }} تصنيفات
+                        {% else %}
+                            تم العثور على {{ articles|length }} مقالات
+                        {% endif %}
+                    {% endif %}
+                </p>
+            </div>
+            
+            {% if articles or categories %}
+                <!-- نتائج التصنيفات -->
+                {% if categories %}
+                <div class="results-category animate__animated animate__fadeInUp animate__delay-1s">
+                    <h2 class="category-title">
+                        <i class="fas fa-folder-open" style="margin-left: 10px;"></i>
+                        التصنيفات المطابقة
+                    </h2>
+                    
+                    {% for category in categories %}
+                    <div class="result-card">
+                        <h3 class="result-title">
+                            <a href="{% url 'category_view' category.country.slug category.slug %}">
+                                {{ category.name }}
+                            </a>
+                        </h3>
+                        <div class="result-meta">
+                            <span><i class="fas fa-book" style="margin-left: 5px;"></i> {{ category.article_count|default:"0" }} مقالة</span>
+                            <span style="margin-right: 15px;"><i class="fas fa-eye" style="margin-left: 5px;"></i> {{ category.view_count|default:"0" }} مشاهدة</span>
+                        </div>
+                        {% if category.description %}
+                        <p class="result-description">{{ category.description|truncatechars:200 }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- نتائج المقالات -->
+                {% if articles %}
+                <div class="results-category animate__animated animate__fadeInUp animate__delay-2s">
+                    <h2 class="category-title">
+                        <i class="fas fa-newspaper" style="margin-left: 10px;"></i>
+                        المقالات المطابقة
+                    </h2>
+                    
+                    {% for article in articles %}
+                    <div class="result-card">
+                        <h3 class="result-title">
+                            <a href="{% url 'article_detail' article.country.slug article.slug %}">
+                                {{ article.title }}
+                            </a>
+                        </h3>
+                        <div class="result-meta">
+                            <span><i class="fas fa-map-marker-alt" style="margin-left: 5px;"></i> {{ article.country.name }}</span>
+                            <span style="margin-right: 15px;"><i class="far fa-calendar-alt" style="margin-left: 5px;"></i> {{ article.publish_date|date:"Y-m-d" }}</span>
+                        </div>
+                        {% if article.summary %}
+                        <p class="result-description">{{ article.summary|truncatechars:200 }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% else %}
+                <!-- حالة عدم وجود نتائج -->
+                <div class="no-results animate__animated animate__fadeIn">
+                    <div class="no-results-icon">
+                        <i class="fas fa-search-minus"></i>
+                    </div>
+                    <h3>لم يتم العثور على نتائج</h3>
+                    <p>عذراً، لم نتمكن من العثور على أي نتائج مطابقة لبحثك "{{ query }}"</p>
+                    <a href="{% url 'country_home' country.slug %}" class="btn btn-primary mt-3">العودة إلى الرئيسية</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- الفوتر الموسوعي المحسن -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://d.top4top.io/p_35134u9lv1.png" alt="عرب بيديا">
+                        عرب بيديا
+                    </div>
+                    <p>الموسوعة العربية الشاملة للمعرفة والمعلومات، نقدم محتوى عالي الجودة عن العالم العربي بتصميم عصري وسهل الاستخدام.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="{% url 'country_home' country.slug %}"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                        <li><a href="{% url 'country_about' country.slug %}"><i class="fas fa-chevron-left"></i> عن الموسوعة</a></li>
+                        <li><a href="#categories"><i class="fas fa-chevron-left"></i> التصنيفات</a></li>
+                        <li><a href="#featured"><i class="fas fa-chevron-left"></i> المقالات المميزة</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>المساعدة</h3>
+                    <ul>
+                        <li><a href="{% url 'country_privacy_policy' country.slug %}"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                        <li><a href="{% url 'country_terms' country.slug %}"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> دليل الاستخدام</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الإبلاغ عن خطأ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>المشاركة</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> المساهمة بالمحتوى</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> التطوع معنا</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الشركاء</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الإعلان معنا</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> التبرع</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} موسوعة عرب بيديا - جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- زر العودة للأعلى -->
+    <button id="backToTop" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+    // تأثيرات التمرير للنافبار
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        // زر العودة للأعلى
+        const backToTop = document.getElementById('backToTop');
+        if (window.scrollY > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
+    
+    // زر العودة للأعلى
+    document.getElementById('backToTop').addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // تأثيرات الظهور عند التمرير
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.result-card, .results-category, .no-results');
+        
+        elements.forEach((element, index) => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementPosition < windowHeight - 100) {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            }
+        });
+    };
+    
+    // تهيئة العناصر قبل الظهور
+    document.querySelectorAll('.result-card, .results-category, .no-results').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+    
+    // تشغيل التأثير عند التحميل وعند التمرير
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // تهيئة AOS
+    AOS.init({
+        duration: 800,
+        once: true,
+        easing: 'ease-out-cubic'
+    });
+    </script>
+</body>
+</html>

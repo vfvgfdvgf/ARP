@@ -1,0 +1,3310 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرب بيديا - ArabPedia | الموسوعة العربية الشاملة</title>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="عرب بيديا - ArabPedia">
+    <meta name="description" content="الموسوعة العربية الشاملة، معلومات دقيقة ومنظمة عن العالم العربي">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sand-beige: #baab97;
+            --light-beige: #dad1ca;
+            --dark-teal: #2c6468;
+            --off-white: #e7e2dc;
+            --gray-green: #7b9486;
+            --text-dark: #1d1d1f;
+            --text-light: #86868b;
+            --hover-bg: rgba(0,0,0,0.03);
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        body {
+            font-family: 'SF Arabic', 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* شريط الترحيب العلوي */
+        .welcome-bar {
+            background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-message {
+            position: relative;
+            display: inline-block;
+            padding: 0 25px;
+        }
+        
+        .welcome-message::before,
+        .welcome-message::after {
+            content: "✧";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+            font-size: 1.1rem;
+        }
+        
+        .welcome-message::before {
+            right: -5px;
+        }
+        
+        .welcome-message::after {
+            left: -5px;
+        }
+        
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+            padding-left: 100%;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* تصميم الهيدر بأسلوب أبل */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 12px 0;
+            transition: var(--transition);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            margin-left: 12px;
+            border-radius: 8px;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand:hover .logo-img {
+            transform: rotate(15deg);
+        }
+        
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-left: 1.2rem;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+            padding: 8px 15px;
+            border-radius: 18px;
+        }
+        
+        .nav-link:hover {
+            color: var(--dark-teal);
+            background-color: var(--hover-bg);
+        }
+        
+        .nav-link.active {
+            color: var(--dark-teal);
+            background-color: rgba(44, 100, 104, 0.1);
+        }
+        
+        /* قسم الهيرو بأسلوب أبل */
+        .hero {
+            position: relative;
+            height: 95vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, #f5f5f7 0%, var(--off-white) 100%);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--dark-teal);
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+        
+        .hero h1 .en {
+            font-size: 3.5rem;
+            display: block;
+            margin-top: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(44, 100, 104, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(44, 100, 104, 0.4);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--dark-teal);
+            background: transparent;
+            color: var(--dark-teal);
+            padding: 0.9rem 2.5rem;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(44, 100, 104, 0.08);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(44, 100, 104, 0.15);
+        }
+        
+        /* شريط البحث بأسلوب أبل */
+        .search-section {
+            background: white;
+            padding: 3rem 2rem;
+            margin-top: -70px;
+            position: relative;
+            z-index: 10;
+            border-radius: 24px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: var(--card-shadow);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.6s;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .search-bar {
+            position: relative;
+        }
+        
+        .search-bar input {
+            background: #f5f5f7;
+            border: none;
+            color: var(--text-dark);
+            padding: 1.3rem 2.5rem 1.3rem 5rem;
+            border-radius: 50px;
+            width: 100%;
+            font-size: 1.15rem;
+            transition: var(--transition);
+            font-family: 'SF Arabic', 'Tajawal', sans-serif;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .search-bar input:focus {
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 3px var(--dark-teal), 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .search-bar input::placeholder {
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+        
+        .search-bar .search-icon {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.3rem;
+        }
+        
+        .search-tags {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1.8rem;
+        }
+        
+        .search-tag {
+            background: #f5f5f7;
+            border: none;
+            color: var(--text-dark);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .search-tag:hover {
+            background: var(--dark-teal);
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(44, 100, 104, 0.2);
+        }
+        
+        /* قسم الدول العربية */
+        .countries-section {
+            padding: 7rem 1rem;
+            background-color: var(--off-white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        
+        .section-title.animate-on-scroll {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark-teal);
+            letter-spacing: -0.5px;
+        }
+        
+        .section-title p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .countries-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .country-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .country-item.animate-on-scroll {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .country-item:hover {
+            transform: translateY(-12px) !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .country-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+        
+        .country-image-container {
+            position: relative;
+            height: 180px;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+        }
+        
+        .country-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .country-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .country-name {
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin: 0;
+        }
+        
+        .country-info {
+            padding: 1.8rem;
+        }
+        
+        .country-description {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .country-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-teal);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+        
+        .btn-explore {
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            border: none;
+            color: white;
+            width: 100%;
+            padding: 0.9rem;
+            border-radius: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(44, 100, 104, 0.2);
+        }
+        
+        .btn-explore:hover {
+            background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(44, 100, 104, 0.3);
+        }
+        
+        /* قسم من نحن */
+        .about-section {
+            padding: 7rem 1rem;
+            background: white;
+        }
+        
+        .about-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        
+        .about-image.animate-on-scroll {
+            animation: fadeInRight 0.8s ease forwards;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        .about-content.animate-on-scroll {
+            animation: fadeInLeft 0.8s ease forwards;
+        }
+        
+        .about-content h2 {
+            font-size: 2.8rem;
+            color: var(--dark-teal);
+            margin-bottom: 1.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .about-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 1.15rem;
+        }
+        
+        .about-features {
+            margin-top: 2.5rem;
+        }
+        
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.8rem;
+        }
+        
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--off-white);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1.5rem;
+            color: var(--dark-teal);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        .about-feature:hover .feature-icon {
+            background: var(--dark-teal);
+            color: white;
+            transform: rotate(5deg);
+        }
+        
+        .feature-text h4 {
+            font-size: 1.3rem;
+            color: var(--dark-teal);
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+        
+        .feature-text p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        /* قسم الإحصائيات */
+        .stats-section {
+            padding: 6rem 1rem;
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            color: white;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .stat-card {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .stat-card.animate-on-scroll {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover .stat-icon {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover .stat-number {
+            transform: scale(1.05);
+        }
+        
+        .stat-title {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* قسم المدونات */
+        .blogs-section {
+            padding: 7rem 1rem;
+            background: var(--off-white);
+        }
+        
+        .blogs-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .blog-card.animate-on-scroll {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .blog-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
+        }
+        
+        .blog-content {
+            padding: 2rem;
+        }
+        
+        .blog-date {
+            display: inline-block;
+            background: var(--off-white);
+            color: var(--dark-teal);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .blog-title {
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-author {
+            display: flex;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 1rem;
+        }
+        
+        .author-info h5 {
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+            color: var(--text-dark);
+        }
+        
+        .author-info p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+        
+        /* قسم الاشتراك */
+        .newsletter-section {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--off-white);
+            padding: 4rem 2rem;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .newsletter-container h2 {
+            font-size: 2.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 1.5rem;
+        }
+        
+        .newsletter-container p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: 12px 0 0 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--dark-teal);
+        }
+        
+        .newsletter-form button {
+            background: var(--dark-teal);
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 0 12px 12px 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form button:hover {
+            background: #24585c;
+        }
+        
+        /* قسم المميزات */
+        .features-section {
+            padding: 7rem 1rem;
+            background: var(--off-white);
+        }
+        
+        .features-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .feature-card.animate-on-scroll {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-12px) !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--dark-teal);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: white;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--dark-teal);
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        /* فوتر بأسلوب أبل */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            padding: 6rem 1rem 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+        }
+        
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+            color: white;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            margin-left: 12px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .footer-logo:hover img {
+            transform: rotate(15deg);
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .footer-social a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(-8px);
+        }
+        
+        .footer-links i {
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 5rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+        
+        /* زر العودة للأعلى بأسلوب أبل */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(44, 100, 104, 0.4);
+            z-index: 100;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(44, 100, 104, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1400px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero h1 .en {
+                font-size: 3rem;
+            }
+            
+            .about-container {
+                gap: 4rem;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero h1 .en {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .countries-list {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .blogs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero {
+                height: auto;
+                padding: 140px 0 100px;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero h1 .en {
+                font-size: 2.4rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .search-section {
+                margin-top: -50px;
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                max-width: 600px;
+                margin: 0 auto 3rem;
+            }
+            
+            .about-content h2 {
+                font-size: 2.4rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 12px;
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-form button {
+                border-radius: 12px;
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h1 .en {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .search-section {
+                margin-top: -40px;
+                padding: 2rem 1rem;
+            }
+            
+            .countries-list {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero h1 .en {
+                font-size: 1.8rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-outline {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .search-section {
+                margin-top: -30px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 1.1rem;
+            }
+            
+            .about-content h2 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.1rem;
+                bottom: 30px;
+                right: 30px;
+            }
+        }
+
+
+        .rulers-section {
+    padding: 6rem 1rem;
+    background: white;
+}
+
+.rulers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 3rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.ruler-card {
+    background: var(--off-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.ruler-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.ruler-image {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.ruler-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.ruler-card:hover .ruler-image img {
+    transform: scale(1.05);
+}
+
+.ruler-flag {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.ruler-info {
+    padding: 2rem;
+}
+
+.ruler-info h3 {
+    font-size: 1.8rem;
+    color: var(--dark-teal);
+    margin-bottom: 0.5rem;
+}
+
+.ruler-position {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.ruler-details {
+    margin-bottom: 1.5rem;
+}
+
+.ruler-details p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.ruler-details strong {
+    color: var(--dark-teal);
+}
+
+.ruler-bio {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.timeline-section {
+    padding: 6rem 1rem;
+    background: var(--off-white);
+}
+
+.timeline-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: var(--dark-teal);
+    opacity: 0.3;
+}
+
+.timeline-event {
+    display: flex;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.timeline-event:nth-child(odd) {
+    flex-direction: row-reverse;
+    text-align: left;
+}
+
+.timeline-event:nth-child(even) {
+    text-align: right;
+}
+
+.event-date {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-content {
+    flex: 2;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    transition: var(--transition);
+}
+
+.timeline-event:hover .event-content {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.event-content::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--dark-teal);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.timeline-event:nth-child(odd) .event-content::before {
+    right: -10px;
+}
+
+.timeline-event:nth-child(even) .event-content::before {
+    left: -10px;
+}
+
+.event-content h3 {
+    font-size: 1.5rem;
+    color: var(--dark-teal);
+    margin-bottom: 1rem;
+}
+
+.event-description {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.event-country {
+    display: flex;
+    align-items: center;
+}
+
+.timeline-event:nth-child(odd) .event-country {
+    justify-content: flex-start;
+}
+
+.timeline-event:nth-child(even) .event-country {
+    justify-content: flex-end;
+}
+
+.event-country img {
+    width: 30px;
+    height: 20px;
+    border-radius: 4px;
+    margin: 0 10px;
+}
+
+.event-country span {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+    .timeline-container::before {
+        left: 30px;
+    }
+    
+    .timeline-event {
+        flex-direction: column !important;
+        text-align: right !important;
+    }
+    
+    .event-date {
+        justify-content: flex-start;
+        padding-right: 70px;
+    }
+    
+    .event-content {
+        margin-right: 30px;
+    }
+    
+    .event-content::before {
+        left: -40px !important;
+    }
+    
+    .event-country {
+        justify-content: flex-end !important;
+    }
+}
+
+
+.wiki-search-section {
+    padding: 5rem 1rem;
+    background: white;
+}
+
+.wiki-search-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.wiki-search-container h2 {
+    font-size: 2rem;
+    color: var(--dark-teal);
+    margin-bottom: 2rem;
+}
+
+.wiki-search-box {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.wiki-search-box input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--light-beige);
+    border-radius: 12px 0 0 12px;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.wiki-search-box input:focus {
+    outline: none;
+    border-color: var(--dark-teal);
+}
+
+.wiki-search-box button {
+    background: var(--dark-teal);
+    color: white;
+    border: none;
+    padding: 0 2rem;
+    border-radius: 0 12px 12px 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.wiki-search-box button:hover {
+    background: #24585c;
+}
+
+.wiki-results {
+    text-align: right;
+    background: var(--off-white);
+    border-radius: 12px;
+    padding: 2rem;
+    min-height: 200px;
+}
+
+.wiki-result-item {
+    margin-bottom: 2rem;
+}
+
+.wiki-result-title {
+    font-size: 1.5rem;
+    color: var(--dark-teal);
+    margin-bottom: 1rem;
+}
+
+.wiki-result-snippet {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.wiki-result-link {
+    display: inline-block;
+    color: var(--dark-teal);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.wiki-result-link:hover {
+    color: #24585c;
+    transform: translateX(-5px);
+}
+
+.wiki-loading {
+    display: none;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.wiki-error {
+    color: #e74c3c;
+    text-align: center;
+}
+.navbar {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 0;
+    transition: var(--transition);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--dark-teal);
+    letter-spacing: -0.5px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    margin-left: 12px;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.navbar-brand:hover .logo-img {
+    transform: rotate(60px);
+}
+
+.nav-link {
+    color: var(--text-dark);
+    font-weight: 500;
+    margin-left: 1rem;
+    transition: var(--transition);
+    position: relative;
+    font-size: 0.95rem;
+    padding: 8px 15px;
+    border-radius: 18px;
+}
+
+.nav-link:hover {
+    color: var(--dark-teal);
+    background-color: var(--hover-bg);
+}
+
+.nav-link.active {
+    color: var(--dark-teal);
+    background-color: rgba(44, 100, 104, 0.1);
+}
+
+.dropdown-menu {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 0.5rem 0;
+    background: white;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.5rem;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.dropdown-item:hover {
+    background: var(--hover-bg);
+    color: var(--dark-teal);
+    transform: translateX(-5px);
+}
+
+.dropdown-divider {
+    border-color: rgba(0,0,0,0.05);
+    margin: 0.5rem 0;
+}
+
+.dropdown-toggle::after {
+    margin-right: 0.5rem;
+    vertical-align: 0.15em;
+}
+
+/* تأثيرات القوائم المنسدلة */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* تعديلات للهواتف */
+@media (max-width: 992px) {
+    .navbar-nav {
+        padding-top: 1rem;
+    }
+    
+    .nav-item {
+        margin-bottom: 0.5rem;
+    }
+    
+    .nav-link {
+        padding: 0.8rem 1rem;
+    }
+    
+    .dropdown-menu {
+        box-shadow: none;
+        background: rgba(0,0,0,0.02);
+        margin-right: 1rem;
+        border-radius: 12px;
+    }
+    
+    .dropdown-item {
+        padding: 0.5rem 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- شريط الترحيب العلوي -->
+    <div class="welcome-bar">
+        <div class="welcome-message">
+            <div class="marquee"> مرحباً بكم في عرب بيديا - الموسوعة العربية الشاملة | اكتشف ثقافات وتاريخ وجغرافية العالم العربي </div>
+        </div>
+    </div>
+    
+    <!-- الهيدر -->
+    <nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="https://j.top4top.io/p_3513ebspn1.png" alt="عرب بيديا" class="logo-img">
+            عرب بيديا
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">الرئيسية</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#countries" id="countriesDropdown">
+مواقع الدول العربية                     </a>
+                 
+<ul class="dropdown-menu">
+    <li>
+        <a class="dropdown-item" href="#countries">
+            <i class="fas fa-globe"></i> مواقع الدول
+        </a>
+    </li>
+       <li class="nav-item">
+                    <a class="nav-link" href="#rulers">حكام الدول العربية،</a>
+                </li>
+</ul>
+      <li class="nav-item">
+                    <a class="nav-link" href="#timeline">الأحداث التاريخية</a>
+                </li>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">المميزات</a>
+                </li>
+                <li class="nav-item">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#wikiSearchInput">موسوعة ويكي</a>
+                </li>
+                <li class="nav-item">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">اتصل بنا</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <!-- قسم الهيرو -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                عرب بيديا
+                <span class="en">ArabPedia</span>
+            </h1>
+            <p>الموسوعة العربية الشاملة للمعرفة والمعلومات</p>
+            <p>اكتشف ثقافات وتاريخ وجغرافية العالم العربي بتجربة مميزة</p>
+            <div class="hero-btns">
+                <a href="#countries" class="btn btn-primary">استكشف الدول</a>
+                <a href="#search" class="btn btn-outline">ابحث عن دولة</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- شريط البحث -->
+<div class="search-section" id="search">
+    <div class="search-container">
+        <div class="search-bar">
+            <i class="fas fa-search search-icon"></i>
+            <form method="get" action="{% url 'search_results' %}">
+                <input type="text" name="q" placeholder="ابحث عن دولة أو مقال..." value="{{ request.GET.q }}">
+            </form>
+        </div>
+        <div class="search-tags">
+            {% comment %} يمكنك تعديل هذه الـ Tags لتكون ديناميكية من قائمة الدول {% endcomment %}
+            {% for country in countries %}
+                <a href="{% url 'search_results' %}?q={{ country.name }}" class="search-tag">#{{ country.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+    <!-- قائمة الدول العربية -->
+    <section class="countries-section" id="countries">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>مواقع الدول العربية</h2>
+                <p>معلومات شاملة عن جميع الدول العربية مع خرائط تفاعلية وإحصائيات حديثة</p>
+            </div>
+            
+            <div class="countries-list">
+                {% for country in countries %}
+                <div class="country-item animate-on-scroll" style="animation-delay: {{ forloop.counter0|divisibleby:3|yesno:'0,0.1s,0.2s' }}">
+                    <a href="{% url 'country_home' country.slug %}" class="country-link">
+                        <div class="country-image-container">
+                            {% if country.image_url %}
+                                <img src="{{ country.image_url }}" alt="{{ country.name }}" loading="lazy">
+                            {% else %}
+                                <img src="{% static 'images/default_country.jpg' %}" alt="{{ country.name }}" loading="lazy">
+                            {% endif %}
+                            <div class="country-overlay">
+                                <h3 class="country-name">{{ country.name }}</h3>
+                            </div>
+                        </div>
+                        <div class="country-info">
+                            <p class="country-description">اكتشف تاريخ وثقافة {{ country.name }} مع أحدث المعلومات والاحصائيات</p>
+                            <div class="country-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">{{ country.population|default:"-" }}</div>
+                                    <div class="stat-label">عدد السكان</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">{{ country.area|default:"-" }}</div>
+                                    <div class="stat-label">المساحة (كم²)</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">{{ country.capital|default:"-" }}</div>
+                                    <div class="stat-label">العاصمة</div>
+                                </div>
+                            </div>
+                            <button class="btn-explore">
+                                اكتشف المزيد
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+
+<!-- قسم حكام الدول -->
+<section class="rulers-section" id="rulers">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>حكام الدول العربية</h2>
+            <p>تعرف على القيادات الحالية للدول العربية الـ22</p>
+        </div>
+             
+        <div class="rulers-grid">
+            <!-- دول الخليج -->
+            <div class="ruler-card animate-on-scroll" data-category="gulf">
+                <div class="ruler-image">
+                    <img src="https://www.alriyadh.com/media/article/2025/03/09/img/4802790767.jpg" alt="سلمان بن عبد العزيز آل سعود">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/sa.png" alt="علم السعودية">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>سلمان بن عبد العزيز آل سعود</h3>
+                    <div class="ruler-position">ملك المملكة العربية السعودية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2015 حتى الآن</p>
+                        <p><strong>العمر:</strong> 88 سنة</p>
+                        <p><strong>ولي العهد:</strong> محمد بن سلمان</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>سلمان بن عبد العزيز آل سعود هو الملك السابع للمملكة العربية السعودية، تولى الحكم في 23 يناير 2015 بعد وفاة أخيه الملك عبدالله.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="gulf">
+                <div class="ruler-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/%D8%AA%D9%85%D9%8A%D9%85_%D8%A8%D9%86_%D8%AD%D9%85%D8%AF_%D8%A8%D9%86_%D8%AE%D9%84%D9%8A%D9%81%D8%A9_%D8%A2%D9%84_%D8%AB%D8%A7%D9%86%D9%8A_%2849759678641%29.jpg/1200px-%D8%AA%D9%85%D9%8A%D9%85_%D8%A8%D9%86_%D8%AD%D9%85%D8%AF_%D8%A8%D9%86_%D8%AE%D9%84%D9%8A%D9%81%D8%A9_%D8%A2%D9%84_%D8%AB%D8%A7%D9%86%D9%8A_%2849759678641%29.jpg" alt="تميم بن حمد آل ثاني">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/qa.png" alt="علم قطر">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>تميم بن حمد آل ثاني</h3>
+                    <div class="ruler-position">أمير دولة قطر</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2013 حتى الآن</p>
+                        <p><strong>العمر:</strong> 44 سنة</p>
+                        <p><strong>الدراسة:</strong> أكاديمية ساندهيرست العسكرية</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>تميم بن حمد آل ثاني هو الأمير الثامن لقطر، تولى الحكم في 25 يونيو 2013 بعد تنازل والده الشيخ حمد بن خليفة آل ثاني عن الحكم.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شمال أفريقيا -->
+            <div class="ruler-card animate-on-scroll" data-category="north-africa">
+                <div class="ruler-image">
+                    <img src="https://i1.hespress.com/wp-content/uploads/2021/08/M6UNE.jpg" alt="محمد السادس">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/ma.png" alt="علم المغرب">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>محمد السادس</h3>
+                    <div class="ruler-position">ملك المملكة المغربية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 1999 حتى الآن</p>
+                        <p><strong>العمر:</strong> 61 سنة</p>
+                        <p><strong>الدراسة:</strong> جامعة نيس صوفيا أنتيبوليس</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>الملك محمد السادس هو العاهل المغربي منذ 23 يوليو 1999، وهو من الأسرة العلوية التي تحكم المغرب منذ القرن 17.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="north-africa">
+                <div class="ruler-image">
+                    <img src="https://arabinp.com/wp-content/uploads/2024/05/434474759_821973176631078_705021296829457655_n-1.jpg" alt="عبد المجيد تبون">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/dz.png" alt="علم الجزائر">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>عبد المجيد تبون</h3>
+                    <div class="ruler-position">رئيس الجمهورية الجزائرية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2019 حتى الآن</p>
+                        <p><strong>العمر:</strong> 78 سنة</p>
+                        <p><strong>الحزب:</strong> مستقل (سابقاً جبهة التحرير الوطني)</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>عبد المجيد تبون هو الرئيس الثامن للجزائر، تولى منصبه بعد فوزه في الانتخابات الرئاسية الجزائرية 2019.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- بلاد الشام -->
+            <div class="ruler-card animate-on-scroll" data-category="levant">
+                <div class="ruler-image">
+                    <img src="https://www.pha.edu.jo/img/king.jpg" alt="عبد الله الثاني">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/jo.png" alt="علم الأردن">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>عبد الله الثاني بن الحسين</h3>
+                    <div class="ruler-position">ملك المملكة الأردنية الهاشمية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 1999 حتى الآن</p>
+                        <p><strong>العمر:</strong> 62 سنة</p>
+                        <p><strong>الدراسة:</strong> أكاديمية ساندهيرست العسكرية</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>الملك عبد الله الثاني هو الحاكم الثالث والأربعون للأردن من الأسرة الهاشمية، تولى العرش بعد وفاة والده الملك حسين.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+           <div class="ruler-card animate-on-scroll" data-category="levant">
+    <div class="ruler-image">
+        <img src="https://via.placeholder.com/300x400" alt="أحمد الشرع">
+        <div class="ruler-flag">
+            <img src="https://flagcdn.com/w80/sy.png" alt="علم سوريا">
+        </div>
+    </div>
+    <div class="ruler-info">
+        <h3>أحمد الشرع</h3>
+        <div class="ruler-position">رئيس الجمهورية العربية السورية</div>
+        <div class="ruler-details">
+            <p><strong>فترة الحكم:</strong> منذ 2025 حتى الآن</p>
+            <p><strong>العمر:</strong> 50 سنة</p>
+            <p><strong>الحزب:</strong> حزب البعث العربي الاشتراكي</p>
+        </div>
+        <div class="ruler-bio">
+            <p>أحمد الشرع هو الرئيس الحالي لسوريا، تولى الرئاسة بعد انتهاء فترة بشار الأسد في عام 2025.</p>
+        </div>
+        <div class="ruler-more">
+            <a href="#" class="btn">المزيد من المعلومات</a>
+        </div>
+    </div>
+</div>
+
+
+            <!-- القرن الأفريقي -->
+            <div class="ruler-card animate-on-scroll" data-category="africa">
+                <div class="ruler-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Abdel_Fattah_al-Burhan_in_April_2025_%28cropped%29.jpg/330px-Abdel_Fattah_al-Burhan_in_April_2025_%28cropped%29.jpg" alt="عبد الفتاح البرهان">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/sd.png" alt="علم السودان">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>عبد الفتاح البرهان</h3>
+                    <div class="ruler-position">رئيس مجلس السيادة السوداني</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2019 حتى الآن</p>
+                        <p><strong>العمر:</strong> 64 سنة</p>
+                        <p><strong>الخلفية:</strong> عسكري - قائد القوات البرية</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>عبد الفتاح البرهان هو الرئيس الحالي لمجلس السيادة السوداني الذي تأسس بعد الإطاحة بعمر البشير في 2019.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- باقي الدول -->
+            <div class="ruler-card animate-on-scroll" data-category="gulf">
+                <div class="ruler-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgRFp7NUK3Yhx7-1Xdl4AdbMDaplh3XM5jYA&s" alt="حمد بن عيسى آل خليفة">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/bh.png" alt="علم البحرين">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>حمد بن عيسى آل خليفة</h3>
+                    <div class="ruler-position">ملك مملكة البحرين</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2002 حتى الآن</p>
+                        <p><strong>العمر:</strong> 74 سنة</p>
+                        <p><strong>ولي العهد:</strong> سلمان بن حمد آل خليفة</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>حمد بن عيسى آل خليفة هو ملك البحرين منذ 6 مارس 1999، وأعلن المملكة في 14 فبراير 2002.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="gulf">
+                <div class="ruler-image">
+                    <img src="https://www.omaninfo.om/files/images/thumb/2020-05-18-13-26-33_5ec254c9e8a52.jpg" alt="هيثم بن طارق آل سعيد">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/om.png" alt="علم عمان">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>هيثم بن طارق آل سعيد</h3>
+                    <div class="ruler-position">سلطان عمان</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2020 حتى الآن</p>
+                        <p><strong>العمر:</strong> 66 سنة</p>
+                        <p><strong>الدراسة:</strong> جامعة أوكسفورد</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>هيثم بن طارق آل سعيد هو السلطان العاشر لعمان، تولى الحكم بعد وفاة السلطان قابوس بن سعيد في 11 يناير 2020.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="levant">
+                <div class="ruler-image">
+                    <img src="https://cnn-arabic-images.cnn.io/cloudinary/image/upload/w_1920,c_scale,q_auto/cnnarabic/2021/12/03/images/199581.jpg" alt="ميشال عون">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/lb.png" alt="علم لبنان">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>نجيب ميقاتي</h3>
+                    <div class="ruler-position">رئيس وزراء لبنان</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2021 حتى الآن</p>
+                        <p><strong>العمر:</strong> 68 سنة</p>
+                        <p><strong>الحزب:</strong> تيار المستقبل</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>نجيب ميقاتي هو رئيس وزراء لبنان الحالي، يشغل المنصب للمرة الثالثة في حياته السياسية.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="north-africa">
+                <div class="ruler-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Kais_Saied_2023.jpg/250px-Kais_Saied_2023.jpg" alt="قيس سعيد">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/tn.png" alt="علم تونس">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>قيس سعيد</h3>
+                    <div class="ruler-position">رئيس الجمهورية التونسية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2019 حتى الآن</p>
+                        <p><strong>العمر:</strong> 66 سنة</p>
+                        <p><strong>الخلفية:</strong> أستاذ قانون دستوري</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>قيس سعيد هو الرئيس الثامن لتونس، فاز في الانتخابات الرئاسية التونسية 2019 بنسبة 72.71% من الأصوات.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="africa">
+                <div class="ruler-image">
+                    <img src="https://doc.aljazeera.net/wp-content/uploads/2019/08/%D9%85%D9%88%D8%B1%D9%8A%D8%AA%D8%A7%D9%86%D9%8A%D8%A7-1692525801.jpg?w=770&resize=770%2C488&quality=80" alt="محمد ولد الشيخ الغزواني">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/mr.png" alt="علم موريتانيا">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>محمد ولد الشيخ الغزواني</h3>
+                    <div class="ruler-position">رئيس الجمهورية الإسلامية الموريتانية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2019 حتى الآن</p>
+                        <p><strong>العمر:</strong> 68 سنة</p>
+                        <p><strong>الخلفية:</strong> عسكري سابق</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>محمد ولد الشيخ الغزواني هو الرئيس الحادي عشر لموريتانيا، فاز في الانتخابات الرئاسية الموريتانية 2019.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="africa">
+                <div class="ruler-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/AbdelFattah_Elsisi_%28cropped%29.jpg/330px-AbdelFattah_Elsisi_%28cropped%29.jpg" alt="عبد الفتاح السيسي">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/eg.png" alt="علم مصر">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>عبد الفتاح السيسي</h3>
+                    <div class="ruler-position">رئيس جمهورية مصر العربية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2014 حتى الآن</p>
+                        <p><strong>العمر:</strong> 69 سنة</p>
+                        <p><strong>الخلفية:</strong> عسكري - وزير الدفاع السابق</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>عبد الفتاح السيسي هو الرئيس السادس لجمهورية مصر العربية، تولى الرئاسة بعد فوزه في الانتخابات الرئاسية 2014.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="africa">
+                <div class="ruler-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs9zNoX3Y5Qq2hBxJy0SikGzrfH2MSJu0B9g&s" alt="إسماعيل عمر جيله">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/dj.png" alt="علم جيبوتي">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>إسماعيل عمر جيله</h3>
+                    <div class="ruler-position">رئيس جمهورية جيبوتي</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 1999 حتى الآن</p>
+                        <p><strong>العمر:</strong> 76 سنة</p>
+                        <p><strong>الحزب:</strong> تجمع الشعب التقدمي</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>إسماعيل عمر جيله هو الرئيس الثاني لجمهورية جيبوتي، تولى الرئاسة بعد استقالة حسن جوليد أبتيدون.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="africa">
+                <div class="ruler-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA6GIwqbbZLMvZXnikgWxJ1xwT3Nl8tRfz6Q&s" alt="حسن شيخ محمود">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/so.png" alt="علم الصومال">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>حسن شيخ محمود</h3>
+                    <div class="ruler-position">رئيس جمهورية الصومال الفيدرالية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2022 حتى الآن</p>
+                        <p><strong>العمر:</strong> 68 سنة</p>
+                        <p><strong>الحزب:</strong> حزب السلام والتنمية</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>حسن شيخ محمود هو الرئيس العاشر للصومال، تولى المنصب بعد فوزه في الانتخابات الرئاسية الصومالية 2022.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="africa">
+                <div class="ruler-image">
+                    <img src="https://www.aljazeera.net/wp-content/uploads/2024/09/11849211-1726249735.jpg?resize=770%2C513&quality=80" alt="غزالي عثماني">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/km.png" alt="علم جزر القمر">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>غزالي عثماني</h3>
+                    <div class="ruler-position">رئيس جمهورية جزر القمر الاتحادية</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2024 حتى الآن</p>
+                        <p><strong>العمر:</strong> 59 سنة</p>
+                        <p><strong>الحزب:</strong> حزب جزر القمر للتنمية</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>غزالي عثماني هو الرئيس الحالي لجزر القمر، تولى المنصب بعد فوزه في الانتخابات الرئاسية 2024.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="levant">
+                <div class="ruler-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVqHy8IP93wyiHfpIdlF85E4kl3UvNwFinhA&s" alt="محمود عباس">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/ps.png" alt="علم فلسطين">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>محمود عباس (أبو مازن)</h3>
+                    <div class="ruler-position">رئيس دولة فلسطين</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2005 حتى الآن</p>
+                        <p><strong>العمر:</strong> 88 سنة</p>
+                        <p><strong>الحزب:</strong> فتح</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>محمود عباس هو الرئيس الثاني للسلطة الوطنية الفلسطينية ورئيس دولة فلسطين، تولى الرئاسة بعد وفاة ياسر عرفات.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="north-africa">
+                <div class="ruler-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Mohamed_al-Menfi_Summit_of_NAM_Contact_Group_on_fight_against_COVID-19_73_%28cropped%29.jpg" alt="محمد المنفي">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/ly.png" alt="علم ليبيا">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>محمد المنفي</h3>
+                    <div class="ruler-position">رئيس المجلس الرئاسي الليبي</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2021 حتى الآن</p>
+                        <p><strong>العمر:</strong> 48 سنة</p>
+                        <p><strong>الخلفية:</strong> دبلوماسي سابق</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>محمد المنفي هو رئيس المجلس الرئاسي الليبي، تم انتخابه ضمن الحكومة المؤقتة الموحدة بعد الحوار السياسي الليبي.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="gulf">
+                <div class="ruler-image">
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRPPqkNgsCJDmwzWoLzt6GUOfqd9RV9alstjPfEXBy15IqUIaUcczv6cChgA76-B9wStOvJb9JPdxVz0J0GflbpFw" alt="محمد بن زايد آل نهيان">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/ae.png" alt="علم الإمارات">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>محمد بن زايد آل نهيان</h3>
+                    <div class="ruler-position">رئيس دولة الإمارات العربية المتحدة</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2022 حتى الآن</p>
+                        <p><strong>العمر:</strong> 63 سنة</p>
+                        <p><strong>المنصب السابق:</strong> ولي عهد أبوظبي</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>محمد بن زايد آل نهيان هو الرئيس الثالث لدولة الإمارات العربية المتحدة، تولى الحكم بعد وفاة شقيقه الشيخ خليفة بن زايد.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="levant">
+                <div class="ruler-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Abdul_Latif_Rashid_in_Davos_-_2025_-_02_%28cropped%29.jpg" alt="عبد اللطيف رشيد">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/iq.png" alt="علم العراق">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>عبد اللطيف رشيد</h3>
+                    <div class="ruler-position">رئيس جمهورية العراق</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2022 حتى الآن</p>
+                        <p><strong>العمر:</strong> 79 سنة</p>
+                        <p><strong>الحزب:</strong> الحزب الديمقراطي الكردستاني</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>عبد اللطيف جمال رشيد هو رئيس جمهورية العراق الحالي، انتخبه البرلمان العراقي في أكتوبر 2022 خلفاً لبرهم صالح.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ruler-card animate-on-scroll" data-category="africa">
+                <div class="ruler-image">
+                    <img src="https://algnoobpress.com/UploadImages/News/16f4ecde0ecf454e83e6ee36689d78f61707188482.jpg" alt="رشاد العليمي">
+                    <div class="ruler-flag">
+                        <img src="https://flagcdn.com/w80/ye.png" alt="علم اليمن">
+                    </div>
+                </div>
+                <div class="ruler-info">
+                    <h3>رشاد محمد العليمي</h3>
+                    <div class="ruler-position">رئيس مجلس القيادة الرئاسي اليمني</div>
+                    <div class="ruler-details">
+                        <p><strong>فترة الحكم:</strong> منذ 2022 حتى الآن</p>
+                        <p><strong>العمر:</strong> 70 سنة</p>
+                        <p><strong>الحزب:</strong> حزب المؤتمر الشعبي العام</p>
+                    </div>
+                    <div class="ruler-bio">
+                        <p>رشاد محمد العليمي هو رئيس مجلس القيادة الرئاسي اليمني، تم تشكيل المجلس من قبل الرئيس عبد ربه منصور هادي.</p>
+                    </div>
+                    <div class="ruler-more">
+                        <a href="#" class="btn">المزيد من المعلومات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="timeline-section" id="timeline">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>الخط الزمني للأحداث العربية</h2>
+            <p>أهم الأحداث التي شكلت التاريخ العربي الحديث</p>
+        </div>
+        
+        <div class="timeline-container">
+            <!-- تأسيس جامعة الدول العربية -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1945</div>
+                <div class="event-content">
+                    <h3>تأسيس جامعة الدول العربية</h3>
+                    <div class="event-description">
+                        <p>تم التوقيع على ميثاق جامعة الدول العربية في 22 مارس 1945 بالقاهرة. تضم الجامعة 22 دولة عربية، وتهدف إلى توثيق الصلات بين الدول الأعضاء وتنسيق خططها السياسية والاقتصادية.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <span>مصر</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- استقلال سوريا ولبنان -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1946</div>
+                <div class="event-content">
+                    <h3>استقلال سوريا ولبنان</h3>
+                    <div class="event-description">
+                        <p>حصلت سوريا ولبنان على استقلالهما الكامل عن الانتداب الفرنسي في عام 1946، بعد كفاح طويل ونضال سياسي وعسكري.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/sy.png" alt="سوريا">
+                        <img src="https://flagcdn.com/w40/lb.png" alt="لبنان">
+                        <span>سوريا - لبنان</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- النكبة الفلسطينية -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1948</div>
+                <div class="event-content">
+                    <h3>النكبة الفلسطينية</h3>
+                    <div class="event-description">
+                        <p>أعلن قيام دولة إسرائيل في 15 مايو 1948، مما أدى إلى حرب مع الدول العربية المجاورة ونزوح أكثر من 700 ألف فلسطيني عن ديارهم، في حدث يعرف بالنكبة.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/ps.png" alt="فلسطين">
+                        <span>فلسطين</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ثورة 23 يوليو في مصر -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1952</div>
+                <div class="event-content">
+                    <h3>ثورة 23 يوليو في مصر</h3>
+                    <div class="event-description">
+                        <p>قامت مجموعة من الضباط الأحرار بقيادة جمال عبد الناصر بانقلاب عسكري أطاح بالملك فاروق، وأدت إلى إعلان الجمهورية وتغيير النظام السياسي في مصر.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <span>مصر</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تأميم قناة السويس -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1956</div>
+                <div class="event-content">
+                    <h3>تأميم قناة السويس</h3>
+                    <div class="event-description">
+                        <p>أعلن الرئيس جمال عبد الناصر تأميم قناة السويس في 26 يوليو 1956، مما أدى إلى العدوان الثلاثي (بريطانيا، فرنسا، إسرائيل) على مصر.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <span>مصر</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الوحدة بين مصر وسوريا -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1958</div>
+                <div class="event-content">
+                    <h3>قيام الجمهورية العربية المتحدة</h3>
+                    <div class="event-description">
+                        <p>تم الإعلان عن قيام الجمهورية العربية المتحدة بين مصر وسوريا في 22 فبراير 1958 كخطوة نحو الوحدة العربية، لكنها انتهت بالانفصال في 1961.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <img src="https://flagcdn.com/w40/sy.png" alt="سوريا">
+                        <span>مصر - سوريا</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- حرب 1967 (النكسة) -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1967</div>
+                <div class="event-content">
+                    <h3>حرب 1967 (النكسة)</h3>
+                    <div class="event-description">
+                        <p>اندلعت حرب الأيام الستة بين إسرائيل وكل من مصر وسوريا والأردن في 5 يونيو 1967، وانتهت بهزيمة عربية واحتلال إسرائيل لسيناء والجولان والضفة الغربية وقطاع غزة.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <img src="https://flagcdn.com/w40/sy.png" alt="سوريا">
+                        <img src="https://flagcdn.com/w40/jo.png" alt="الأردن">
+                        <span>مصر - سوريا - الأردن</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- حرب أكتوبر 1973 -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1973</div>
+                <div class="event-content">
+                    <h3>حرب أكتوبر 1973</h3>
+                    <div class="event-description">
+                        <p>شن الجيشان المصري والسوري هجومًا مفاجئًا على إسرائيل في 6 أكتوبر 1973 لاستعادة الأراضي المحتلة، وكانت الحرب نقطة تحول في الصراع العربي الإسرائيلي.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <img src="https://flagcdn.com/w40/sy.png" alt="سوريا">
+                        <span>مصر - سوريا</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- اتفاقية كامب ديفيد -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1978</div>
+                <div class="event-content">
+                    <h3>اتفاقية كامب ديفيد</h3>
+                    <div class="event-description">
+                        <p>وقعت مصر وإسرائيل اتفاقية كامب ديفيد في 17 سبتمبر 1978 برعاية أمريكية، مما أدى إلى معاهدة السلام المصرية الإسرائيلية عام 1979 واستعادة سيناء.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <span>مصر</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الغزو العراقي للكويت -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1990</div>
+                <div class="event-content">
+                    <h3>الغزو العراقي للكويت</h3>
+                    <div class="event-description">
+                        <p>في 2 أغسطس 1990، غزا العراق الكويت مما أدى إلى حرب الخليج الثانية وتشكيل تحالف دولي لتحرير الكويت في عام 1991.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/iq.png" alt="العراق">
+                        <img src="https://flagcdn.com/w40/kw.png" alt="الكويت">
+                        <span>العراق - الكويت</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- اتفاقيات أوسلو -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">1993</div>
+                <div class="event-content">
+                    <h3>اتفاقيات أوسلو</h3>
+                    <div class="event-description">
+                        <p>وقعت منظمة التحرير الفلسطينية وإسرائيل اتفاقيات أوسلو في 13 سبتمبر 1993، والتي نصت على إنشاء سلطة فلسطينية وحكم ذاتي في الضفة الغربية وقطاع غزة.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/ps.png" alt="فلسطين">
+                        <span>فلسطين</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الغزو الأمريكي للعراق -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">2003</div>
+                <div class="event-content">
+                    <h3>الغزو الأمريكي للعراق</h3>
+                    <div class="event-description">
+                        <p>في 20 مارس 2003، غزت القوات الأمريكية العراق وأطاحت بنظام صدام حسين، مما أدخل العراق في مرحلة من الفوضى والعنف الطائفي.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/iq.png" alt="العراق">
+                        <span>العراق</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الربيع العربي -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">2011</div>
+                <div class="event-content">
+                    <h3>الربيع العربي</h3>
+                    <div class="event-description">
+                        <p>اندلعت سلسلة من الاحتجاجات والثورات في العالم العربي بدءًا من تونس في ديسمبر 2010، وأدت إلى تغيير أنظمة في تونس ومصر وليبيا واليمن.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/tn.png" alt="تونس">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <img src="https://flagcdn.com/w40/ly.png" alt="ليبيا">
+                        <img src="https://flagcdn.com/w40/ye.png" alt="اليمن">
+                        <span>تونس - مصر - ليبيا - اليمن</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الحرب في سوريا -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">2011</div>
+                <div class="event-content">
+                    <h3>اندلاع الحرب الأهلية السورية</h3>
+                    <div class="event-description">
+                        <p>تحولت الاحتجاجات السلمية في سوريا إلى حرب أهلية بعد القمع العنيف للنظام، مما أدى إلى أزمة إنسانية كبيرة وتدخلات دولية وإقليمية.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/sy.png" alt="سوريا">
+                        <span>سوريا</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- عاصفة الحزم -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">2015</div>
+                <div class="event-content">
+                    <h3>عاصفة الحزم</h3>
+                    <div class="event-description">
+                        <p>في 26 مارس 2015، أطلقت السعودية تحالفًا عربيًا لدعم الشرعية في اليمن ضد الحوثيين، في عملية عسكرية سميت "عاصفة الحزم".</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/sa.png" alt="السعودية">
+                        <img src="https://flagcdn.com/w40/ye.png" alt="اليمن">
+                        <span>السعودية - اليمن</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- التطبيع مع إسرائيل -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">2020</div>
+                <div class="event-content">
+                    <h3>اتفاقيات التطبيع مع إسرائيل</h3>
+                    <div class="event-description">
+                        <p>وقعت الإمارات والبحرين والسودان والمغرب اتفاقيات لتطبيع العلاقات مع إسرائيل في عام 2020 بوساطة أمريكية، في ما عرف بـ"اتفاقات إبراهيم".</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/ae.png" alt="الإمارات">
+                        <img src="https://flagcdn.com/w40/bh.png" alt="البحرين">
+                        <img src="https://flagcdn.com/w40/sd.png" alt="السودان">
+                        <img src="https://flagcdn.com/w40/ma.png" alt="المغرب">
+                        <span>الإمارات - البحرين - السودان - المغرب</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- أزمة قطر -->
+            <div class="timeline-event animate-on-scroll">
+                <div class="event-date">2017-2021</div>
+                <div class="event-content">
+                    <h3>الأزمة الخليجية مع قطر</h3>
+                    <div class="event-description">
+                        <p>في 5 يونيو 2017، قطعت السعودية والإمارات والبحرين ومصر علاقاتها مع قطر وفرضت حصارًا عليها، وانتهت الأزمة في يناير 2021 بتوقيع اتفاق العلا.</p>
+                    </div>
+                    <div class="event-country">
+                        <img src="https://flagcdn.com/w40/sa.png" alt="السعودية">
+                        <img src="https://flagcdn.com/w40/ae.png" alt="الإمارات">
+                        <img src="https://flagcdn.com/w40/bh.png" alt="البحرين">
+                        <img src="https://flagcdn.com/w40/eg.png" alt="مصر">
+                        <img src="https://flagcdn.com/w40/qa.png" alt="قطر">
+                        <span>دول الخليج - مصر</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- محرك البحث الداخلي -->
+<div class="wiki-search-section">
+    <div class="container">
+        <div class="wiki-search-container">
+            <h2>ابحث في الموسوعة العربية</h2>
+            <div class="wiki-search-box">
+                <input type="text" id="wikiSearchInput" placeholder="اكتب موضوع البحث...">
+                <button id="wikiSearchBtn"><i class="fas fa-search"></i> بحث</button>
+            </div>
+            <div id="wikiSearchResults" class="wiki-results"></div>
+        </div>
+    </div>
+</div>
+    <!-- قسم الإحصائيات -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>عرب بيديا بالأرقام</h2>
+                <p>إحصائيات وأرقام تبرز حجم المحتوى والزوار في منصتنا</p>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stats-grid">
+                    <div class="stat-card animate-on-scroll" style="animation-delay: 0.1s">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <div class="stat-number">22</div>
+                        <div class="stat-title">دولة عربية</div>
+                    </div>
+                    
+                    <div class="stat-card animate-on-scroll" style="animation-delay: 0.2s">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-number">1,250+</div>
+                        <div class="stat-title">مقالة متخصصة</div>
+                    </div>
+                    
+                    <div class="stat-card animate-on-scroll" style="animation-delay: 0.3s">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-title">زائر شهرياً</div>
+                    </div>
+                    
+                    <div class="stat-card animate-on-scroll" style="animation-delay: 0.4s">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="stat-number">150+</div>
+                        <div class="stat-title">خريطة تفاعلية</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم من نحن -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-image animate-on-scroll">
+                    <img src="https://f.top4top.io/p_3515oh0b11.png" alt="من نحن">
+                </div>
+                <div class="about-content animate-on-scroll">
+                    <h2>من نحن</h2>
+                    <p>عرب بيديا هي موسوعة عربية شاملة تهدف إلى تقديم معلومات دقيقة وحديثة عن العالم العربي بكل جوانبه الثقافية والتاريخية والجغرافية.</p>
+                    <p>نحن فريق من المحررين والباحثين المتخصصين نعمل على جمع المعلومات من مصادر موثوقة وتقديمها بطريقة سهلة ومبسطة للقارئ العربي.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>معلومات موثوقة</h4>
+                                <p>جميع المعلومات يتم التحقق منها من مصادر رسمية وموثوقة قبل نشرها</p>
+                            </div>
+                        </div>
+                        
+                        <div class="about-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>تحديث مستمر</h4>
+                                <p>نقوم بتحديث المعلومات والإحصائيات بشكل دوري لضمان دقتها</p>
+                            </div>
+                        </div>
+                        
+                        <div class="about-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>فريق متخصص</h4>
+                                <p>فريق عمل من المحررين والخبراء في مختلف المجالات</p>
+                            </div>
+                        </div>
+                        
+                        <div class="about-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>شغف بالمعرفة</h4>
+                                <p>نؤمن بأهمية نشر المعرفة الموثوقة للقارئ العربي</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- قسم المميزات -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>لماذا عرب بيديا؟</h2>
+                <p>منصة شاملة تقدم لك كل ما تحتاج لمعرفته عن العالم العربي</p>
+            </div>
+            
+            <div class="features-container">
+                <div class="features-grid">
+                    <div class="feature-card animate-on-scroll" style="animation-delay: 0.1s">
+                        <div class="feature-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>معلومات دقيقة</h3>
+                        <p>نقدم معلومات موثوقة ودقيقة يتم تحديثها بشكل مستمر لضمان حصولك على أحدث البيانات والإحصائيات من مصادر رسمية وموثوقة.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll" style="animation-delay: 0.2s">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>خرائط تفاعلية</h3>
+                        <p>استكشف الدول العربية من خلال خرائط تفاعلية عالية الجودة توضح التضاريس والمعالم الجغرافية المهمة مع إمكانية التكبير والتصغير.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll" style="animation-delay: 0.3s">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>إحصائيات حديثة</h3>
+                        <p>احصل على أحدث الإحصائيات السكانية والاقتصادية لكل دولة عربية مع مقارنات ورسوم بيانية توضيحية سهلة الفهم.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll" style="animation-delay: 0.4s">
+                        <div class="feature-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h3>معرض الصور</h3>
+                        <p>استمتع بمجموعة واسعة من الصور عالية الجودة التي تعرض معالم الدول العربية وثقافاتها وتقاليدها.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll" style="animation-delay: 0.5s">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>تصميم متجاوب</h3>
+                        <p>تصفح الموسوعة بسهولة من أي جهاز سواء كان كمبيوتر، لوحي أو هاتف ذكي مع تجربة مستخدم مميزة.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll" style="animation-delay: 0.6s">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>بحث متقدم</h3>
+                        <p>ابحث بسهولة عن أي معلومة تريدها باستخدام نظام البحث المتقدم الذي يوفر نتائج دقيقة وسريعة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بنا -->
+    <main>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>معلومات التواصل</h2>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>البريد الإلكتروني</h3>
+                        <p>info@tariqaljoda.com</p>
+                    </div>
+                </div>
+              
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="https://d.top4top.io/p_35134u9lv1.png" alt="عرب بيديا">
+                    عرب بيديا
+                </div>
+                <p>الموسوعة العربية الشاملة للمعرفة والمعلومات، نقدم محتوى عالي الجودة عن العالم العربي بتصميم عصري وسهل الاستخدام.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>الدول</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> مصر</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> السعودية</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الإمارات</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المغرب</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الجزائر</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>المعلومات</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> عن المشروع</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> خريطة الموقع</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>اتصل بنا</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> تواصل معنا</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الإبلاغ عن خطأ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> اقتراح تحسين</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المساهمة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الإعلان معنا</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 عرب بيديا - ArabPedia. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    
+    <!-- زر العودة للأعلى -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // تأثيرات التمرير للنافبار
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // تحديث الروابط النشطة
+            updateActiveLinks();
+        });
+        
+        // تأثيرات الظهور عند التمرير
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.getAttribute('style')?.includes('animation-delay') ? 
+                            entry.target.style.animationDelay : '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add('animate-on-scroll');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // العناصر التي نريد مراقبتها
+            const elementsToAnimate = document.querySelectorAll('.section-title, .country-item, .feature-card, .about-image, .about-content, .stat-card, .blog-card, .newsletter-container');
+            elementsToAnimate.forEach(element => {
+                observer.observe(element);
+            });
+        }
+        
+        // زر العودة للأعلى
+        function setupBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+            
+            backToTop.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // البحث عن الدول
+        function setupSearch() {
+            const searchInput = document.querySelector('.search-bar input');
+            const searchTags = document.querySelectorAll('.search-tag');
+            
+            searchInput.addEventListener('focus', () => {
+                searchInput.parentElement.style.boxShadow = '0 0 0 3px var(--dark-teal)';
+            });
+            
+            searchInput.addEventListener('blur', () => {
+                searchInput.parentElement.style.boxShadow = 'none';
+            });
+            
+            searchTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    searchInput.value = tag.textContent.replace('#', '');
+                    searchInput.focus();
+                });
+                
+                // تأثير عند التحويم
+                tag.addEventListener('mouseenter', () => {
+                    tag.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                tag.addEventListener('mouseleave', () => {
+                    tag.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+        
+        // تحديث الروابط النشطة
+        function updateActiveLinks() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop - 200) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}` || 
+                    (currentSection === '' && link.getAttribute('href') === '#')) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // تأثيرات الصفحة عند التحميل
+        window.addEventListener('DOMContentLoaded', () => {
+            setupScrollAnimations();
+            setupBackToTop();
+            setupSearch();
+            updateActiveLinks();
+            
+            // تأثيرات للبطاقات
+            const countryItems = document.querySelectorAll('.country-item');
+            countryItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    const img = item.querySelector('img');
+                    img.style.transform = 'scale(1.1)';
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    const img = item.querySelector('img');
+                    img.style.transform = 'scale(1)';
+                });
+            });
+            
+            // تأثيرات لبطاقات المميزات
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const icon = card.querySelector('.feature-icon');
+                    icon.style.transform = 'rotate(10deg) scale(1.1)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    const icon = card.querySelector('.feature-icon');
+                    icon.style.transform = 'rotate(0) scale(1)';
+                });
+            });
+            
+            // تأثيرات لقسم من نحن
+            const aboutImage = document.querySelector('.about-image');
+            aboutImage.addEventListener('mouseenter', () => {
+                const img = aboutImage.querySelector('img');
+                img.style.transform = 'scale(1.05)';
+            });
+            
+            aboutImage.addEventListener('mouseleave', () => {
+                const img = aboutImage.querySelector('img');
+                img.style.transform = 'scale(1)';
+            });
+            
+            // تأثيرات لبطاقات المدونات
+            const blogCards = document.querySelectorAll('.blog-card');
+            blogCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const img = card.querySelector('img');
+                    img.style.transform = 'scale(1.1)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    const img = card.querySelector('img');
+                    img.style.transform = 'scale(1)';
+                });
+            });
+            
+            // تأثيرات لبطاقات الإحصائيات
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const number = card.querySelector('.stat-number');
+                    number.style.transform = 'scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    const number = card.querySelector('.stat-number');
+                    number.style.transform = 'scale(1)';
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const searchBtn = document.getElementById('wikiSearchBtn');
+    const searchInput = document.getElementById('wikiSearchInput');
+    const resultsContainer = document.getElementById('wikiSearchResults');
+    
+    searchBtn.addEventListener('click', searchWikipedia);
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchWikipedia();
+        }
+    });
+    
+    function searchWikipedia() {
+        const query = searchInput.value.trim();
+        if (!query) return;
+        
+        resultsContainer.innerHTML = '<div class="wiki-loading">جاري البحث...</div>';
+        
+        // استخدم CORS proxy لتجنب مشاكل الـ CORS
+        const proxyUrl = 'https://api.allorigins.win/get?url=';
+        const apiUrl = `https://ar.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&utf8=1`;
+        
+        fetch(proxyUrl + encodeURIComponent(apiUrl))
+            .then(response => response.json())
+            .then(data => {
+                const content = JSON.parse(data.contents);
+                displayResults(content.query.search);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultsContainer.innerHTML = '<div class="wiki-error">حدث خطأ أثناء البحث. يرجى المحاولة لاحقاً.</div>';
+            });
+    }
+    
+    function displayResults(results) {
+        if (results.length === 0) {
+            resultsContainer.innerHTML = '<div class="wiki-error">لا توجد نتائج للبحث</div>';
+            return;
+        }
+        
+        let html = '';
+        results.slice(0, 5).forEach(result => {
+            html += `
+                <div class="wiki-result-item">
+                    <h3 class="wiki-result-title">${result.title}</h3>
+                    <p class="wiki-result-snippet">${result.snippet}...</p>
+                    <a href="https://ar.wikipedia.org/wiki/${encodeURIComponent(result.title)}" 
+                       target="_blank" 
+                       class="wiki-result-link">
+                       اقرأ المزيد على ويكيبيديا <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            `;
+        });
+        
+        resultsContainer.innerHTML = html;
+    }
+});
+
+
+// فلترة البطاقات حسب المنطقة
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        // إزالة النشط من جميع الأزرار
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        // إضافة النشط للزر المحدد
+        this.classList.add('active');
+        
+        const filter = this.dataset.filter;
+        const cards = document.querySelectorAll('.ruler-card');
+        
+        cards.forEach(card => {
+            if (filter === 'all' || card.dataset.category === filter) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+// تأثير الظهور عند التمرير
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    
+    elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+        }
+    });
+}
+
+// تهيئة العناصر قبل الظهور
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.6s ease-out';
+});
+
+// تنفيذ عند التحميل وعند التمرير
+window.addEventListener('load', animateOnScroll);
+window.addEventListener('scroll', animateOnScroll);
+
+
+
+
+// جعل القوائم المنسدلة تعمل على الهواتف
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdowns = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function(e) {
+            if (window.innerWidth < 992) {
+                e.preventDefault();
+                const menu = this.nextElementSibling;
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+    
+    // إغلاق القوائم المنسدلة عند النقر خارجها
+    document.addEventListener('click', function(e) {
+        if (!e.target.matches('.dropdown-toggle')) {
+            const dropdowns = document.querySelectorAll('.dropdown-menu');
+            dropdowns.forEach(menu => {
+                if (window.innerWidth < 992 && menu.style.display === 'block') {
+                    menu.style.display = 'none';
+                }
+            });
+        }
+    });
+});
+    </script>
+</body>
+</html>

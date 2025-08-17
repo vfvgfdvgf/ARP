@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    {% comment %} لكل دولة {% endcomment %}
+    {% for country in countries %}
+    <!-- الصفحة الرئيسية للدولة -->
+    <url>
+        <loc>{{ request.scheme }}://{{ request.get_host }}/{{ country.slug }}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    {% comment %} جميع التصنيفات للدولة {% endcomment %}
+    {% for category in country.category_set.all %}
+    <url>
+        <loc>{{ request.scheme }}://{{ request.get_host }}/{{ country.slug }}/category/{{ category.slug }}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    {% endfor %}
+
+    {% comment %} جميع المقالات للدولة {% endcomment %}
+    {% for article in country.article_set.all %}
+    <url>
+        <loc>{{ request.scheme }}://{{ request.get_host }}/{{ country.slug }}/article/{{ article.slug }}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    {% endfor %}
+
+    {% endfor %}
+
+</urlset>

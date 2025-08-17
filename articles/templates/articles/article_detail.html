@@ -1,0 +1,1311 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }} - {{ country.name }} | عرب بيديا</title>
+    <meta name="description" content="{{ article.summary|truncatechars:160 }}">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" as="style">
+    <link rel="preload" href="{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}" as="image">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
+    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Inline Critical CSS -->
+    <style>
+    :root {
+        --sand-beige: #baab97;
+        --light-beige: #dad1ca;
+        --dark-teal: #2c6468;
+        --off-white: #e7e2dc;
+        --gray-green: #7b9486;
+        --text-dark: #1d1d1f;
+        --text-light: #86868b;
+        --hover-bg: rgba(0,0,0,0.03);
+        --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        --border-color: rgba(0,0,0,0.08);
+    }
+    
+    /* Base Styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: 'SF Arabic', 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--off-white);
+        color: var(--text-dark);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    button, input, textarea {
+        font-family: inherit;
+    }
+    
+    /* Welcome Bar */
+    .welcome-bar {
+        background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 0.95rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .welcome-message {
+        position: relative;
+        display: inline-block;
+        padding: 0 25px;
+    }
+    
+    .welcome-message::before,
+    .welcome-message::after {
+        content: "✧";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.7;
+        font-size: 1.1rem;
+    }
+    
+    .welcome-message::before {
+        right: -5px;
+    }
+    
+    .welcome-message::after {
+        left: -5px;
+    }
+    
+    .marquee {
+        display: inline-block;
+        white-space: nowrap;
+        animation: marquee 15s linear infinite;
+        padding-left: 100%;
+    }
+    
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+    
+    /* Navbar */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px 0;
+        transition: var(--transition);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: var(--dark-teal);
+    }
+    
+    .logo-img {
+        width: 36px;
+        height: 36px;
+        margin-left: 12px;
+        border-radius: 8px;
+        object-fit: contain;
+        transition: var(--transition);
+    }
+    
+    .navbar-brand:hover .logo-img {
+        transform: rotate(15deg);
+    }
+    
+    .nav-link {
+        color: var(--text-dark);
+        font-weight: 500;
+        margin-left: 1.2rem;
+        transition: var(--transition);
+        padding: 8px 15px;
+        border-radius: 18px;
+    }
+    
+    .nav-link:hover {
+        color: var(--dark-teal);
+        background-color: var(--hover-bg);
+    }
+    
+    .nav-link.active {
+        color: var(--dark-teal);
+        background-color: rgba(44, 100, 104, 0.1);
+    }
+    
+    /* Article Header */
+    .article-header {
+        height: 60vh;
+        min-height: 400px;
+        max-height: 600px;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+        margin-bottom: 3rem;
+    }
+    
+    .header-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+    }
+    
+    .header-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding-bottom: 3rem;
+        color: white;
+    }
+    
+    .article-title {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+    }
+    
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        transition: var(--transition);
+        font-size: 0.9rem;
+    }
+    
+    .meta-item:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Article Content */
+    .article-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    
+    .article-tools {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 2rem 0;
+        padding: 1.5rem 0;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .share-buttons {
+        display: flex;
+        gap: 0.8rem;
+    }
+    
+    .share-btn {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--light-beige);
+        color: var(--dark-teal);
+        transition: var(--transition);
+    }
+    
+    .share-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--card-shadow);
+    }
+    
+    .article-actions {
+        display: flex;
+        gap: 0.8rem;
+    }
+    
+    .action-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        background-color: var(--light-beige);
+        color: var(--dark-teal);
+        transition: var(--transition);
+        border: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+    
+    .action-btn:hover {
+        background-color: var(--dark-teal);
+        color: white;
+    }
+    
+    /* Table of Contents */
+    .toc-container {
+        background-color: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border-color);
+    }
+    
+    .toc-title {
+        font-size: 1.4rem;
+        color: var(--dark-teal);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--light-beige);
+    }
+    
+    .toc-list {
+        list-style: none;
+    }
+    
+    .toc-list li {
+        margin-bottom: 0.8rem;
+    }
+    
+    .toc-list a {
+        display: block;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: var(--transition);
+    }
+    
+    .toc-list a:hover {
+        color: var(--dark-teal);
+        background-color: var(--hover-bg);
+        transform: translateX(-5px);
+    }
+    
+    /* Article Content Styles */
+    .article-content {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        color: var(--text-dark);
+        margin-bottom: 3rem;
+    }
+    
+    .article-content p {
+        margin-bottom: 1.8rem;
+    }
+    
+    .article-content h2 {
+        font-size: 1.8rem;
+        color: var(--dark-teal);
+        margin: 2.5rem 0 1.5rem;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 0.8rem;
+    }
+    
+    .article-content h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        border-radius: 3px;
+    }
+    
+    .article-content h3 {
+        font-size: 1.5rem;
+        color: var(--dark-teal);
+        margin: 2rem 0 1.2rem;
+        font-weight: 600;
+    }
+    
+    .article-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1.5rem auto;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+    }
+    
+    .article-content img:hover {
+        transform: scale(1.03);
+    }
+    
+    .article-content blockquote {
+        border-right: 4px solid var(--dark-teal);
+        background-color: var(--light-beige);
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        position: relative;
+    }
+    
+    .article-content blockquote::before {
+        content: '\201C';
+        position: absolute;
+        top: 0;
+        right: 20px;
+        font-size: 4rem;
+        color: var(--sand-beige);
+        line-height: 1;
+        opacity: 0.3;
+    }
+    
+    /* Comments Section */
+    .comments-section {
+        background-color: white;
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 3rem 0;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border-color);
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        color: var(--dark-teal);
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.8rem;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        border-radius: 3px;
+    }
+    
+    .comment-form {
+        margin-bottom: 2rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        transition: var(--transition);
+        background-color: white;
+    }
+    
+    .form-control:focus {
+        border-color: var(--dark-teal);
+        box-shadow: 0 0 0 3px rgba(44, 100, 104, 0.2);
+        outline: none;
+    }
+    
+    .btn-submit {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: var(--transition);
+        cursor: pointer;
+    }
+    
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(44, 100, 104, 0.3);
+    }
+    
+    .alert-messages {
+        margin-bottom: 1.5rem;
+    }
+    
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    .alert-success {
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+        border: 1px solid rgba(40, 167, 69, 0.2);
+    }
+    
+    .comment-list {
+        margin-top: 2rem;
+    }
+    
+    .comment {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .comment:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .comment-avatar {
+        flex: 0 0 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--light-beige);
+        display: grid;
+        place-items: center;
+        color: var(--dark-teal);
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+    
+    .comment-body {
+        flex: 1;
+    }
+    
+    .comment-author {
+        font-weight: 600;
+        color: var(--dark-teal);
+        margin-bottom: 0.3rem;
+    }
+    
+    .comment-date {
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin-bottom: 0.8rem;
+    }
+    
+    .comment-text {
+        line-height: 1.7;
+    }
+    
+    /* Related Articles */
+    .related-section {
+        padding: 3rem 0;
+        background-color: white;
+    }
+    
+    .related-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--dark-teal);
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 0.8rem;
+    }
+    
+    .related-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        border-radius: 3px;
+    }
+    
+    .related-articles {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .related-article {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+    }
+    
+    .related-article:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    
+    .article-image {
+        height: 180px;
+        overflow: hidden;
+    }
+    
+    .article-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+    
+    .related-article:hover img {
+        transform: scale(1.03);
+    }
+    
+    .related-info {
+        padding: 1.2rem;
+    }
+    
+    .related-article h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--dark-teal);
+        font-weight: 600;
+        line-height: 1.4;
+    }
+    
+    .related-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin-bottom: 0.8rem;
+    }
+    
+    .read-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--dark-teal);
+        font-weight: 500;
+        transition: var(--transition);
+    }
+    
+    .read-more:hover {
+        color: #24585c;
+    }
+    
+    /* Footer */
+    .footer {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        padding: 6rem 0 3rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 4rem;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .footer-logo {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1.8rem;
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer-logo img {
+        width: 40px;
+        height: 40px;
+        margin-left: 12px;
+        border-radius: 10px;
+        transition: var(--transition);
+    }
+    
+    .footer-logo:hover img {
+        transform: rotate(15deg);
+    }
+    
+    .footer-about p {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+    
+    .footer-social {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .footer-social a {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: grid;
+        place-items: center;
+        transition: var(--transition);
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .footer-social a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px) scale(1.1);
+    }
+    
+    .footer-links h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.8rem;
+        position: relative;
+        padding-bottom: 0.8rem;
+        color: white;
+        font-weight: 600;
+    }
+    
+    .footer-links h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: rgba(255,255,255,0.5);
+    }
+    
+    .footer-links ul {
+        list-style: none;
+    }
+    
+    .footer-links li {
+        margin-bottom: 1rem;
+    }
+    
+    .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .footer-links a:hover {
+        color: white;
+        transform: translateX(-8px);
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: 5rem;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+        .article-header {
+            height: 50vh;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .article-header {
+            height: 40vh;
+        }
+        
+        .article-meta {
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .article-tools {
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .comment {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .comment-avatar {
+            align-self: flex-start;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .article-header {
+            height: 35vh;
+            min-height: 300px;
+        }
+        
+        .related-articles {
+            grid-template-columns: 1fr;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    /* Print Styles */
+    @media print {
+        .welcome-bar,
+        .navbar,
+        .article-tools,
+        .footer {
+            display: none;
+        }
+        
+        body {
+            background-color: white;
+            color: black;
+            font-size: 12pt;
+            line-height: 1.5;
+        }
+        
+        .article-header {
+            height: auto;
+            min-height: 0;
+            color: black;
+            background-image: none !important;
+        }
+        
+        .header-overlay {
+            display: none;
+        }
+        
+        .article-title {
+            color: black;
+        }
+        
+        .article-content {
+            font-size: 12pt;
+        }
+        
+        .article-content img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- شريط الترحيب العلوي -->
+    <div class="welcome-bar">
+        <div class="welcome-message">
+            <div class="marquee"> مرحباً بكم في عرب بيديا - الموسوعة العربية الشاملة | اكتشف ثقافات وتاريخ وجغرافية العالم العربي </div>
+        </div>
+    </div>
+    
+    <!-- الهيدر -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'country_home' country.slug %}">
+                <img src="https://j.top4top.io/p_3513ebspn1.png" alt="عرب بيديا" class="logo-img" width="36" height="36" loading="lazy">
+                {{ country.name }}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="تبديل القائمة">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_home' country.slug %}">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'categories' country.slug %}">التصنيفات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_about' country.slug %}">من نحن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_contact' country.slug %}">اتصل بنا</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- هيدر المقال -->
+    <header class="article-header" style="background-image: url('{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}')">
+        <div class="header-overlay"></div>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="article-title">{{ article.title }}</h1>
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar" aria-hidden="true"></i>
+                        <span>{{ article.publish_date|date:"Y-m-d" }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        <span>{{ article.views }} قراءة</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-tag" aria-hidden="true"></i>
+                        <a href="{% url 'category_view' country.slug article.category.slug %}">
+                            {{ article.category.name }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوى المقال -->
+    <main class="article-container">
+        <!-- أدوات المقال -->
+        <div class="article-tools">
+            <div class="share-buttons">
+                <a href="#" class="share-btn" onclick="shareOnFacebook()" aria-label="مشاركة على فيسبوك">
+                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="share-btn" onclick="shareOnTwitter()" aria-label="مشاركة على تويتر">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="share-btn" onclick="shareOnLinkedIn()" aria-label="مشاركة على لينكد إن">
+                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="share-btn" onclick="shareOnWhatsApp()" aria-label="مشاركة على واتساب">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="share-btn" onclick="copyArticleLink()" aria-label="نسخ رابط المقال">
+                    <i class="fas fa-link" aria-hidden="true"></i>
+                </a>
+            </div>
+            
+            <div class="article-actions">
+                <button class="action-btn" id="saveArticleBtn" aria-label="حفظ المقال">
+                    <i class="far fa-bookmark" aria-hidden="true"></i> حفظ المقال
+                </button>
+                <button class="action-btn" id="printArticleBtn" aria-label="طباعة المقال">
+                    <i class="fas fa-print" aria-hidden="true"></i> طباعة
+                </button>
+            </div>
+        </div>
+        
+        <!-- جدول المحتويات -->
+        <div class="toc-container" id="tocContainer">
+            <h2 class="toc-title">جدول المحتويات</h2>
+            <ul class="toc-list" id="tocList">
+                <!-- سيتم ملؤه بواسطة JavaScript -->
+            </ul>
+        </div>
+        
+        <!-- محتوى المقال الفعلي -->
+        <article class="article-content">
+            {{ article.content|safe }}
+        </article>
+        
+        <!-- أدوات المقال السفلية -->
+        <div class="article-tools">
+            <div class="share-buttons">
+                <span>شارك المقال:</span>
+                <a href="#" class="share-btn" onclick="shareOnFacebook()" aria-label="مشاركة على فيسبوك">
+                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="share-btn" onclick="shareOnTwitter()" aria-label="مشاركة على تويتر">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="share-btn" onclick="shareOnLinkedIn()" aria-label="مشاركة على لينكد إن">
+                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="share-btn" onclick="shareOnWhatsApp()" aria-label="مشاركة على واتساب">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                </a>
+            </div>
+            
+            <div class="article-actions">
+                <button class="action-btn" onclick="scrollToTop()" aria-label="العودة إلى الأعلى">
+                    <i class="fas fa-arrow-up" aria-hidden="true"></i> العودة للأعلى
+                </button>
+            </div>
+        </div>
+        
+        <!-- قسم التعليقات -->
+        <section class="comments-section" id="comments">
+            <h2 class="section-title">التعليقات</h2>
+            
+            <!-- نموذج إضافة تعليق -->
+            <div class="comment-form">
+                <h3>أضف تعليق</h3>
+                <form method="post" id="commentForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="اسمك" required aria-label="اسمك">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="content" placeholder="أدخل تعليقك" rows="4" required aria-label="نص التعليق"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">إضافة تعليق</button>
+                </form>
+            </div>
+            
+            <!-- رسائل التنبيه -->
+            {% if messages %}
+                <div class="alert-messages">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <!-- قائمة التعليقات -->
+            <div class="comment-list">
+                {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-avatar" aria-hidden="true">
+                        {{ comment.name|slice:":1"|upper }}
+                    </div>
+                    <div class="comment-body">
+                        <h4 class="comment-author">{{ comment.name }}</h4>
+                        <time class="comment-date" datetime="{{ comment.created_at|date:'c' }}">{{ comment.created_at|date:"Y-m-d H:i" }}</time>
+                        <div class="comment-text">{{ comment.content }}</div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="no-comments">لا توجد تعليقات حتى الآن.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- مقالات ذات صلة -->
+<hr>
+<div class="related-articles">
+    <h3>مقالات ذات صلة</h3>
+    <div class="row">
+        {% for related in related_articles %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>
+                            <a href="{% url 'article_detail' country_slug=related.country.slug category_slug=related.category.slug article_slug=related.slug %}">
+                                {{ related.title }}
+                            </a>
+                        </h5>
+                        <p>{{ related.content|truncatewords:20 }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>لا توجد مقالات ذات صلة حالياً.</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://d.top4top.io/p_35134u9lv1.png" alt="عرب بيديا" width="40" height="40" loading="lazy">
+                        عرب بيديا
+                    </div>
+                    <p>الموسوعة العربية الشاملة للمعرفة والمعلومات، نقدم محتوى عالي الجودة عن العالم العربي بتصميم عصري وسهل الاستخدام.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="تويتر"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="لينكد إن"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>المعلومات</h3>
+                    <ul>
+                        <li><a href="{% url 'country_home' country.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> الرئيسية</a></li>
+                        <li><a href="{% url 'country_about' country.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> من نحن</a></li>
+                        <li><a href="{% url 'country_privacy_policy' country.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> سياسة الخصوصية</a></li>
+                        <li><a href="{% url 'country_terms' country.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> شروط الاستخدام</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>التصنيفات</h3>
+                    <ul>
+                        {% for cat in categories|slice:":5" %}
+                        <li><a href="{% url 'category_view' country.slug cat.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> {{ cat.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {{ country.name }}. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Load non-critical JS asynchronously -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" async defer></script>
+    
+    <!-- Inline critical JS -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        
+        function handleScroll() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+        
+        // Initialize scroll state
+        handleScroll();
+        
+        // Debounce scroll event
+        let isScrolling;
+        window.addEventListener('scroll', function() {
+            window.clearTimeout(isScrolling);
+            isScrolling = setTimeout(handleScroll, 50);
+        }, {passive: true});
+        
+        // Generate Table of Contents
+        function generateTOC() {
+            const headings = document.querySelectorAll('.article-content h2, .article-content h3');
+            const tocList = document.getElementById('tocList');
+            
+            if (headings.length === 0) {
+                document.getElementById('tocContainer').style.display = 'none';
+                return;
+            }
+            
+            headings.forEach((heading, index) => {
+                if (!heading.id) {
+                    heading.id = 'heading-' + index;
+                }
+                
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#' + heading.id;
+                link.textContent = heading.textContent;
+                
+                if (heading.tagName === 'H3') {
+                    link.style.paddingRight = '20px';
+                }
+                
+                listItem.appendChild(link);
+                tocList.appendChild(listItem);
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-list a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without page reload
+                    history.pushState(null, null, targetId);
+                }
+            });
+        });
+        
+        // Social sharing functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'noopener,noreferrer');
+        }
+        
+        function shareOnTwitter() {
+            const text = encodeURIComponent('{{ article.title }}');
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'noopener,noreferrer');
+        }
+        
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'noopener,noreferrer');
+        }
+        
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent('{{ article.title }} - ' + window.location.href);
+            window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
+        }
+        
+        function copyArticleLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('تم نسخ رابط المقال إلى الحافظة');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+        
+        // Save article button
+        const saveArticleBtn = document.getElementById('saveArticleBtn');
+        if (saveArticleBtn) {
+            saveArticleBtn.addEventListener('click', function() {
+                // Here you can add code to save the article to favorites
+                const icon = this.querySelector('i');
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                this.innerHTML = '<i class="fas fa-bookmark" aria-hidden="true"></i> تم الحفظ';
+                
+                setTimeout(() => {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    this.innerHTML = '<i class="far fa-bookmark" aria-hidden="true"></i> حفظ المقال';
+                }, 2000);
+            });
+        }
+        
+        // Print article button
+        const printArticleBtn = document.getElementById('printArticleBtn');
+        if (printArticleBtn) {
+            printArticleBtn.addEventListener('click', function() {
+                window.print();
+            });
+        }
+        
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Scroll to comment form if URL has #comments hash
+        if (window.location.hash === '#comments') {
+            const commentsSection = document.getElementById('comments');
+            if (commentsSection) {
+                setTimeout(() => {
+                    commentsSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+        
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.related-article, .article-content, .comments-section');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach((element, index) => {
+                const elementPosition = element.getBoundingClientRect().top;
+                
+                if (elementPosition < windowHeight - 100) {
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }
+        
+        // Initialize elements for animation
+        document.querySelectorAll('.related-article, .article-content, .comments-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+        });
+        
+        // Initialize components
+        generateTOC();
+        animateOnScroll();
+        
+        // Event listeners
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll, {passive: true});
+    });
+    </script>
+</body>
+</html>

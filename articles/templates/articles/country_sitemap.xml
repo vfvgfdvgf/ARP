@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- الصفحة الرئيسية للدولة -->
+    <url>
+        <loc>{{ request.scheme }}://{{ request.get_host }}/{{ country.slug }}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- التصنيفات -->
+    {% for category in categories %}
+    <url>
+        <loc>{{ request.scheme }}://{{ request.get_host }}/{{ country.slug }}/category/{{ category.slug }}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    {% endfor %}
+
+    <!-- المقالات -->
+    {% for article in articles %}
+    <url>
+        <loc>{{ request.scheme }}://{{ request.get_host }}/{{ country.slug }}/article/{{ article.slug }}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    {% endfor %}
+
+</urlset>

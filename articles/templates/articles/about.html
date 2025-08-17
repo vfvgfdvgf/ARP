@@ -1,0 +1,1614 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عن عرب بيديا - ArabPedia | الموسوعة العربية الشاملة</title>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="عن عرب بيديا - ArabPedia">
+    <meta name="description" content="تعرف على رؤية وأهداف موسوعة عرب بيديا الشاملة">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* نفس متغيرات الألوان */
+        :root {
+            --sand-beige: #baab97;
+            --light-beige: #dad1ca;
+            --dark-teal: #2c6468;
+            --off-white: #e7e2dc;
+            --gray-green: #7b9486;
+            --text-dark: #1d1d1f;
+            --text-light: #86868b;
+            --hover-bg: rgba(0,0,0,0.03);
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        body {
+            font-family: 'SF Arabic', 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* شريط الترحيب العلوي */
+        .welcome-bar {
+            background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-message {
+            position: relative;
+            display: inline-block;
+            padding: 0 25px;
+        }
+        
+        .welcome-message::before,
+        .welcome-message::after {
+            content: "✧";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+            font-size: 1.1rem;
+        }
+        
+        .welcome-message::before {
+            right: -5px;
+        }
+        
+        .welcome-message::after {
+            left: -5px;
+        }
+        
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+            padding-left: 100%;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* تصميم الهيدر بأسلوب أبل */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 12px 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-left: 12px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand:hover .logo-img {
+            transform: rotate(15deg);
+        }
+        
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-left: 1rem;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+            padding: 8px 15px;
+            border-radius: 18px;
+        }
+        
+        .nav-link:hover {
+            color: var(--dark-teal);
+            background-color: var(--hover-bg);
+        }
+        
+        .nav-link.active {
+            color: var(--dark-teal);
+            background-color: rgba(44, 100, 104, 0.1);
+        }
+        
+        /* قسم الهيرو المعدل لصفحة "عن الموقع" */
+        .about-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, #f5f5f7 0%, var(--off-white) 100%);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .about-hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+        }
+        
+        .about-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--dark-teal);
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+        
+        .about-hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        /* قسم رؤيتنا ورسالتنا */
+        .vision-mission {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .vision-mission-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .vision-card, .mission-card {
+            background: var(--off-white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+        
+        .vision-card:hover, .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .vision-icon, .mission-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--dark-teal);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: white;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+        
+        .vision-card:hover .vision-icon, 
+        .mission-card:hover .mission-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .vision-mission h2 {
+            font-size: 2rem;
+            color: var(--dark-teal);
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .vision-mission h3 {
+            font-size: 1.8rem;
+            color: var(--dark-teal);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .vision-mission p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        /* قسم فريق العمل */
+        .team-section {
+            padding: 6rem 1rem;
+            background: var(--off-white);
+        }
+        
+        .team-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.05);
+        }
+        
+        .member-info {
+            padding: 2rem;
+        }
+        
+        .member-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-position {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .member-bio {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .member-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--off-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-teal);
+            transition: var(--transition);
+        }
+        
+        .member-social a:hover {
+            background: var(--dark-teal);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        /* قسم قيمنا */
+        .values-section {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .value-card {
+            background: var(--off-white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--dark-teal);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .value-card:hover .value-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .value-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 1rem;
+        }
+        
+        .value-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* قسم تواصل معنا */
+        .contact-about-section {
+            padding: 6rem 1rem;
+            background: var(--off-white);
+        }
+        
+        .contact-about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 4rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+        
+        .contact-about-container h2 {
+            font-size: 2.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-about-container p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .contact-btn {
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(44, 100, 104, 0.3);
+        }
+        
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44, 100, 104, 0.4);
+            color: white;
+        }
+        
+        /* فوتر بأسلوب أبل */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            padding: 6rem 1rem 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+        }
+        
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+            color: white;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            margin-left: 12px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .footer-logo:hover img {
+            transform: rotate(15deg);
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .footer-social a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(-8px);
+        }
+        
+        .footer-links i {
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 5rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+        
+        /* زر العودة للأعلى بأسلوب أبل */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(44, 100, 104, 0.4);
+            z-index: 100;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(44, 100, 104, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .about-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .vision-mission h2, 
+            .contact-about-container h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-hero {
+                height: auto;
+                padding: 120px 0 80px;
+                min-height: auto;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero p {
+                font-size: 1.2rem;
+            }
+            
+            .vision-mission-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .vision-card, .mission-card {
+                padding: 2rem;
+            }
+            
+            .contact-about-container {
+                padding: 3rem 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-about-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .contact-about-container h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-about-container {
+                padding: 2rem 1rem;
+            }
+            
+            .contact-about-container h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.1rem;
+                bottom: 30px;
+                right: 30px;
+            }
+        }
+        /* قسم تاريخ التأسيس */
+        .history-section {
+            padding: 6rem 1rem;
+            background: var(--off-white);
+        }
+        
+        .history-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+        
+        .history-image {
+            flex: 1;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .history-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        
+        .history-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .history-content {
+            flex: 1;
+        }
+        
+        .history-content h2 {
+            font-size: 2.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .history-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .history-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .history-stat {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+        
+        .history-stat .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-teal);
+            margin-bottom: 0.5rem;
+        }
+        
+        .history-stat .label {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        /* قسم المحتوى والإحصائيات */
+        .content-stats-section {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .content-stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .content-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .content-stat-card {
+            background: var(--off-white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .content-stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .content-stat-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--dark-teal);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .content-stat-card:hover .content-stat-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .content-stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-teal);
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-stat-title {
+            font-size: 1.2rem;
+            color: var(--dark-teal);
+            margin-bottom: 1rem;
+        }
+        
+        .content-stat-desc {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* قسم التطور الزمني */
+        .timeline-section {
+            padding: 6rem 1rem;
+            background: var(--off-white);
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            background: var(--dark-teal);
+            opacity: 0.3;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+            text-align: left;
+        }
+        
+        .timeline-item:nth-child(even) {
+            text-align: right;
+        }
+        
+        .timeline-date {
+            flex: 1;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .timeline-content {
+            flex: 2;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--dark-teal);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* قسم الشركاء */
+        .partners-section {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .partners-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+            align-items: center;
+        }
+        
+        .partner-logo {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+            transition: var(--transition);
+        }
+        
+        .partner-logo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 70px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+        
+        .partner-logo:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* التعديلات للجوال */
+        @media (max-width: 992px) {
+            .history-container {
+                flex-direction: column;
+            }
+            
+            .history-image {
+                margin-bottom: 3rem;
+                max-width: 600px;
+            }
+            
+            .history-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-container::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+                text-align: right !important;
+            }
+            
+            .timeline-date {
+                justify-content: flex-start;
+                padding-right: 70px;
+            }
+            
+            .timeline-content {
+                margin-right: 30px;
+            }
+            
+            .timeline-content::before {
+                left: -40px !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .partners-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .content-stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط الترحيب العلوي -->
+    <div class="welcome-bar">
+        <div class="welcome-message">
+            <div class="marquee"> مرحباً بكم في عرب بيديا - الموسوعة العربية الشاملة | تعرف على رؤيتنا ورسالتنا وقيمنا </div>
+        </div>
+    </div>
+    
+    <!-- الهيدر -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home'  %}">
+                <img src="https://j.top4top.io/p_3513ebspn1.png" alt="عرب بيديا" class="logo-img">
+                عرب بيديا
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home'  %}">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">عن الموقع</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#countries" id="countriesDropdown">
+                            مواقع الدول العربية
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'home'  %}">
+                                    <i class="fas fa-globe"></i> مواقع الدول
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'home'  %}#rulers">
+                                    <i class="fas fa-crown"></i> حكام الدول
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#timeline">الأحداث التاريخية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#features">المميزات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">اتصل بنا</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   
+    <!-- قسم الهيرو المعدل -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>قصة عرب بيديا</h1>
+            <p>من فكرة بسيطة إلى أكبر موسوعة عربية شاملة على الإنترنت</p>
+            <a href="#history" class="btn btn-primary">اكتشف تاريخنا</a>
+        </div>
+    </section>
+
+    <!-- قسم تاريخ التأسيس -->
+    <section class="history-section" id="history">
+        <div class="history-container">
+            <div class="history-image animate-on-scroll">
+                <img src="https://via.placeholder.com/600x400" alt="تاريخ تأسيس عرب بيديا">
+            </div>
+            <div class="history-content animate-on-scroll">
+                <h2>بدايتنا</h2>
+                <p>تأسست عرب بيديا في عام 2015 كمبادرة من مجموعة من الباحثين والمهتمين بالمعرفة العربية، بهدف إنشاء منصة شاملة تجمع المعلومات الموثوقة عن العالم العربي في مكان واحد.</p>
+                <p>بدأت الفكرة كمشروع صغير يغطي 5 دول عربية فقط، ومع تزايد الإقبال وتوسع فريق العمل، أصبحت تغطي جميع الدول العربية الـ22 مع آلاف المقالات والمحتوى التفاعلي.</p>
+                
+                <div class="history-stats">
+                    <div class="history-stat animate-on-scroll">
+                        <div class="number">2015</div>
+                        <div class="label">سنة التأسيس</div>
+                    </div>
+                    <div class="history-stat animate-on-scroll">
+                        <div class="number">5</div>
+                        <div class="label">دول في البداية</div>
+                    </div>
+                    <div class="history-stat animate-on-scroll">
+                        <div class="number">22</div>
+                        <div class="label">دولة الآن</div>
+                    </div>
+                    <div class="history-stat animate-on-scroll">
+                        <div class="number">7</div>
+                        <div class="label">سنوات من التطور</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم رؤيتنا ورسالتنا (نفسه مع تحسينات) -->
+    <section class="vision-mission">
+        <div class="container">
+            <h2>رؤيتنا ورسالتنا وأهدافنا</h2>
+            <div class="vision-mission-container">
+                <div class="vision-card animate-on-scroll">
+                    <div class="vision-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>رؤيتنا</h3>
+                    <p>أن نكون المنصة الرائدة في تقديم المعرفة الموثوقة عن العالم العربي، والمصدر الأول للباحثين عن المعلومات الدقيقة والشاملة.</p>
+                    <p>نسعى لأن نكون الوجهة الأولى لكل من يبحث عن فهم عميق للعالم العربي بكل أبعاده التاريخية والجغرافية والثقافية.</p>
+                </div>
+                
+                <div class="mission-card animate-on-scroll">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>رسالتنا</h3>
+                    <p>تقديم محتوى عربي موثوق ودقيق بطريقة سهلة ومبسطة، مع الحفاظ على الموضوعية والشمولية.</p>
+                    <p>نلتزم بتوثيق المعلومات التاريخية والجغرافية والثقافية للعالم العربي وتقديمها للقارئ بطريقة تفاعلية وجذابة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المحتوى والإحصائيات -->
+    <section class="content-stats-section">
+        <div class="content-stats-container">
+            <h2>إنجازاتنا في أرقام</h2>
+            <p class="text-center" style="max-width: 700px; margin: 0 auto; color: var(--text-light);">نفخر بما حققناه من تقدم كمي ونوعي في تقديم المحتوى العربي الموثوق</p>
+            
+            <div class="content-stats-grid">
+                <div class="content-stat-card animate-on-scroll">
+                    <div class="content-stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="content-stat-number">5,000+</div>
+                    <div class="content-stat-title">مقالة متخصصة</div>
+                    <div class="content-stat-desc">تشمل جميع جوانب الدول العربية من تاريخ وجغرافيا وثقافة واقتصاد</div>
+                </div>
+                
+                <div class="content-stat-card animate-on-scroll">
+                    <div class="content-stat-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="content-stat-number">250+</div>
+                    <div class="content-stat-title">خريطة تفاعلية</div>
+                    <div class="content-stat-desc">خرائط مفصلة لكل دولة مع إمكانية التكبير والتصغير</div>
+                </div>
+                
+                <div class="content-stat-card animate-on-scroll">
+                    <div class="content-stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="content-stat-number">500K+</div>
+                    <div class="content-stat-title">زائر شهرياً</div>
+                    <div class="content-stat-desc">من جميع أنحاء العالم العربي وخارجه</div>
+                </div>
+                
+                <div class="content-stat-card animate-on-scroll">
+                    <div class="content-stat-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="content-stat-number">10,000+</div>
+                    <div class="content-stat-title">صورة معتمدة</div>
+                    <div class="content-stat-desc">صور عالية الجودة للمعالم والمدن العربية</div>
+                </div>
+                
+                <div class="content-stat-card animate-on-scroll">
+                    <div class="content-stat-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="content-stat-number">500+</div>
+                    <div class="content-stat-title">مقطع فيديو</div>
+                    <div class="content-stat-desc">فيديوهات توثيقية وشرح للمحتوى</div>
+                </div>
+                
+                <div class="content-stat-card animate-on-scroll">
+                    <div class="content-stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="content-stat-number">1M+</div>
+                    <div class="content-stat-title">بيان إحصائي</div>
+                    <div class="content-stat-desc">أحدث الإحصائيات عن الدول العربية</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التطور الزمني -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <h2 class="text-center mb-5">رحلة تطورنا</h2>
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2015</div>
+                <div class="timeline-content">
+                    <h3>التأسيس</h3>
+                    <p>إطلاق النسخة الأولى من عرب بيديا بتغطية 5 دول عربية فقط، مع فريق عمل مكون من 3 أشخاص.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2016</div>
+                <div class="timeline-content">
+                    <h3>التوسع الأول</h3>
+                    <p>إضافة 7 دول جديدة، وإطلاق نظام التحرير الجماعي، ووصول عدد الزوار إلى 10,000 شهرياً.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2017</div>
+                <div class="timeline-content">
+                    <h3>التحول الكبير</h3>
+                    <p>إطلاق التصميم الجديد مع خرائط تفاعلية، وتغطية جميع الدول العربية الـ22، وفريق عمل مكون من 15 شخصاً.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2019</div>
+                <div class="timeline-content">
+                    <h3>الانتشار الواسع</h3>
+                    <p>تجاوز عدد الزوار 100,000 شهرياً، وإطلاق تطبيق الهاتف المحمول، وشراكات مع مؤسسات أكاديمية.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2021</div>
+                <div class="timeline-content">
+                    <h3>التحديث الشامل</h3>
+                    <p>إطلاق نظام الذكاء الاصطناعي لتحسين البحث، وإضافة المحتوى التفاعلي، وتجاوز 3,000 مقالة.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-date">2023</div>
+                <div class="timeline-content">
+                    <h3>الريادة</h3>
+                    <p>وصول عدد الزوار إلى 500,000 شهرياً، الاعتماد كمصدر في عدة جامعات، وإطلاق نظام الترجمة الآلية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم القيم الأساسية (نفسه مع تحسينات) -->
+    <section class="values-section">
+        <div class="values-container">
+            <h2>ما يميز عرب بيديا</h2>
+            <p class="text-center" style="max-width: 700px; margin: 0 auto 3rem; color: var(--text-light);">نلتزم بمجموعة من المبادئ والقيم التي توجه عملنا اليومي</p>
+            
+            <div class="values-grid">
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>الدقة العلمية</h3>
+                    <p>كل معلومة ننشرها تمر بمراجعة دقيقة من قبل متخصصين، مع الإشارة إلى المصادر الموثوقة.</p>
+                </div>
+                
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>الموضوعية</h3>
+                    <p>نقدم الحقائق كما هي دون تحيز أو تأثر بأي توجهات سياسية أو أيديولوجية.</p>
+                </div>
+                
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>الجودة</h3>
+                    <p>نحرص على تقديم محتوى عالي الجودة من حيث الدقة والعمق وسهولة الفهم.</p>
+                </div>
+                
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>التحديث المستمر</h3>
+                    <p>نقوم بتحديث معلوماتنا باستمرار لضمان تقديم أحدث البيانات والإحصائيات.</p>
+                </div>
+                
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>الابتكار</h3>
+                    <p>نسعى دائمًا لتقديم المحتوى بطرق مبتكرة تسهل وصول المعلومة للقارئ.</p>
+                </div>
+                
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>حب المعرفة</h3>
+                    <p>نؤمن بأهمية نشر المعرفة الموثوقة لتعزيز الوعي والثقافة العربية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الشركاء -->
+   
+
+    <!-- قسم تواصل معنا -->
+    <section class="contact-about-section" id="contact">
+        <div class="contact-about-container animate-on-scroll">
+            <h2>نرحب بآرائكم ومقترحاتكم</h2>
+            <p>يسعدنا تواصلكم معنا لأي استفسارات أو مقترحات أو للإبلاغ عن أي أخطاء في المحتوى. فريق عرب بيديا دائماً مستعد للرد على استفساراتكم.</p>
+            <a href="{% url 'contact'  %}" class="contact-btn">تواصل معنا</a>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="https://d.top4top.io/p_35134u9lv1.png" alt="عرب بيديا">
+                    عرب بيديا
+                </div>
+                <p>الموسوعة العربية الشاملة للمعرفة والمعلومات، نقدم محتوى عالي الجودة عن العالم العربي بتصميم عصري وسهل الاستخدام.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>الدول</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> مصر</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> السعودية</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الإمارات</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المغرب</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الجزائر</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>المعلومات</h3>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-chevron-left"></i> عن المشروع</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> خريطة الموقع</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>اتصل بنا</h3>
+                <ul>
+                    <li><a href="contact.html"><i class="fas fa-chevron-left"></i> تواصل معنا</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الإبلاغ عن خطأ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> اقتراح تحسين</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المساهمة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الإعلان معنا</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 عرب بيديا - ArabPedia. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    
+    <!-- زر العودة للأعلى -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // تأثيرات التمرير للنافبار
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // تحديث الروابط النشطة
+            updateActiveLinks();
+            
+            // زر العودة للأعلى
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // تأثيرات الظهور عند التمرير
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-on-scroll');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // العناصر التي نريد مراقبتها
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            elementsToAnimate.forEach(element => {
+                observer.observe(element);
+            });
+        }
+        
+        // زر العودة للأعلى
+        document.getElementById('backToTop').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // تحديث الروابط النشطة
+        function updateActiveLinks() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop - 200) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}` || 
+                    (currentSection === '' && link.getAttribute('href') === 'about.html')) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // تهيئة تأثيرات الصفحة عند التحميل
+        window.addEventListener('DOMContentLoaded', () => {
+            setupScrollAnimations();
+            updateActiveLinks();
+            
+            // تأثيرات للبطاقات
+            const cards = document.querySelectorAll('.vision-card, .mission-card, .team-member, .value-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const icon = card.querySelector('.vision-icon, .mission-icon, .value-icon');
+                    if (icon) {
+                        icon.style.transform = 'rotate(10deg) scale(1.1)';
+                    }
+                    
+                    const img = card.querySelector('img');
+                    if (img) {
+                        img.style.transform = 'scale(1.05)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    const icon = card.querySelector('.vision-icon, .mission-icon, .value-icon');
+                    if (icon) {
+                        icon.style.transform = 'rotate(0) scale(1)';
+                    }
+                    
+                    const img = card.querySelector('img');
+                    if (img) {
+                        img.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

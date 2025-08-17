@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>نتائج البحث عن "{{ query }}"</h1>
+
+<h2>الدول:</h2>
+<ul>
+{% for country in countries %}
+    <li>{{ country.name }}</li>
+{% empty %}
+    <li>لا توجد دول مطابقة</li>
+{% endfor %}
+</ul>
+
+<h2>المقالات:</h2>
+<ul>
+{% for article in articles %}
+    <li>{{ article.title }}</li>
+{% empty %}
+    <li>لا توجد مقالات مطابقة</li>
+{% endfor %}
+</ul>
+{% endblock %}

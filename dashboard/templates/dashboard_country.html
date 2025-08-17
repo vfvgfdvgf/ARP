@@ -1,0 +1,60 @@
+{% block content %}
+<h1>إدارة {{ country.name }}</h1>
+
+<div class="tabbed-admin">
+    <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-categories">التصنيفات</li>
+        <li class="tab-link" data-tab="tab-articles">المقالات</li>
+        <li class="tab-link" data-tab="tab-employees">الموظفين</li>
+    </ul>
+
+    <div id="tab-categories" class="tab-content current">
+        <ul>
+            {% for cat in categories %}
+                <li>{{ cat.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="tab-articles" class="tab-content">
+        <ul>
+            {% for art in articles %}
+                <li>{{ art.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="tab-employees" class="tab-content">
+        <ul>
+            {% for emp in employees %}
+                <li>{{ emp.user.username }} - {{ emp.position }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<style>
+.tabs { list-style:none; display:flex; padding:0; }
+.tabs li { padding:10px; background:#eee; margin-right:5px; cursor:pointer; }
+.tabs li.current { background:#fff; font-weight:bold; border-bottom:1px solid #fff; }
+.tab-content { display:none; padding:10px; border:1px solid #eee; }
+.tab-content.current { display:block; }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tabs = document.querySelectorAll(".tabs li");
+    const contents = document.querySelectorAll(".tab-content");
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function() {
+            tabs.forEach(t => t.classList.remove("current"));
+            contents.forEach(c => c.classList.remove("current"));
+
+            this.classList.add("current");
+            document.getElementById(this.dataset.tab).classList.add("current");
+        });
+    });
+});
+</script>
+{% endblock %}

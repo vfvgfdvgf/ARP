@@ -1,0 +1,732 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصنيفات {{ country.name }} | عرب بيديا</title>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="تصنيفات {{ country.name }} - عرب بيديا">
+    <meta name="description" content="استكشف جميع تصنيفات {{ country.name }} - التاريخ، الجغرافيا، الثقافة والإحصائيات">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Preload important resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"></noscript>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap"></noscript>
+    
+    <!-- Inline critical CSS -->
+    <style>
+    :root {
+        --sand-beige: #baab97;
+        --light-beige: #dad1ca;
+        --dark-teal: #2c6468;
+        --off-white: #e7e2dc;
+        --gray-green: #7b9486;
+        --text-dark: #1d1d1f;
+        --text-light: #86868b;
+        --hover-bg: rgba(0,0,0,0.03);
+        --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    body {
+        font-family: 'SF Arabic', 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--off-white);
+        color: var(--text-dark);
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* شريط الترحيب العلوي */
+    .welcome-bar {
+        background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 0.95rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .welcome-message {
+        position: relative;
+        display: inline-block;
+        padding: 0 25px;
+    }
+    
+    .welcome-message::before,
+    .welcome-message::after {
+        content: "✧";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.7;
+        font-size: 1.1rem;
+    }
+    
+    .welcome-message::before {
+        right: -5px;
+    }
+    
+    .welcome-message::after {
+        left: -5px;
+    }
+    
+    .marquee {
+        display: inline-block;
+        white-space: nowrap;
+        animation: marquee 15s linear infinite;
+        padding-left: 100%;
+    }
+    
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+    
+    /* تصميم الهيدر بأسلوب أبل */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 12px 0;
+        transition: var(--transition);
+        box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    }
+    
+    .navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: var(--dark-teal);
+        letter-spacing: -0.5px;
+    }
+    
+    .logo-img {
+        width: 36px;
+        height: 36px;
+        margin-left: 12px;
+        border-radius: 8px;
+        object-fit: contain;
+        transition: var(--transition);
+    }
+    
+    .navbar-brand:hover .logo-img {
+        transform: rotate(15deg);
+    }
+    
+    .nav-link {
+        color: var(--text-dark);
+        font-weight: 500;
+        margin-left: 1.2rem;
+        transition: var(--transition);
+        position: relative;
+        font-size: 0.95rem;
+        padding: 8px 15px;
+        border-radius: 18px;
+    }
+    
+    .nav-link:hover {
+        color: var(--dark-teal);
+        background-color: var(--hover-bg);
+    }
+    
+    .nav-link.active {
+        color: var(--dark-teal);
+        background-color: rgba(44, 100, 104, 0.1);
+    }
+    
+    /* هيدر التصنيفات */
+    .categories-header {
+        height: 400px;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+        margin-bottom: 3rem;
+    }
+    
+    .header-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+    }
+    
+    .header-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding-bottom: 3rem;
+        color: white;
+    }
+    
+    .categories-title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+    }
+    
+    .categories-description {
+        font-size: 1.25rem;
+        max-width: 700px;
+        margin-bottom: 2.5rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* محتوى التصنيفات */
+    .categories-section {
+        padding: 4rem 0;
+        background-color: white;
+    }
+    
+    .categories-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--dark-teal);
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 0.8rem;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        border-radius: 3px;
+    }
+    
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .category-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .category-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+    
+    .category-image {
+        height: 180px;
+        overflow: hidden;
+    }
+    
+    .category-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+    
+    .category-card:hover .category-image img {
+        transform: scale(1.05);
+    }
+    
+    .category-content {
+        padding: 1.5rem;
+    }
+    
+    .category-name {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        color: var(--dark-teal);
+        font-weight: 600;
+    }
+    
+    .category-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    
+    .articles-count {
+        background-color: var(--light-beige);
+        color: var(--dark-teal);
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    
+    .category-description {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+    
+    .btn-explore {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        border: none;
+        padding: 0.8rem;
+        border-radius: 12px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: var(--transition);
+        text-decoration: none;
+    }
+    
+    .btn-explore:hover {
+        background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+        transform: translateY(-2px);
+    }
+    
+    /* حالة عدم وجود تصنيفات */
+    .empty-state {
+        text-align: center;
+        padding: 4rem 0;
+        grid-column: 1 / -1;
+    }
+    
+    .empty-state-icon {
+        font-size: 3.5rem;
+        color: var(--light-beige);
+        margin-bottom: 1.5rem;
+    }
+    
+    .empty-state-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--dark-teal);
+    }
+    
+    .empty-state-description {
+        color: var(--text-light);
+        max-width: 500px;
+        margin: 0 auto 2rem;
+    }
+    
+    /* الفوتر بأسلوب أبل */
+    .footer {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        padding: 6rem 0 3rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 4rem;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .footer-logo {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1.8rem;
+        color: white;
+        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer-logo img {
+        width: 40px;
+        height: 40px;
+        margin-left: 12px;
+        border-radius: 10px;
+        transition: var(--transition);
+    }
+    
+    .footer-logo:hover img {
+        transform: rotate(15deg);
+    }
+    
+    .footer-about p {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        font-size: 1rem;
+    }
+    
+    .footer-social {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .footer-social a {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .footer-social a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px) scale(1.1);
+    }
+    
+    .footer-links h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.8rem;
+        position: relative;
+        padding-bottom: 0.8rem;
+        color: white;
+        font-weight: 600;
+    }
+    
+    .footer-links h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: rgba(255,255,255,0.5);
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-links li {
+        margin-bottom: 1rem;
+    }
+    
+    .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 1rem;
+    }
+    
+    .footer-links a:hover {
+        color: white;
+        transform: translateX(-8px);
+    }
+    
+    .footer-links i {
+        font-size: 0.9rem;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: 5rem;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+    }
+    
+    /* تأثيرات الحركة */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* تعديلات للهواتف */
+    @media (max-width: 992px) {
+        .categories-header {
+            height: 350px;
+        }
+        
+        .categories-title {
+            font-size: 2.4rem;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .categories-header {
+            height: 300px;
+        }
+        
+        .categories-title {
+            font-size: 2rem;
+        }
+        
+        .categories-description {
+            font-size: 1.1rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .categories-header {
+            height: 250px;
+        }
+        
+        .categories-title {
+            font-size: 1.8rem;
+        }
+        
+        .categories-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- شريط الترحيب العلوي -->
+    <div class="welcome-bar">
+        <div class="welcome-message">
+            <div class="marquee"> مرحباً بكم في عرب بيديا - الموسوعة العربية الشاملة | اكتشف ثقافات وتاريخ وجغرافية العالم العربي </div>
+        </div>
+    </div>
+    
+    <!-- الهيدر -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'country_home' country.slug %}">
+                <img src="https://j.top4top.io/p_3513ebspn1.png" alt="عرب بيديا" class="logo-img" width="36" height="36">
+                {{ country.name }}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="تبديل التنقل">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_home' country.slug %}">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'categories' country.slug %}" aria-current="page">التصنيفات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_about' country.slug %}">من نحن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_contact' country.slug %}">اتصل بنا</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- هيدر التصنيفات -->
+    <header class="categories-header" style="background-image: url('{% static 'images/default_categories.jpg' %}')">
+        <div class="header-overlay"></div>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="categories-title">تصنيفات {{ country.name }}</h1>
+                <p class="categories-description">استكشف المعرفة من خلال تصنيفاتنا المختلفة التي تغطي جميع جوانب {{ country.name }}</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوى التصنيفات -->
+    <section class="categories-section">
+        <div class="categories-container">
+            <h2 class="section-title">جميع التصنيفات</h2>
+            
+            {% if categories %}
+            <div class="categories-grid">
+                {% for category in categories %}
+                <div class="category-card">
+                    <div class="category-image">
+                        {% if category.image_url %}
+                            <img src="{{ category.image_url }}" alt="{{ category.name }}" loading="lazy" width="300" height="180">
+                        {% else %}
+                            <img src="{% static 'images/default_category.jpg' %}" alt="{{ category.name }}" loading="lazy" width="300" height="180">
+                        {% endif %}
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">{{ category.name }}</h3>
+                        <div class="category-stats">
+                            <span class="articles-count">{{ category.article_count }} مقال</span>
+                        </div>
+                        {% if category.description %}
+                        <p class="category-description">{{ category.description|truncatechars:100 }}</p>
+                        {% endif %}
+                        <a href="{% url 'category_view' country.slug category.slug %}" class="btn-explore">
+                            استكشف التصنيف <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3 class="empty-state-title">لا توجد تصنيفات متاحة</h3>
+                <p class="empty-state-description">لا توجد تصنيفات متاحة حالياً، يمكنك العودة لاحقاً.</p>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://d.top4top.io/p_35134u9lv1.png" alt="عرب بيديا" width="40" height="40">
+                        عرب بيديا
+                    </div>
+                    <p>الموسوعة العربية الشاملة للمعرفة والمعلومات، نقدم محتوى عالي الجودة عن العالم العربي بتصميم عصري وسهل الاستخدام.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="لينكد إن"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>المعلومات</h3>
+                    <ul>
+                        <li><a href="{% url 'country_home' country.slug %}"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                        <li><a href="{% url 'country_about' country.slug %}"><i class="fas fa-chevron-left"></i> من نحن</a></li>
+                        <li><a href="{% url 'country_privacy_policy' country.slug %}"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                        <li><a href="{% url 'country_terms' country.slug %}"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>التصنيفات الشائعة</h3>
+                    <ul>
+                        {% for cat in popular_categories|slice:":5" %}
+                        <li><a href="{% url 'category_view' country.slug cat.slug %}"><i class="fas fa-chevron-left"></i> {{ cat.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {{ country.name }}. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Load non-critical JS asynchronously -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" async defer></script>
+    
+    <!-- Inline critical JS -->
+    <script>
+    // تأثيرات التمرير للنافبار
+    document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.querySelector('.navbar');
+        
+        function handleScroll() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+        
+        // Initialize scroll state
+        handleScroll();
+        
+        // Debounce scroll event
+        let isScrolling;
+        window.addEventListener('scroll', function() {
+            window.clearTimeout(isScrolling);
+            isScrolling = setTimeout(handleScroll, 50);
+        }, {passive: true});
+        
+        // تأثيرات الظهور عند التمرير
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.category-card, .empty-state');
+            
+            elements.forEach((element, index) => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        };
+        
+        // تهيئة العناصر قبل الظهور
+        document.querySelectorAll('.category-card, .empty-state').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+        });
+        
+        // تشغيل التأثير عند التحميل وعند التمرير
+        animateOnScroll();
+        window.addEventListener('scroll', animateOnScroll, {passive: true});
+    });
+    </script>
+</body>
+</html>

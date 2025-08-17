@@ -1,0 +1,27 @@
+{% load static %}
+{% block content %}
+<h1>لوحة التحكم الرئيسية</h1>
+
+<div class="stats-cards">
+    <div class="card">الدول: {{ countries_count }}</div>
+    <div class="card">المقالات: {{ articles_count }}</div>
+    <div class="card">التصنيفات: {{ categories_count }}</div>
+    <div class="card">الموظفين: {{ employees_count }}</div>
+</div>
+
+<h2>أحدث المقالات</h2>
+<ul>
+    {% for article in latest_articles %}
+        <li>{{ article.title }} - {{ article.country.name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>الدول</h2>
+<ul>
+    {% for country in countries %}
+        <li>
+            <a href="{% url 'dashboard_country' country.slug %}">{{ country.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

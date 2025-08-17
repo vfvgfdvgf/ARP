@@ -1,0 +1,773 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - {{ country.name }} | عرب بيديا</title>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="اتصل بنا - {{ country.name }} - عرب بيديا">
+    <meta name="description" content="تواصل مع فريق عرب بيديا للاستفسارات أو الاقتراحات أو التعاون">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --sand-beige: #baab97;
+        --light-beige: #dad1ca;
+        --dark-teal: #2c6468;
+        --off-white: #e7e2dc;
+        --gray-green: #7b9486;
+        --text-dark: #1d1d1f;
+        --text-light: #86868b;
+        --hover-bg: rgba(0,0,0,0.03);
+        --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    body {
+        font-family: 'SF Arabic', 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: var(--off-white);
+        color: var(--text-dark);
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* شريط الترحيب العلوي */
+    .welcome-bar {
+        background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 0.95rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .welcome-message {
+        position: relative;
+        display: inline-block;
+        padding: 0 25px;
+    }
+    
+    .welcome-message::before,
+    .welcome-message::after {
+        content: "✧";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.7;
+        font-size: 1.1rem;
+    }
+    
+    .welcome-message::before {
+        right: -5px;
+    }
+    
+    .welcome-message::after {
+        left: -5px;
+    }
+    
+    .marquee {
+        display: inline-block;
+        white-space: nowrap;
+        animation: marquee 15s linear infinite;
+        padding-left: 100%;
+    }
+    
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+    
+    /* تصميم الهيدر بأسلوب أبل */
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        padding: 12px 0;
+        transition: var(--transition);
+        box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    }
+    
+    .navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: var(--dark-teal);
+        letter-spacing: -0.5px;
+    }
+    
+    .logo-img {
+        width: 36px;
+        height: 36px;
+        margin-left: 12px;
+        border-radius: 8px;
+        object-fit: contain;
+        transition: var(--transition);
+    }
+    
+    .navbar-brand:hover .logo-img {
+        transform: rotate(15deg);
+    }
+    
+    .nav-link {
+        color: var(--text-dark);
+        font-weight: 500;
+        margin-left: 1.2rem;
+        transition: var(--transition);
+        position: relative;
+        font-size: 0.95rem;
+        padding: 8px 15px;
+        border-radius: 18px;
+    }
+    
+    .nav-link:hover {
+        color: var(--dark-teal);
+        background-color: var(--hover-bg);
+    }
+    
+    .nav-link.active {
+        color: var(--dark-teal);
+        background-color: rgba(44, 100, 104, 0.1);
+    }
+    
+    /* هيدر صفحة اتصل بنا */
+    .contact-hero {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        padding: 8rem 0 6rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .contact-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    }
+    
+    .contact-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        position: relative;
+        animation: fadeInUp 0.8s ease;
+    }
+    
+    .contact-hero p {
+        font-size: 1.3rem;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        opacity: 0.9;
+        animation: fadeInUp 0.8s ease 0.2s both;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* محتوى صفحة اتصل بنا */
+    .contact-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: -4rem auto 4rem;
+        padding: 0 1.5rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .contact-info, .contact-form {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .contact-info:hover, .contact-form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+    
+    .contact-info h2, .contact-form h2 {
+        color: var(--dark-teal);
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        position: relative;
+    }
+    
+    .contact-info h2::after, .contact-form h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        border-radius: 3px;
+    }
+    
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        transition: var(--transition);
+    }
+    
+    .info-item:hover {
+        transform: translateX(-5px);
+    }
+    
+    .info-icon {
+        font-size: 1.5rem;
+        color: var(--dark-teal);
+        margin-left: 1.5rem;
+        margin-top: 0.3rem;
+        background: rgba(44, 100, 104, 0.1);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .info-item h3 {
+        color: var(--dark-teal);
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    
+    .info-item p {
+        color: var(--text-light);
+        line-height: 1.7;
+    }
+    
+    /* تصميم النموذج */
+    .form-group {
+        margin-bottom: 1.8rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        font-family: 'Tajawal', sans-serif;
+        transition: var(--transition);
+        background-color: rgba(255,255,255,0.8);
+        font-size: 1rem;
+    }
+    
+    .form-control:focus {
+        border-color: var(--dark-teal);
+        box-shadow: 0 0 0 4px rgba(44, 100, 104, 0.15);
+        outline: none;
+    }
+    
+    textarea.form-control {
+        min-height: 180px;
+        resize: vertical;
+    }
+    
+    .submit-btn {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        font-family: 'Tajawal', sans-serif;
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    .submit-btn:hover {
+        background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(44, 100, 104, 0.2);
+    }
+    
+    /* تصميم الخريطة */
+    .map-container {
+        height: 450px;
+        margin: 5rem auto;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: var(--transition);
+        max-width: 1200px;
+    }
+    
+    .map-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+    
+    .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    
+    /* الفوتر بأسلوب أبل */
+    .footer {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        padding: 6rem 0 3rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 4rem;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .footer-logo {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1.8rem;
+        color: white;
+        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer-logo img {
+        width: 40px;
+        height: 40px;
+        margin-left: 12px;
+        border-radius: 10px;
+        transition: var(--transition);
+    }
+    
+    .footer-logo:hover img {
+        transform: rotate(15deg);
+    }
+    
+    .footer-about p {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        font-size: 1rem;
+    }
+    
+    .footer-social {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .footer-social a {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .footer-social a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px) scale(1.1);
+    }
+    
+    .footer-links h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.8rem;
+        position: relative;
+        padding-bottom: 0.8rem;
+        color: white;
+        font-weight: 600;
+    }
+    
+    .footer-links h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: rgba(255,255,255,0.5);
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-links li {
+        margin-bottom: 1rem;
+    }
+    
+    .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 1rem;
+    }
+    
+    .footer-links a:hover {
+        color: white;
+        transform: translateX(-8px);
+    }
+    
+    .footer-links i {
+        font-size: 0.9rem;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: 5rem;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+    }
+    
+    /* تأثيرات الحركة */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    /* تعديلات للهواتف */
+    @media (max-width: 992px) {
+        .contact-hero h1 {
+            font-size: 2.8rem;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .contact-hero {
+            padding: 6rem 0 4rem;
+        }
+        
+        .contact-hero h1 {
+            font-size: 2.2rem;
+        }
+        
+        .contact-hero p {
+            font-size: 1.1rem;
+        }
+        
+        .contact-container {
+            margin-top: -2rem;
+            grid-template-columns: 1fr;
+        }
+        
+        .map-container {
+            height: 350px;
+            margin: 3rem auto;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .contact-hero h1 {
+            font-size: 2rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- شريط الترحيب العلوي -->
+    <div class="welcome-bar">
+        <div class="welcome-message">
+            <div class="marquee"> مرحباً بكم في عرب بيديا - الموسوعة العربية الشاملة | تواصل معنا لأي استفسار أو اقتراح </div>
+        </div>
+    </div>
+    
+    <!-- الهيدر -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'country_home' country.slug %}">
+                <img src="https://j.top4top.io/p_3513ebspn1.png" alt="عرب بيديا" class="logo-img">
+                {{ country.name }}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_home' country.slug %}">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">التصنيفات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'country_about' country.slug %}">من نحن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'country_contact' country.slug %}">اتصل بنا</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- هيدر صفحة اتصل بنا -->
+    <header class="contact-hero">
+        <div class="container">
+            <h1>اتصل بنا</h1>
+            <p>نحن هنا للإجابة على جميع استفساراتك. لا تتردد في التواصل معنا بأي طريقة تفضلها.</p>
+        </div>
+    </header>
+
+    <!-- محتوى صفحة اتصل بنا -->
+    <main>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>معلومات التواصل</h2>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3>العنوان</h3>
+                        <p>قريبا</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>البريد الإلكتروني</h3>
+                        <p>info@tariqaljoda.com</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div>
+                        <h3>الهاتف</h3>
+                        <p>قريبا</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3>ساعات العمل</h3>
+                        <p>الأحد - الخميس: 8 صباحاً - 5 مساءً<br>الجمعة والسبت: مغلق</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2>أرسل رسالة</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل</label>
+                        <input type="text" id="name" name="name" class="form-control" required placeholder="أدخل اسمك الكامل">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" class="form-control" required placeholder="أدخل بريدك الإلكتروني">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">الموضوع</label>
+                        <input type="text" id="subject" name="subject" class="form-control" required placeholder="موضوع الرسالة">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">الرسالة</label>
+                        <textarea id="message" name="message" class="form-control" required placeholder="اكتب رسالتك هنا..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                        إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.789012345678!2d31.2356789!3d30.0123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAwJzQ0LjQiTiAzMcKwMTQnMDguNCJF!5e0!3m2!1sen!2seg!4v1234567890123!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://d.top4top.io/p_35134u9lv1.png" alt="عرب بيديا">
+                        عرب بيديا
+                    </div>
+                    <p>الموسوعة العربية الشاملة للمعرفة والمعلومات، نقدم محتوى عالي الجودة عن العالم العربي بتصميم عصري وسهل الاستخدام.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>المعلومات</h3>
+                    <ul>
+                        <li><a href="{% url 'country_home' country.slug %}">الرئيسية</a></li>
+                        <li><a href="{% url 'country_about' country.slug %}">من نحن</a></li>
+                        <li><a href="{% url 'country_privacy_policy' country.slug %}">سياسة الخصوصية</a></li>
+                        <li><a href="{% url 'country_terms' country.slug %}">شروط الاستخدام</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left"></i> تواصل معنا</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left"></i> الإبلاغ عن خطأ</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left"></i> اقتراح تحسين</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left"></i> المساهمة</a></li>
+                        <li><a href="{% url 'country_contact' country.slug %}"><i class="fas fa-chevron-left"></i> الإعلان معنا</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {{ country.name }}. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+    // تأثيرات التمرير للنافبار
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    // تأثيرات الظهور عند التمرير
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.contact-info, .contact-form, .map-container');
+        
+        elements.forEach((element, index) => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementPosition < windowHeight - 100) {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            }
+        });
+    };
+    
+    // تهيئة العناصر قبل الظهور
+    document.querySelectorAll('.contact-info, .contact-form, .map-container').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease-out';
+    });
+    
+    // تشغيل التأثير عند التحميل وعند التمرير
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

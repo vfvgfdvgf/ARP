@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>تسجيل الدخول للوحة التحكم</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+        {% if form.errors %}
+            <p class="error">اسم المستخدم أو كلمة المرور غير صحيحة</p>
+        {% endif %}
+    </div>
+</body>
+</html>
