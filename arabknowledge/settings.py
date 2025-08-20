@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ========================
 SECRET_KEY = 'django-insecure-h(ky(ezdvyi463^9r)u5!@2z5!th-%4^ocd#fdj0yl@h%@9$!+'
 DEBUG = False  # يجب إيقاف debug في الإنتاج
-ALLOWED_HOSTS = ['tariqaljoda.com', 'www.tariqaljoda.com']  # ضع هنا الدومينات الفعلية
+ALLOWED_HOSTS = ['*']  # ضع هنا الدومينات الفعلية
 
 # ========================
 # Custom User
