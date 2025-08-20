@@ -2,8 +2,5 @@ User-agent: *
 Allow: /
 
 Disallow: /admin/
-Disallow: /accounts/
-Disallow: /static/
-Disallow: /media/
 
 Sitemap: https://tariqaljoda.com/sitemap.xml
