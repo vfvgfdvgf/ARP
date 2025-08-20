@@ -2,15 +2,72 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Basic Setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نتائج البحث - عرب بيديا | الموسوعة العربية الشاملة</title>
+
+    <!-- Dynamic Title & Meta SEO -->
+    <title>
+        {% if country %}
+            نتائج البحث عن "{{ query }}" في {{ country.name }} | عرب بيديا
+        {% else %}
+            نتائج البحث عن "{{ query }}" | عرب بيديا
+        {% endif %}
+    </title>
+    <meta name="title" content="{% if country %}نتائج البحث عن '{{ query }}' في {{ country.name }} | عرب بيديا{% else %}نتائج البحث عن '{{ query }}' | عرب بيديا{% endif %}">
     
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="نتائج البحث - عرب بيديا">
-    <meta name="description" content="نتائج البحث في الموسوعة العربية الشاملة">
+    <meta name="description" content="{% if country %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' في {{ country.name }} على موسوعة عرب بيديا.{% else %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' على موسوعة عرب بيديا.{% endif %}">
+    
+    <meta name="keywords" content="بحث, نتائج البحث, '{{ query }}', {% if country %}{{ country.name }}, {% endif %}مقالات, تصنيفات, عرب بيديا, موسوعة عربية">
     <meta name="robots" content="index, follow">
     
+    <!-- Canonical -->
+    <link rel="canonical" href="{% if country %}https://tariqaljoda.com/{{ country.slug }}/search/?q={{ query|urlencode }}{% else %}https://tariqaljoda.com/search/?q={{ query|urlencode }}{% endif %}">
+
+    <!-- Favicon & Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="apple-touch-icon" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:title" content="{% if country %}نتائج البحث عن '{{ query }}' في {{ country.name }} | عرب بيديا{% else %}نتائج البحث عن '{{ query }}' | عرب بيديا{% endif %}">
+    <meta property="og:description" content="{% if country %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' في {{ country.name }} على موسوعة عرب بيديا.{% else %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' على موسوعة عرب بيديا.{% endif %}">
+    <meta property="og:url" content="{% if country %}https://tariqaljoda.com/{{ country.slug }}/search/?q={{ query|urlencode }}{% else %}https://tariqaljoda.com/search/?q={{ query|urlencode }}{% endif %}">
+    <meta property="og:site_name" content="عرب بيديا">
+    <meta property="og:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if country %}نتائج البحث عن '{{ query }}' في {{ country.name }} | عرب بيديا{% else %}نتائج البحث عن '{{ query }}' | عرب بيديا{% endif %}">
+    <meta name="twitter:description" content="{% if country %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' في {{ country.name }} على موسوعة عرب بيديا.{% else %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' على موسوعة عرب بيديا.{% endif %}">
+    <meta name="twitter:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SearchResultsPage",
+      "name": "{% if country %}نتائج البحث عن '{{ query }}' في {{ country.name }}{% else %}نتائج البحث عن '{{ query }}'{% endif %}",
+      "url": "{% if country %}https://tariqaljoda.com/{{ country.slug }}/search/?q={{ query|urlencode }}{% else %}https://tariqaljoda.com/search/?q={{ query|urlencode }}{% endif %}",
+      "description": "{% if country %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' في {{ country.name }} على موسوعة عرب بيديا.{% else %}تم العثور على {% if categories|length > 0 and articles|length > 0 %}{{ categories|length }} تصنيفات و {{ articles|length }} مقالات{% elif categories|length > 0 %}{{ categories|length }} تصنيفات{% else %}{{ articles|length }} مقالات{% endif %} للبحث '{{ query }}' على موسوعة عرب بيديا.{% endif %}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "عرب بيديا",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://d.top4top.io/p_35134u9lv1.png"
+        }
+      }
+    }
+    </script>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
     <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">

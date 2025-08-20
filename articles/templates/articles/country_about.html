@@ -2,17 +2,82 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <head>
+    <!-- Basic Setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>من نحن - {{ country.name }} | عرب بيديا</title>
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="من نحن - {{ country.name }} - عرب بيديا">
-    <meta name="description" content="تعرف على فريق موسوعة {{ country.name }} ورسالتنا ورؤيتنا وأهدافنا">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
 
+    <!-- Title & Meta SEO -->
+    <title>من نحن - {{ country.name }}  </title>
+    <meta name="title" content="من نحن - {{ country.name }} | عرب بيديا">
+    <meta name="description" content="تعرف على فريق موسوعة {{ country.name }} ورسالتنا ورؤيتنا وأهدافنا، واعرف كيف نسعى لتقديم محتوى عربي موثوق ومنظم لكل المستخدمين.">
+    <meta name="keywords" content="من نحن, فريق {{ country.name }}, عرب بيديا, موسوعة عربية, رؤية, رسالة, أهداف, فريق العمل, المعرفة العربية">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://tariqaljoda.com/{{ country.slug }}/about/">
+
+    <!-- Favicon & Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="apple-touch-icon" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:title" content="من نحن - {{ country.name }} | عرب بيديا">
+    <meta property="og:description" content="تعرف على فريق عرب بيديا لموسوعة {{ country.name }}، رسالتنا، رؤيتنا، وأهدافنا لتقديم محتوى عربي موثوق وشامل.">
+    <meta property="og:url" content="https://tariqaljoda.com/{{ country.slug }}/about/">
+    <meta property="og:site_name" content="عرب بيديا">
+    <meta property="og:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="من نحن - {{ country.name }} | عرب بيديا">
+    <meta name="twitter:description" content="اعرف المزيد عن فريق موسوعة {{ country.name }} ورؤيتنا لتقديم المعرفة العربية بطريقة موثوقة ومنظمة.">
+    <meta name="twitter:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Preconnect & Preload for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <!-- Structured Data (Organization + WebPage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "من نحن - {{ country.name }}",
+      "url": "https://tariqaljoda.com/{{ country.slug }}/about/",
+      "description": "صفحة من نحن لفريق عرب بيديا لموسوعة {{ country.name }}، تعرف على الرسالة والرؤية والأهداف.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "عرب بيديا",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://d.top4top.io/p_35134u9lv1.png"
+        }
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "عرب بيديا",
+      "url": "https://tariqaljoda.com/",
+      "logo": "https://d.top4top.io/p_35134u9lv1.png",
+      "sameAs": [
+        "https://facebook.com/arabpedia",
+        "https://twitter.com/arabpedia",
+        "https://www.instagram.com/arabpedia"
+      ]
+    }
+    </script>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->

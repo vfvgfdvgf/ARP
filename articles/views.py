@@ -236,18 +236,7 @@ def country_sitemap(request, country_slug):
     return HttpResponse(xml_content, content_type="application/xml")
 
 # إنشاء ملف robots.txt تلقائيًا
-def robots_txt(request):
-    lines = [
-        "User-agent: *",
-        "Disallow:",
-    ]
 
-    countries = Country.objects.all()
-    for country in countries:
-        lines.append(f"Sitemap: {request.scheme}://{request.get_host()}/sitemap/{country.slug}.xml")
-
-    content = "\n".join(lines)
-    return HttpResponse(content, content_type="text/plain")
 
 # توليد sitemap index لجميع الدول
 def all_countries_sitemaps(request):

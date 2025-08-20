@@ -13,8 +13,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 # ========================
 SECRET_KEY = 'django-insecure-h(ky(ezdvyi463^9r)u5!@2z5!th-%4^ocd#fdj0yl@h%@9$!+'
-DEBUG = False
-ALLOWED_HOSTS = ['*']
+DEBUG = False  # يجب إيقاف debug في الإنتاج
+ALLOWED_HOSTS = ['tariqaljoda.com', 'www.tariqaljoda.com']  # ضع هنا الدومينات الفعلية
 
 # ========================
 # Custom User
@@ -31,8 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',  # إضافة Whitenoise
+    'whitenoise.runserver_nostatic',  # Whitenoise
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
 
     # تطبيقاتك
     'dashboard',
@@ -82,7 +83,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # ========================
 # Auth
 # ========================
-AUTH_USER_MODEL = 'articles.CustomUser'
 LOGIN_URL = '/dashboard/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/dashboard/login/'
@@ -95,7 +95,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise لخدمة static
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -110,7 +110,7 @@ ROOT_URLCONF = 'arabknowledge.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],  
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,12 +125,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'arabknowledge.wsgi.application'
 
 # ========================
-# Database
+# Database (Production - PostgreSQL Render)
 # ========================
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'arabknowledge_db',
+        'USER': 'arabknowledge_db_user',
+        'PASSWORD': 'GLMiIasX9aiSTVmcpB8uDU74uIcuAlh2',
+        'HOST': 'dpg-d2ih7bbuibrs739qrelg-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
@@ -153,13 +157,10 @@ USE_I18N = True
 USE_TZ = True
 
 # ========================
-# Static files
+# Static files (Production)
 # ========================
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]  
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# Whitenoise إعدادات
+STATIC_ROOT = BASE_DIR / "staticfiles"  # تجمع كل ملفات static هنا عند collectstatic
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # ========================

@@ -1,0 +1,15 @@
+# السماح لجميع محركات البحث
+User-agent: *
+
+# السماح بالوصول لجميع الصفحات العامة
+Allow: /
+
+# منع الوصول للصفحات الإدارية أو الخلفية
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /static/
+Disallow: /media/
+
+# رابط Sitemap
+Sitemap: http://127.0.0.1:8000/sitemap.xml
+Sitemap: http://127.0.0.1:8000/sitemap2.xml

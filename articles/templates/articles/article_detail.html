@@ -2,26 +2,98 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Basic Setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ article.title }} - {{ country.name }} | عرب بيديا</title>
+    <title>{{ article.title }} - {{ country.name }} | </title>
+
+    <!-- SEO Meta -->
     <meta name="description" content="{{ article.summary|truncatechars:160 }}">
-    
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    
-    <!-- Preload critical resources -->
+    <meta name="keywords" content="{{ country.name }}, {{ article.title }}, ثقافة, تاريخ, معلومات, عرب بيديا, موسوعة, مقالات, الجغرافيا, الاحصائيات, {{ country.slug }}">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://tariqaljoda.com/{{ country.slug }}/{{ article.slug }}/">
+
+    <!-- Language -->
+    <meta name="language" content="ar">
+    <meta http-equiv="Content-Language" content="ar">
+
+    <!-- Author -->
+    <meta name="author" content="عرب بيديا - Tariq Aljoda">
+    <meta name="publisher" content="عرب بيديا">
+
+    <!-- Open Graph (Facebook + LinkedIn) -->
+    <meta property="og:title" content="{{ article.title }} - {{ country.name }}">
+    <meta property="og:description" content="{{ article.summary|truncatechars:160 }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tariqaljoda.com/{{ country.slug }}/{{ article.slug }}/">
+    <meta property="og:site_name" content="عرب بيديا">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:image" content="{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}">
+    <meta property="og:image:alt" content="{{ article.title }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ article.title }} - {{ country.name }}">
+    <meta name="twitter:description" content="{{ article.summary|truncatechars:160 }}">
+    <meta name="twitter:image" content="{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}">
+    <meta name="twitter:site" content="@ArabPedia">
+
+    <!-- Preconnect / Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Preload Critical CSS & Fonts -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" as="style">
     <link rel="preload" href="{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}" as="image">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
-    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
-    
+
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://f.top4top.io/p_35182640v1.png">
+    <link rel="apple-touch-icon" href="https://f.top4top.io/p_35182640v1.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Structured Data (Article Schema) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ article.title }}",
+      "image": "{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}",
+      "author": {
+        "@type": "Organization",
+        "name": "عرب بيديا"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "عرب بيديا",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://d.top4top.io/p_35134u9lv1.png"
+        }
+      },
+      "datePublished": "{{ article.published_at|date:'Y-m-d' }}",
+      "dateModified": "{{ article.updated_at|date:'Y-m-d' }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://tariqaljoda.com/{{ country.slug }}/{{ article.slug }}/"
+      },
+      "description": "{{ article.summary|truncatechars:160 }}"
+    }
+    </script>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -1054,7 +1126,7 @@
         </section>
     </main>
 
-    <!-- مقالات ذات صلة -->
+<!-- مقالات ذات صلة -->
 <hr>
 <div class="related-articles">
     <h3>مقالات ذات صلة</h3>
@@ -1064,7 +1136,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5>
-                            <a href="{% url 'article_detail' country_slug=related.country.slug category_slug=related.category.slug article_slug=related.slug %}">
+                            <a href="{% url 'article_detail' country_slug=related.country.slug article_slug=related.slug %}">
                                 {{ related.title }}
                             </a>
                         </h5>

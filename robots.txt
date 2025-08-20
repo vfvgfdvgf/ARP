@@ -1,4 +1,11 @@
 User-agent: *
-Disallow:
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Allow: /
+
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /static/
+Disallow: /media/
+
+# رابط Sitemap
+Sitemap: tariqaljoda.com/sitemap.xml

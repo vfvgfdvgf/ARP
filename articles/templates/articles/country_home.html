@@ -4,45 +4,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ country.name }} - عرب بيديا | الموسوعة العربية الشاملة</title>
-    
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ country.name }} - عرب بيديا">
-    <meta name="description" content="معلومات شاملة عن {{ country.name }} - التاريخ، الجغرافيا، الثقافة والإحصائيات">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://example.com/{{ country.slug }}">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
-    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
-    
-    <!-- Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 🔥 Primary SEO Meta Tags -->
+    <title>{{ country.name }} - موسوعة عرب بيديا</title>
+    <meta name="title" content="{{ country.name }} - موسوعة عرب بيديا">
+    <meta name="description" content="اكتشف معلومات شاملة عن {{ country.name }} | التاريخ، الجغرافيا، الثقافة، الاقتصاد، والسياسة. موسوعة عرب بيديا - مرجعك العربي الأول.">
+    <meta name="keywords" content="{{ country.name }}, تاريخ {{ country.name }}, جغرافيا {{ country.name }}, ثقافة {{ country.name }}, اقتصاد {{ country.name }}, سياسة {{ country.name }}, موسوعة عرب بيديا, معلومات عن {{ country.name }}">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://tariqaljoda.com/{{ country.slug }}">
+
+    <!-- 🌍 Language & Alternate -->
+    <link rel="alternate" hreflang="ar" href="https://tariqaljoda.com/ar/{{ country.slug }}">
+    <link rel="alternate" hreflang="en" href="https://tariqaljoda.com/en/{{ country.slug }}">
+    <link rel="alternate" hreflang="x-default" href="https://tariqaljoda.com/{{ country.slug }}">
+
+    <!-- 📱 Mobile Friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#2c6468">
+
+    <!-- 🟦 Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:site_name" content="موسوعة عرب بيديا">
+    <meta property="og:title" content="{{ country.name }} - موسوعة عرب بيديا">
+    <meta property="og:description" content="تعرف على {{ country.name }}: التاريخ، الجغرافيا، الثقافة، الاقتصاد، والسياسة.">
+    <meta property="og:url" content="https://tariqaljoda.com/{{ country.slug }}">
+    <meta property="og:image" content="https://tariqaljoda.com/static/images/countries/{{ country.slug }}.jpg">
+    <meta property="og:image:alt" content="علم {{ country.name }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- 🐦 Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ArabPedia">
+    <meta name="twitter:title" content="{{ country.name }} - موسوعة عرب بيديا">
+    <meta name="twitter:description" content="معلومات موسوعية عن {{ country.name }} | التاريخ، الجغرافيا، الثقافة وأكثر.">
+    <meta name="twitter:image" content="https://tariqaljoda.com/static/images/countries/{{ country.slug }}.jpg">
+
+    <!-- 📊 Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://tariqaljoda.com/{{ country.slug }}"
+      },
+      "headline": "{{ country.name }} - موسوعة عرب بيديا",
+      "description": "معلومات تاريخية وجغرافية وثقافية عن {{ country.name }} ضمن موسوعة عرب بيديا.",
+      "image": "https://tariqaljoda.com/static/images/countries/{{ country.slug }}.jpg",
+      "author": {
+        "@type": "Organization",
+        "name": "موسوعة عرب بيديا",
+        "url": "https://tariqaljoda.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "موسوعة عرب بيديا",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://tariqaljoda.com/static/logo.png"
+        }
+      },
+      "datePublished": "2025-08-18",
+      "dateModified": "2025-08-18"
+    }
+    </script>
+
+    <!-- 🌐 Schema for Country -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Country",
+      "name": "{{ country.name }}",
+      "url": "https://tariqaljoda.com/{{ country.slug }}",
+      "image": "https://tariqaljoda.com/static/images/countries/{{ country.slug }}.jpg",
+      "description": "معلومات شاملة عن {{ country.name }}: التاريخ، الجغرافيا، الثقافة، الاقتصاد، والسياسة.",
+      "alternateName": "{{ country.slug }}",
+      "inLanguage": "ar"
+    }
+    </script>
+
+    <!-- 🖼️ Icons & Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="apple-touch-icon" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="manifest" href="/site.webmanifest">
+
+    <!-- Preload Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"></noscript>
     
     <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
     :root {
-        --sand-beige: #baab97;
-        --light-beige: #dad1ca;
-        --dark-teal: #2c6468;
-        --off-white: #e7e2dc;
-        --gray-green: #7b9486;
+        --primary: #2c6468;
+        --primary-light: #3a7a7e;
+        --primary-dark: #1f4a4d;
+        --secondary: #d4a86a;
+        --secondary-light: #e3c092;
+        --secondary-dark: #b58a4e;
+        --accent: #9c6f44;
+        --neutral: #f5f3ef;
+        --neutral-dark: #e5e1d9;
         --text-dark: #1a1a1a;
         --text-light: #5a5a5a;
         --hover-bg: rgba(0,0,0,0.03);
         --card-shadow: 0 4px 30px rgba(0,0,0,0.08);
         --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         --border-radius: 18px;
+        --header-height: 65vh;
     }
     
     /* Base Styles */
     body {
         font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
-        background-color: var(--off-white);
+        background-color: var(--neutral);
         color: var(--text-dark);
         line-height: 1.8;
         letter-spacing: 0.01em;
@@ -63,7 +143,7 @@
     
     /* Welcome Bar - Enhanced */
     .welcome-bar {
-        background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+        background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
         color: white;
         padding: 12px 0;
         position: relative;
@@ -158,7 +238,7 @@
         align-items: center;
         font-weight: 700;
         font-size: 1.6rem;
-        color: var(--dark-teal);
+        color: var(--primary);
         letter-spacing: -0.5px;
     }
     
@@ -188,13 +268,13 @@
     }
     
     .nav-link:hover {
-        color: var(--dark-teal);
+        color: var(--primary);
         background-color: var(--hover-bg);
         transform: translateY(-2px);
     }
     
     .nav-link.active {
-        color: var(--dark-teal);
+        color: var(--primary);
         background-color: rgba(44, 100, 104, 0.1);
         font-weight: 600;
     }
@@ -206,13 +286,13 @@
         left: 18px;
         right: 18px;
         height: 3px;
-        background: var(--dark-teal);
+        background: var(--primary);
         border-radius: 3px;
     }
     
     /* Encyclopedia-style Header */
     .country-header {
-        height: 65vh;
+        height: var(--header-height);
         min-height: 500px;
         max-height: 800px;
         background-size: cover;
@@ -311,10 +391,194 @@
         font-size: 1.2rem;
     }
     
+    /* Hero Section - New Design */
+    .hero-section {
+        padding: 4rem 0;
+        background-color: white;
+        position: relative;
+    }
+    
+    .hero-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+    
+    .hero-column {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+    
+    .hero-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 3px;
+    }
+    
+    .hero-articles {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .hero-article {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+    }
+    
+    .hero-article:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(-5px);
+    }
+    
+    .hero-article-image {
+        width: 100px;
+        height: 80px;
+        border-radius: 12px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+    
+    .hero-article-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+    
+    .hero-article:hover .hero-article-image img {
+        transform: scale(1.05);
+    }
+    
+    .hero-article-content {
+        flex: 1;
+    }
+    
+    .hero-article-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+    }
+    
+    .hero-article-meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.85rem;
+        color: var(--text-light);
+    }
+    
+    .hero-categories {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .hero-category {
+        background: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+    }
+    
+    .hero-category:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .hero-category-header {
+        padding: 1.5rem;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        color: white;
+    }
+    
+    .hero-category-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0;
+    }
+    
+    .hero-category-articles {
+        padding: 1.5rem;
+    }
+    
+    .hero-category-article {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .hero-category-article:last-child {
+        border-bottom: none;
+    }
+    
+    .hero-category-article:hover {
+        transform: translateX(-5px);
+    }
+    
+    .hero-category-article-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: rgba(44, 100, 104, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        flex-shrink: 0;
+    }
+    
+    .hero-category-article-title {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+    
+    .view-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary);
+        font-weight: 500;
+        margin-top: 1.5rem;
+        transition: var(--transition);
+    }
+    
+    .view-all-btn:hover {
+        gap: 0.8rem;
+    }
+    
     /* Encyclopedia Categories Grid */
     .categories-section {
         padding: 5rem 0;
-        background-color: white;
+        background-color: var(--neutral);
         position: relative;
     }
     
@@ -344,7 +608,7 @@
     .section-title {
         font-size: 2rem;
         font-weight: 800;
-        color: var(--dark-teal);
+        color: var(--primary);
         margin: 0;
         position: relative;
         padding-bottom: 1rem;
@@ -357,7 +621,7 @@
         right: 0;
         width: 80px;
         height: 4px;
-        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        background: linear-gradient(to right, var(--primary), var(--primary-light));
         border-radius: 4px;
     }
     
@@ -369,7 +633,7 @@
     }
     
     .view-all {
-        color: var(--dark-teal);
+        color: var(--primary);
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -407,7 +671,7 @@
         left: 0;
         height: 4px;
         width: 0%;
-        background: var(--dark-teal);
+        background: var(--primary);
         transition: width 0.4s ease;
     }
     
@@ -479,7 +743,7 @@
     .stat-value {
         font-size: 1.2rem;
         font-weight: 700;
-        color: var(--dark-teal);
+        color: var(--primary);
     }
     
     .stat-label {
@@ -489,7 +753,7 @@
     }
     
     .btn-explore {
-        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
         color: white;
         border: none;
         padding: 0.9rem;
@@ -506,7 +770,7 @@
     }
     
     .btn-explore:hover {
-        background: linear-gradient(135deg, #24585c 0%, var(--dark-teal) 100%);
+        background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(44, 100, 104, 0.3);
     }
@@ -514,7 +778,7 @@
     /* Featured Articles - Apple Style */
     .articles-section {
         padding: 5rem 0;
-        background-color: var(--off-white);
+        background-color: white;
         position: relative;
     }
     
@@ -578,7 +842,7 @@
         position: absolute;
         top: 15px;
         left: 15px;
-        background: var(--dark-teal);
+        background: var(--primary);
         color: white;
         padding: 0.3rem 0.8rem;
         border-radius: 50px;
@@ -597,7 +861,7 @@
     .featured-article h3 {
         font-size: 1.4rem;
         margin-bottom: 1rem;
-        color: var(--dark-teal);
+        color: var(--primary);
         font-weight: 700;
     }
     
@@ -610,7 +874,7 @@
     }
     
     .read-more {
-        color: var(--dark-teal);
+        color: var(--primary);
         text-decoration: none;
         font-weight: 600;
         font-size: 1rem;
@@ -621,7 +885,7 @@
     }
     
     .read-more:hover {
-        color: #24585c;
+        color: var(--primary-light);
         gap: 0.8rem;
     }
     
@@ -649,7 +913,7 @@
     }
     
     .articles-track::-webkit-scrollbar-thumb {
-        background: var(--dark-teal);
+        background: var(--primary);
         border-radius: 10px;
     }
     
@@ -693,7 +957,7 @@
     .article-card h3 {
         font-size: 1.2rem;
         margin-bottom: 0.8rem;
-        color: var(--dark-teal);
+        color: var(--primary);
         font-weight: 600;
         line-height: 1.4;
     }
@@ -727,7 +991,7 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: var(--dark-teal);
+        background: var(--primary);
         color: white;
         border: none;
         cursor: pointer;
@@ -753,7 +1017,7 @@
     
     /* Encyclopedia Footer */
     .footer {
-        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
         padding: 6rem 0 3rem;
         color: white;
         position: relative;
@@ -930,25 +1194,28 @@
     }
     
     a:focus, button:focus {
-        outline: 3px solid var(--dark-teal);
+        outline: 3px solid var(--primary);
         outline-offset: 3px;
     }
     
     /* Responsive Adjustments */
     @media (max-width: 1200px) {
-        .country-header {
-            height: 55vh;
+        :root {
+            --header-height: 55vh;
         }
         
         .categories-grid {
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         }
+        
+        .hero-grid {
+            gap: 2rem;
+        }
     }
     
     @media (max-width: 992px) {
-        .country-header {
-            height: 50vh;
-            min-height: 450px;
+        :root {
+            --header-height: 50vh;
         }
         
         .country-name {
@@ -963,13 +1230,16 @@
         .featured-grid {
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
         }
+        
+        .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
     }
     
     @media (max-width: 768px) {
-        .country-header {
-            height: 45vh;
-            min-height: 400px;
-            background-attachment: scroll;
+        :root {
+            --header-height: 45vh;
         }
         
         .country-name {
@@ -1009,12 +1279,21 @@
         .utility-links {
             margin-top: 0.5rem;
         }
+        
+        .hero-article {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .hero-article-image {
+            width: 100%;
+            height: 150px;
+        }
     }
     
     @media (max-width: 576px) {
-        .country-header {
-            height: 40vh;
-            min-height: 350px;
+        :root {
+            --header-height: 40vh;
         }
         
         .country-name {
@@ -1048,9 +1327,13 @@
     <div class="welcome-bar">
         <div class="container welcome-container">
             <div class="welcome-message">
-                <div class="marquee">مرحباً بكم في       {{ country.name }} | اكتشف ثقافات وتاريخ وجغرافية العالم العربي</div>
+                <div class="marquee">مرحباً بكم في {{ country.name }} | اكتشف ثقافات وتاريخ وجغرافية العالم العربي</div>
             </div>
+            <div class="utility-links">
+                <a href="{% url 'country_about' country.slug %}" class="utility-link">من نحن</a>
+                <a href="{% url 'country_contact' country.slug %}" class="utility-link">اتصل بنا</a>
             </div>
+        </div>
     </div>
     
     <!-- الهيدر المحسن -->
@@ -1082,10 +1365,6 @@
                     </li>
                 </ul>
             </div>
-              <div class="utility-links">
-                <a href="{% url 'country_about' country.slug %}" class="utility-link">من نحن</a>
-                <a href="{% url 'country_contact' country.slug %}" class="utility-link">اتصل بنا</a>
-            </div>
         </div>
     </nav>
     
@@ -1113,15 +1392,27 @@
     </header>
     
     <!-- شريط البحث المحسن -->
-    <div class="search-container">
-        <form method="get" action="{% url 'country_search' country.slug %}" class="search-form">
-            <input class="search-input" type="search" name="q" placeholder="ابحث في مقالات {{ country.name }}..." value="{{ request.GET.q }}" aria-label="بحث">
-            <button class="search-btn" type="submit" aria-label="إرسال البحث">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-    </div>
+   <div class="search-container">
+    <form method="get" action="{% if country.slug %}{% url 'country_search' country.slug %}{% else %}#{% endif %}" class="search-form" onsubmit="return validateSearch()">
+        <input class="search-input" type="search" id="search-input" name="q" placeholder="ابحث في مقالات {{ country.name }}..." value="{{ request.GET.q }}" aria-label="بحث">
+        <button class="search-btn" type="submit" aria-label="إرسال البحث">
+            <i class="fas fa-search"></i>
+        </button>
+    </form>
+</div>
+
+<script>
+function validateSearch() {
+    const input = document.getElementById('search-input').value.trim();
+    if (!input) {
+        alert('يرجى كتابة نص للبحث');
+        return false; // يمنع إرسال النموذج
+    }
+    return true; // يسمح بالإرسال
+}
+</script>
     
+    <!-- قسم الهيرو الجديد -->
     <!-- قسم التصنيفات المحسن -->
     <section class="categories-section" id="categories">
         <div class="categories-container">
@@ -1130,7 +1421,7 @@
                     <h2 class="section-title">تصفح حسب التصنيفات</h2>
                     <p class="section-subtitle">اكتشف مجموعة واسعة من المقالات المصنفة حسب المواضيع المختلفة</p>
                 </div>
-                <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+                <a href="{% url 'categories' country.slug %}" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
             </div>
             
             <div class="categories-grid">
@@ -1173,42 +1464,6 @@
             </div>
         </div>
     </section>
-
-    <!-- قسم المقالات المميزة -->
-    <section class="articles-section" id="featured">
-        <div class="articles-container">
-            <div class="section-header">
-                <div>
-                    <h2 class="section-title">المقالات المميزة</h2>
-                    <p class="section-subtitle">أهم وأشهر المقالات التي ننصح بقراءتها</p>
-                </div>
-                <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
-            </div>
-            
-            <div class="featured-grid">
-                {% for article in featured_articles %}
-                <article class="featured-article animate__animated animate__fadeInUp" data-aos-delay="{{ forloop.counter0|add:1 }}00">
-                    <div class="article-image">
-                        {% if article.image_url %}
-                            <img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">
-                        {% else %}
-                            <img src="{% static 'images/default_article.jpg' %}" alt="{{ article.title }}" loading="lazy">
-                        {% endif %}
-                        <div class="article-badge">مميز</div>
-                    </div>
-                    <div class="article-content">
-                        <h3>{{ article.title }}</h3>
-                        <p>{{ article.summary|truncatechars:150 }}</p>
-                        <a href="{% url 'article_detail' country.slug article.slug %}" class="read-more">
-                            اقرأ المزيد <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </div>
-                </article>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
     <!-- قسم آخر المقالات -->
     <section class="articles-section">
         <div class="articles-container">
@@ -1217,7 +1472,6 @@
                     <h2 class="section-title">آخر المقالات</h2>
                     <p class="section-subtitle">أحدث الإضافات إلى موسوعة {{ country.name }}</p>
                 </div>
-                <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
             </div>
             
             <div class="articles-track-container">
@@ -1235,9 +1489,10 @@
                             <h3>{{ article.title }}</h3>
                             <div class="article-meta">
                                 <span class="article-author">
-                                    <img src="{% static 'images/default_avatar.jpg' %}" alt="كاتب المقال" class="author-avatar">
-                                    {{ article.author|default:"فريق عرب بيديا" }}
-                                </span>
+                                    <span class="author-name">
+    {{ article.author|default:"فريق عرب بيديا" }}
+</span>
+
                                 <span><i class="far fa-calendar-alt"></i> {{ article.publish_date|date:"Y-m-d" }}</span>
                             </div>
                             <a href="{% url 'article_detail' country.slug article.slug %}" class="read-more">
@@ -1348,7 +1603,7 @@
     
     // تأثيرات الظهور عند التمرير
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.featured-article, .article-card, .category-card, .section-header');
+        const elements = document.querySelectorAll('.featured-article, .article-card, .category-card, .section-header, .hero-article, .hero-category');
         
         elements.forEach((element, index) => {
             const elementPosition = element.getBoundingClientRect().top;
@@ -1364,7 +1619,7 @@
     };
     
     // تهيئة العناصر قبل الظهور
-    document.querySelectorAll('.featured-article, .article-card, .category-card, .section-header').forEach(el => {
+    document.querySelectorAll('.featured-article, .article-card, .category-card, .section-header, .hero-article, .hero-category').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -1385,6 +1640,25 @@
     document.querySelectorAll('input, select, textarea').forEach(el => {
         el.style.fontSize = '16px';
     });
+    
+    // Lazy Loading for Images
+    const lazyImages = [].slice.call(document.querySelectorAll('img[loading="lazy"]'));
+    
+    if ('IntersectionObserver' in window) {
+        const lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src || lazyImage.src;
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
+    
+        lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+        });
+    }
     </script>
     
     <!-- بيانات منظمة Schema.org -->

@@ -2,17 +2,66 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Basic Setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شروط الاستخدام - {{ country.name }} | عرب بيديا</title>
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="شروط الاستخدام - {{ country.name }} - عرب بيديا">
-    <meta name="description" content="شروط استخدام موقع {{ country.name }} - القواعد والأحكام المنظمة لاستخدام الموقع">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
 
+    <!-- Title & Meta SEO -->
+    <title>شروط الاستخدام - {{ country.name }} | عرب بيديا</title>
+    <meta name="title" content="شروط الاستخدام - {{ country.name }} | عرب بيديا">
+    <meta name="description" content="اكتشف شروط استخدام موقع {{ country.name }} على عرب بيديا: القواعد والأحكام المنظمة لاستخدام الموقع، الحقوق والالتزامات، وسياسة الخصوصية.">
+    <meta name="keywords" content="شروط الاستخدام, {{ country.name }}, حقوق وواجبات, سياسة الموقع, عرب بيديا, القوانين, الموقع العربي, موسوعة عربية">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://tariqaljoda.com/{{ country.slug }}/terms/">
+
+    <!-- Favicon & Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="apple-touch-icon" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:title" content="شروط الاستخدام - {{ country.name }} | عرب بيديا">
+    <meta property="og:description" content="تعرف على شروط الاستخدام والقواعد المنظمة لموقع {{ country.name }} على عرب بيديا لضمان استخدام آمن وموثوق.">
+    <meta property="og:url" content="https://tariqaljoda.com/{{ country.slug }}/terms/">
+    <meta property="og:site_name" content="عرب بيديا">
+    <meta property="og:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="شروط الاستخدام - {{ country.name }} | عرب بيديا">
+    <meta name="twitter:description" content="اكتشف شروط الاستخدام لموقع {{ country.name }} على عرب بيديا لضمان تجربة استخدام آمنة وموثوقة.">
+    <meta name="twitter:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Preconnect & Preload for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "شروط الاستخدام - {{ country.name }}",
+      "url": "https://tariqaljoda.com/{{ country.slug }}/terms/",
+      "description": "صفحة شروط الاستخدام لموقع {{ country.name }} على عرب بيديا: القواعد والأحكام المنظمة لاستخدام الموقع.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "عرب بيديا",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://d.top4top.io/p_35134u9lv1.png"
+        }
+      }
+    }
+    </script>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->

@@ -2,16 +2,69 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <head>
+    <!-- Basic Setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Dynamic Title & Meta SEO -->
     <title>{{ category.name }} - {{ country.name }} | عرب بيديا</title>
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="{{ category.name }} - عرب بيديا">
-    <meta name="description" content="جميع المقالات في تصنيف {{ category.name }} عن {{ country.name }} - التاريخ، الجغرافيا، الثقافة والإحصائيات">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://d.top4top.io/p_35134u9lv1.png">
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="https://d.top4top.io/p_35134u9lv1.png">
+    <meta name="title" content="{{ category.name }} - {{ country.name }} | عرب بيديا">
+    <meta name="description" content="اكتشف جميع المقالات في تصنيف '{{ category.name }}' عن {{ country.name }}: التاريخ، الجغرافيا، الثقافة، الاقتصاد، والفنون ضمن موسوعة عربية شاملة.">
+    <meta name="keywords" content="{{ category.name }}, {{ country.name }}, تصنيفات, مقالات, موسوعة عربية, عرب بيديا, التاريخ, الجغرافيا, الثقافة, الاقتصاد, الفنون">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://tariqaljoda.com/{{ country.slug }}/categories/{{ category.slug }}/">
+
+    <!-- Favicon & Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="apple-touch-icon" href="https://f.top4top.io/p_35182640v1.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:title" content="{{ category.name }} - {{ country.name }} | عرب بيديا">
+    <meta property="og:description" content="استعرض كل المقالات في تصنيف '{{ category.name }}' عن {{ country.name }} ضمن موسوعة عرب بيديا: محتوى عربي موثوق وشامل.">
+    <meta property="og:url" content="https://tariqaljoda.com/{{ country.slug }}/categories/{{ category.slug }}/">
+    <meta property="og:site_name" content="عرب بيديا">
+    <meta property="og:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ category.name }} - {{ country.name }} | عرب بيديا">
+    <meta name="twitter:description" content="اكتشف جميع المقالات في تصنيف '{{ category.name }}' عن {{ country.name }} ضمن موسوعة عرب بيديا العربية الشاملة.">
+    <meta name="twitter:image" content="https://d.top4top.io/p_35134u9lv1.png">
+
+    <!-- Preconnect & Preload for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <!-- Structured Data (CollectionPage Schema) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "{{ category.name }} - {{ country.name }}",
+      "url": "https://tariqaljoda.com/{{ country.slug }}/categories/{{ category.slug }}/",
+      "description": "استعرض جميع المقالات في تصنيف '{{ category.name }}' عن {{ country.name }} ضمن موسوعة عرب بيديا: التاريخ، الجغرافيا، الثقافة، الاقتصاد، والفنون.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "عرب بيديا",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://d.top4top.io/p_35134u9lv1.png"
+        }
+      }
+    }
+    </script>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

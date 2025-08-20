@@ -1,0 +1,70 @@
+# articles/sitemaps.py
+from django.contrib.sitemaps import Sitemap
+from django.urls import reverse
+from .models import Country, Category, Article
+
+# ================= الصفحة الرئيسية العامة =================
+class HomeSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 1.0
+
+    def items(self):
+        return ['home', 'about', 'privacy_policy', 'terms', 'faq', 'search_results']
+
+    def location(self, item):
+        return reverse(item)
+
+# ================= الدول =================
+class CountrySitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.9
+
+    def items(self):
+        return Country.objects.all()
+
+    def lastmod(self, obj):
+        return obj.updated_at  # تأكد من وجود هذا الحقل في الموديل
+
+# ================= التصنيفات =================
+class CategorySitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.8
+
+    def items(self):
+        return Category.objects.all()
+
+    def lastmod(self, obj):
+        return obj.updated_at
+
+# ================= المقالات =================
+class ArticleSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.9
+
+    def items(self):
+        return Article.objects.all()
+
+    def lastmod(self, obj):
+        return obj.updated_at
+
+# ================= الصفحات الخاصة بالدول =================
+class CountryPagesSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.8
+
+    def items(self):
+        countries = Country.objects.all()
+        # لكل دولة نضيف صفحاتها العامة
+        country_pages = []
+        for country in countries:
+            country_pages.append({'slug': country.slug, 'page': 'country_home'})
+            country_pages.append({'slug': country.slug, 'page': 'categories'})
+            country_pages.append({'slug': country.slug, 'page': 'country_about'})
+            country_pages.append({'slug': country.slug, 'page': 'country_contact'})
+            country_pages.append({'slug': country.slug, 'page': 'country_privacy_policy'})
+            country_pages.append({'slug': country.slug, 'page': 'country_terms'})
+            country_pages.append({'slug': country.slug, 'page': 'country_search'})
+        return country_pages
+
+    def location(self, item):
+        return reverse(item['page'], kwargs={'country_slug': item['slug']})

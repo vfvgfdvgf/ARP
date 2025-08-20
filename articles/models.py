@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from ckeditor_uploader.fields import RichTextUploadingField  # محرر CKEditor يدعم الصور والفيديو
+from django.utils import timezone
 
 # ========================
 # موديل الدول
@@ -20,6 +21,7 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
 
 # ========================
 # موديل التصنيفات
@@ -40,6 +42,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 # ========================
 # موديل المقالات
 # ========================
@@ -50,7 +53,9 @@ class Article(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='articles')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)  # أول مرة
+    updated_at = models.DateTimeField(auto_now=True)      # كل تعديل
 
     # الصور
     image_url = models.URLField(blank=True, null=True, verbose_name="رابط صورة المقال")
@@ -72,6 +77,7 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+
 # ========================
 # موديل المستخدم المخصص
 # ========================
@@ -89,19 +95,18 @@ class CustomUser(AbstractUser):
     def is_editor(self):
         return self.role in ['admin', 'editor']
 
-from django.db import models
-from django.utils import timezone
 
+# ========================
+# موديل التعليقات
+# ========================
 class Comment(models.Model):
-    article = models.ForeignKey('Article', related_name='comments', on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.name} - {self.article.title}"
-
-
 
 
 # ========================

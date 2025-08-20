@@ -1,34 +1,57 @@
 from django.contrib.sitemaps import Sitemap
-from .models import Country, Category, Article
+from django.urls import reverse
+from .models import Article, Country, Category
 
+# ---------------- الصفحة الرئيسية ----------------
+class HomeSitemap(Sitemap):
+    priority = 1.0
+    changefreq = 'daily'
+    protocol = 'https'  # يستخدم البروتوكول عند توليد الروابط
+
+    def items(self):
+        return ['home']  # اسم URL name للصفحة الرئيسية
+
+    def location(self, item):
+        return reverse(item)  # رابط نسبي فقط
+
+
+# ---------------- صفحات الدول ----------------
 class CountrySitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.9
+    priority = 0.8
+    changefreq = 'weekly'
+    protocol = 'https'
 
     def items(self):
         return Country.objects.all()
 
     def location(self, obj):
-        return f'/{obj.slug}/'  # رابط الصفحة الرئيسية لكل دولة
+        return reverse('country_home', args=[obj.slug])
 
 
+# ---------------- المقالات ----------------
+class ArticleSitemap(Sitemap):
+    priority = 0.9
+    changefreq = 'weekly'
+    protocol = 'https'
+
+    def items(self):
+        return Article.objects.all()
+
+    def lastmod(self, obj):
+        return obj.updated_at
+
+    def location(self, obj):
+        return reverse('article_detail', args=[obj.country.slug, obj.slug])
+
+
+# ---------------- التصنيفات ----------------
 class CategorySitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.8
+    priority = 0.7
+    changefreq = 'monthly'
+    protocol = 'https'
 
     def items(self):
         return Category.objects.all()
 
     def location(self, obj):
-        return f'/{obj.country.slug}/category/{obj.slug}/'
-
-
-class ArticleSitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.7
-
-    def items(self):
-        return Article.objects.all()
-
-    def location(self, obj):
-        return f'/{obj.country.slug}/article/{obj.slug}/'
+        return reverse('category_view', args=[obj.country.slug, obj.slug])
