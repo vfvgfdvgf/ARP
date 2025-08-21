@@ -102,6 +102,20 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
+
+.categories-section,
+.categories-container,
+.category-card,
+.category-content {
+    background: transparent !important; /* 🔥 يضمن الشفافية */
+    box-shadow: none !important;       /* بدون أي ظل */
+    border: none !important;           /* بدون حدود */
+}
+
+
+
+
+        
     :root {
         --primary: #2c6468;
         --primary-light: #3a7a7e;
@@ -1423,7 +1437,10 @@ function validateSearch() {
                 <h2 class="section-title">تصفح حسب التصنيفات</h2>
                 <p class="section-subtitle">اكتشف مجموعة واسعة من المقالات المصنفة حسب المواضيع المختلفة</p>
             </div>
-            <a href="{% url 'categories' country.slug %}" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+            <!-- عرض كل التصنيفات الخاصة بالدولة -->
+            <a href="{% url 'categories' country.slug %}" class="view-all">
+                عرض الكل <i class="fas fa-arrow-left"></i>
+            </a>
         </div>
         
         <div class="categories-grid">
@@ -1435,16 +1452,14 @@ function validateSearch() {
                     {% else %}
                         <img src="{% static 'images/default_category.jpg' %}" alt="{{ category.name }}" loading="lazy">
                     {% endif %}
-                    <div class="category-overlay">
-                        <h3 class="category-title">{{ category.name }}</h3>
-                    </div>
                 </div>
                 <div class="category-content">
+                    <h3 class="category-title">{{ category.name }}</h3>
                     <p class="category-description">
                         {{ category.description|default:"استكشف مجموعة من المقالات المختارة في هذا التصنيف"|truncatechars:140 }}
                     </p>
                     <!-- زر استكشاف التصنيف -->
-                    <a href="{% url 'category_detail' category.slug %}" class="explore-btn">
+                    <a href="{% url 'category_view' country.slug category.slug %}" class="explore-btn">
                         استكشف التصنيف <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
