@@ -1443,24 +1443,7 @@ function validateSearch() {
                         <p class="category-description">
                             {{ category.description|default:"استكشف مجموعة من المقالات المختارة في هذا التصنيف"|truncatechars:140 }}
                         </p>
-                        <div class="category-stats">
-                            <div class="stat-item">
-                                <div class="stat-value">{{ category.article_count|default:"50+" }}</div>
-                                <div class="stat-label">مقالة</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">{{ category.view_count|default:"10K+" }}</div>
-                                <div class="stat-label">قراءة</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">{{ category.last_update|date:"Y"|default:"2023" }}</div>
-                                <div class="stat-label">آخر تحديث</div>
-                            </div>
-                        </div>
-                        <a href="{% url 'category_view' country.slug category.slug %}" class="btn-explore">
-                            استكشف التصنيف <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </div>
+                      
                 </div>
                 {% endfor %}
             </div>
