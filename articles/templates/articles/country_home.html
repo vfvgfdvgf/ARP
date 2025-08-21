@@ -1416,39 +1416,40 @@ function validateSearch() {
     
     <!-- قسم الهيرو الجديد -->
     <!-- قسم التصنيفات المحسن -->
-    <section class="categories-section" id="categories">
-        <div class="categories-container">
-            <div class="section-header">
-                <div>
-                    <h2 class="section-title">تصفح حسب التصنيفات</h2>
-                    <p class="section-subtitle">اكتشف مجموعة واسعة من المقالات المصنفة حسب المواضيع المختلفة</p>
-                </div>
-                <a href="{% url 'categories' country.slug %}" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+<section class="categories-section" id="categories">
+    <div class="categories-container">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">تصفح حسب التصنيفات</h2>
+                <p class="section-subtitle">اكتشف مجموعة واسعة من المقالات المصنفة حسب المواضيع المختلفة</p>
             </div>
-            
-            <div class="categories-grid">
-                {% for category in categories %}
-                <div class="category-card animate__animated animate__fadeInUp" data-aos-delay="{{ forloop.counter0|add:1 }}00">
-                    <div class="category-image">
-                        {% if category.image_url %}
-                            <img src="{{ category.image_url }}" alt="{{ category.name }}" loading="lazy">
-                        {% else %}
-                            <img src="{% static 'images/default_category.jpg' %}" alt="{{ category.name }}" loading="lazy">
-                        {% endif %}
-                        <div class="category-overlay">
-                            <h3 class="category-title">{{ category.name }}</h3>
-                        </div>
-                    </div>
-                    <div class="category-content">
-                        <p class="category-description">
-                            {{ category.description|default:"استكشف مجموعة من المقالات المختارة في هذا التصنيف"|truncatechars:140 }}
-                        </p>
-                      
-                </div>
-                {% endfor %}
-            </div>
+            <a href="{% url 'categories' country.slug %}" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
         </div>
-    </section>
+        
+        <div class="categories-grid">
+            {% for category in categories %}
+            <div class="category-card animate__animated animate__fadeInUp" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+                <div class="category-image">
+                    {% if category.image_url %}
+                        <img src="{{ category.image_url }}" alt="{{ category.name }}" loading="lazy">
+                    {% else %}
+                        <img src="{% static 'images/default_category.jpg' %}" alt="{{ category.name }}" loading="lazy">
+                    {% endif %}
+                    <div class="category-overlay">
+                        <h3 class="category-title">{{ category.name }}</h3>
+                    </div>
+                </div>
+                <div class="category-content">
+                    <p class="category-description">
+                        {{ category.description|default:"استكشف مجموعة من المقالات المختارة في هذا التصنيف"|truncatechars:140 }}
+                    </p>
+                </div>
+            </div> <!-- ✅ قفلنا البطاقة -->
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
     <!-- قسم آخر المقالات -->
     <section class="articles-section">
         <div class="articles-container">
