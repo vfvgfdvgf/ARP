@@ -1443,8 +1443,12 @@ function validateSearch() {
                     <p class="category-description">
                         {{ category.description|default:"استكشف مجموعة من المقالات المختارة في هذا التصنيف"|truncatechars:140 }}
                     </p>
+                    <!-- زر استكشاف التصنيف -->
+                    <a href="{% url 'category_detail' category.slug %}" class="explore-btn">
+                        استكشف التصنيف <i class="fas fa-arrow-left"></i>
+                    </a>
                 </div>
-            </div> <!-- ✅ قفلنا البطاقة -->
+            </div>
             {% endfor %}
         </div>
     </div>
