@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8168804660279955" crossorigin="anonymous"></script>
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8168804660279955"
-     crossorigin="anonymous"></script>
     <!-- Basic Setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ article.title }} - {{ country.name }} | </title>
+    <title>{{ article.title }} - {{ country.name }} | عرب بيديا</title>
 
     <!-- SEO Meta -->
     <meta name="description" content="{{ article.summary|truncatechars:160 }}">
@@ -33,6 +33,8 @@
     <meta property="og:locale" content="ar_AR">
     <meta property="og:image" content="{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}">
     <meta property="og:image:alt" content="{{ article.title }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -40,6 +42,7 @@
     <meta name="twitter:description" content="{{ article.summary|truncatechars:160 }}">
     <meta name="twitter:image" content="{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}">
     <meta name="twitter:site" content="@ArabPedia">
+    <meta name="twitter:creator" content="@ArabPedia">
 
     <!-- Preconnect / Performance -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -50,15 +53,17 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
     <!-- Preload Critical CSS & Fonts -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}" as="image">
 
     <!-- Stylesheets -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    </noscript>
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://f.top4top.io/p_35182640v1.png">
@@ -74,14 +79,17 @@
       "image": "{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}",
       "author": {
         "@type": "Organization",
-        "name": "عرب بيديا"
+        "name": "عرب بيديا",
+        "url": "https://tariqaljoda.com"
       },
       "publisher": {
         "@type": "Organization",
         "name": "عرب بيديا",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://d.top4top.io/p_35134u9lv1.png"
+          "url": "https://d.top4top.io/p_35134u9lv1.png",
+          "width": 100,
+          "height": 100
         }
       },
       "datePublished": "{{ article.published_at|date:'Y-m-d' }}",
@@ -90,17 +98,43 @@
         "@type": "WebPage",
         "@id": "https://tariqaljoda.com/{{ country.slug }}/{{ article.slug }}/"
       },
-      "description": "{{ article.summary|truncatechars:160 }}"
+      "description": "{{ article.summary|truncatechars:160 }}",
+      "articleSection": "{{ article.category.name }}",
+      "articleBody": "{{ article.content|striptags|truncatechars:500 }}"
+    }
+    </script>
+    
+    <!-- Additional Structured Data for Breadcrumb -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://tariqaljoda.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ country.name }}",
+          "item": "https://tariqaljoda.com/{{ country.slug }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ article.title }}",
+          "item": "https://tariqaljoda.com/{{ country.slug }}/{{ article.slug }}/"
+        }
+      ]
     }
     </script>
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Arabic&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2c6468" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1a3a3d" media="(prefers-color-scheme: dark)">
     
     <!-- Inline Critical CSS -->
     <style>
@@ -108,14 +142,22 @@
         --sand-beige: #baab97;
         --light-beige: #dad1ca;
         --dark-teal: #2c6468;
+        --dark-teal-hover: #24585c;
         --off-white: #e7e2dc;
         --gray-green: #7b9486;
         --text-dark: #1d1d1f;
         --text-light: #86868b;
         --hover-bg: rgba(0,0,0,0.03);
         --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
         --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         --border-color: rgba(0,0,0,0.08);
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --error-color: #dc3545;
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
     }
     
     /* Base Styles */
@@ -125,11 +167,15 @@
         padding: 0;
     }
     
+    html {
+        scroll-behavior: smooth;
+    }
+    
     body {
         font-family: 'SF Arabic', 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
         background-color: var(--off-white);
         color: var(--text-dark);
-        line-height: 1.6;
+        line-height: 1.7;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
     }
@@ -143,15 +189,16 @@
     a {
         text-decoration: none;
         color: inherit;
+        transition: var(--transition);
     }
     
-    button, input, textarea {
+    button, input, textarea, select {
         font-family: inherit;
     }
     
     /* Welcome Bar */
     .welcome-bar {
-        background: linear-gradient(90deg, var(--dark-teal) 0%, #24585c 100%);
+        background: linear-gradient(90deg, var(--dark-teal) 0%, var(--dark-teal-hover) 100%);
         color: white;
         padding: 10px 0;
         text-align: center;
@@ -198,7 +245,7 @@
     
     /* Navbar */
     .navbar {
-        background-color: rgba(255, 255, 255, 0.85);
+        background-color: rgba(255, 255, 255, 0.95);
         backdrop-filter: saturate(180%) blur(20px);
         -webkit-backdrop-filter: saturate(180%) blur(20px);
         border-bottom: 1px solid var(--border-color);
@@ -210,14 +257,14 @@
     }
     
     .navbar.scrolled {
-        background-color: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
     }
     
     .navbar-brand {
         display: flex;
         align-items: center;
-        font-weight: 600;
+        font-weight: 700;
         font-size: 1.5rem;
         color: var(--dark-teal);
     }
@@ -242,16 +289,62 @@
         transition: var(--transition);
         padding: 8px 15px;
         border-radius: 18px;
+        position: relative;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+        width: 0;
+        height: 2px;
+        background-color: var(--dark-teal);
+        transition: var(--transition);
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+        right: 0;
     }
     
     .nav-link:hover {
         color: var(--dark-teal);
-        background-color: var(--hover-bg);
     }
     
     .nav-link.active {
         color: var(--dark-teal);
-        background-color: rgba(44, 100, 104, 0.1);
+        font-weight: 600;
+    }
+    
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+        font-size: 1.25rem;
+        color: var(--dark-teal);
+        background: transparent;
+    }
+    
+    /* Breadcrumb */
+    .breadcrumb {
+        background-color: transparent;
+        padding: 1rem 0;
+        margin-bottom: 0;
+    }
+    
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "›";
+        color: var(--text-light);
+    }
+    
+    .breadcrumb-item a {
+        color: var(--dark-teal);
+    }
+    
+    .breadcrumb-item a:hover {
+        color: var(--dark-teal-hover);
+        text-decoration: underline;
     }
     
     /* Article Header */
@@ -265,12 +358,14 @@
         align-items: flex-end;
         position: relative;
         margin-bottom: 3rem;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        overflow: hidden;
     }
     
     .header-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
     }
     
     .header-content {
@@ -282,10 +377,11 @@
     }
     
     .article-title {
-        font-size: clamp(1.8rem, 5vw, 2.8rem);
-        font-weight: 700;
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        font-weight: 800;
         margin-bottom: 1.5rem;
         line-height: 1.2;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     
     .article-meta {
@@ -304,10 +400,12 @@
         border-radius: 20px;
         transition: var(--transition);
         font-size: 0.9rem;
+        backdrop-filter: blur(10px);
     }
     
     .meta-item:hover {
         background-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
     }
     
     /* Article Content */
@@ -325,11 +423,20 @@
         padding: 1.5rem 0;
         border-top: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
+        flex-wrap: wrap;
+        gap: 1rem;
     }
     
     .share-buttons {
         display: flex;
         gap: 0.8rem;
+        align-items: center;
+    }
+    
+    .share-label {
+        font-weight: 500;
+        color: var(--text-dark);
+        margin-left: 0.5rem;
     }
     
     .share-btn {
@@ -341,16 +448,42 @@
         background-color: var(--light-beige);
         color: var(--dark-teal);
         transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .share-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--dark-teal) 0%, var(--dark-teal-hover) 100%);
+        opacity: 0;
+        transition: var(--transition);
+        z-index: 0;
+    }
+    
+    .share-btn i {
+        position: relative;
+        z-index: 1;
     }
     
     .share-btn:hover {
         transform: translateY(-3px);
         box-shadow: var(--card-shadow);
+        color: white;
+    }
+    
+    .share-btn:hover::before {
+        opacity: 1;
     }
     
     .article-actions {
         display: flex;
         gap: 0.8rem;
+        flex-wrap: wrap;
     }
     
     .action-btn {
@@ -365,21 +498,27 @@
         border: none;
         font-size: 0.9rem;
         cursor: pointer;
+        font-weight: 500;
     }
     
     .action-btn:hover {
         background-color: var(--dark-teal);
         color: white;
+        transform: translateY(-2px);
+        box-shadow: var(--card-shadow);
     }
     
     /* Table of Contents */
     .toc-container {
         background-color: white;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         padding: 1.5rem;
         margin: 2rem 0;
         box-shadow: var(--card-shadow);
         border: 1px solid var(--border-color);
+        position: sticky;
+        top: 90px;
+        z-index: 10;
     }
     
     .toc-title {
@@ -388,14 +527,47 @@
         margin-bottom: 1rem;
         padding-bottom: 0.5rem;
         border-bottom: 2px solid var(--light-beige);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .toc-title i {
+        font-size: 1.2rem;
     }
     
     .toc-list {
         list-style: none;
+        max-height: 300px;
+        overflow-y: auto;
+        padding-left: 0.5rem;
+    }
+    
+    .toc-list::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .toc-list::-webkit-scrollbar-track {
+        background: var(--light-beige);
+        border-radius: 10px;
+    }
+    
+    .toc-list::-webkit-scrollbar-thumb {
+        background: var(--dark-teal);
+        border-radius: 10px;
     }
     
     .toc-list li {
         margin-bottom: 0.8rem;
+        position: relative;
+        padding-right: 1rem;
+    }
+    
+    .toc-list li::before {
+        content: "•";
+        color: var(--dark-teal);
+        position: absolute;
+        right: 0;
     }
     
     .toc-list a {
@@ -403,6 +575,7 @@
         padding: 0.5rem;
         border-radius: 8px;
         transition: var(--transition);
+        color: var(--text-dark);
     }
     
     .toc-list a:hover {
@@ -421,26 +594,17 @@
     
     .article-content p {
         margin-bottom: 1.8rem;
+        text-align: justify;
     }
     
     .article-content h2 {
         font-size: 1.8rem;
         color: var(--dark-teal);
         margin: 2.5rem 0 1.5rem;
-        font-weight: 600;
+        font-weight: 700;
         position: relative;
         padding-bottom: 0.8rem;
-    }
-    
-    .article-content h2::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 100px;
-        height: 3px;
-        background: linear-gradient(to right, var(--dark-teal), #24585c);
-        border-radius: 3px;
+        border-bottom: 2px solid var(--light-beige);
     }
     
     .article-content h3 {
@@ -448,19 +612,46 @@
         color: var(--dark-teal);
         margin: 2rem 0 1.2rem;
         font-weight: 600;
+        position: relative;
+        padding-right: 1rem;
+    }
+    
+    .article-content h3::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        background-color: var(--dark-teal);
+        border-radius: 50%;
     }
     
     .article-content img {
         max-width: 100%;
         height: auto;
-        border-radius: 8px;
+        border-radius: var(--radius-md);
         margin: 1.5rem auto;
         box-shadow: var(--card-shadow);
         transition: var(--transition);
     }
     
     .article-content img:hover {
-        transform: scale(1.03);
+        transform: scale(1.02);
+        box-shadow: var(--card-shadow-hover);
+    }
+    
+    .article-content figure {
+        margin: 2rem 0;
+        text-align: center;
+    }
+    
+    .article-content figcaption {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-top: 0.5rem;
+        font-style: italic;
     }
     
     .article-content blockquote {
@@ -468,7 +659,7 @@
         background-color: var(--light-beige);
         padding: 1.5rem;
         margin: 2rem 0;
-        border-radius: 0 8px 8px 0;
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
         font-style: italic;
         position: relative;
     }
@@ -484,10 +675,132 @@
         opacity: 0.3;
     }
     
+    .article-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        box-shadow: var(--card-shadow);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+    }
+    
+    .article-content th, 
+    .article-content td {
+        padding: 1rem;
+        text-align: right;
+        border: 1px solid var(--border-color);
+    }
+    
+    .article-content th {
+        background-color: var(--dark-teal);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .article-content tr:nth-child(even) {
+        background-color: var(--hover-bg);
+    }
+    
+    .article-content a {
+        color: var(--dark-teal);
+        font-weight: 500;
+        text-decoration: underline;
+    }
+    
+    .article-content a:hover {
+        color: var(--dark-teal-hover);
+    }
+    
+    .article-content ul, 
+    .article-content ol {
+        margin-right: 1.5rem;
+        margin-bottom: 1.8rem;
+    }
+    
+    .article-content li {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Tags Section */
+    .article-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin: 2rem 0;
+        padding: 1.5rem 0;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .tag-label {
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+    
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.4rem 0.8rem;
+        background-color: var(--light-beige);
+        color: var(--dark-teal);
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: var(--transition);
+    }
+    
+    .tag:hover {
+        background-color: var(--dark-teal);
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    /* Rating Section */
+    .rating-section {
+        background-color: white;
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        margin: 2rem 0;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border-color);
+        text-align: center;
+    }
+    
+    .rating-title {
+        font-size: 1.2rem;
+        color: var(--dark-teal);
+        margin-bottom: 1rem;
+    }
+    
+    .rating-stars {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .rating-star {
+        font-size: 1.5rem;
+        color: var(--light-beige);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .rating-star:hover,
+    .rating-star.active {
+        color: var(--warning-color);
+        transform: scale(1.2);
+    }
+    
+    .rating-text {
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+    
     /* Comments Section */
     .comments-section {
         background-color: white;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         padding: 2rem;
         margin: 3rem 0;
         box-shadow: var(--card-shadow);
@@ -500,6 +813,9 @@
         margin-bottom: 1.5rem;
         position: relative;
         padding-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .section-title::after {
@@ -509,25 +825,36 @@
         right: 0;
         width: 60px;
         height: 3px;
-        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        background: linear-gradient(to right, var(--dark-teal), var(--dark-teal-hover));
         border-radius: 3px;
     }
     
     .comment-form {
         margin-bottom: 2rem;
+        background-color: var(--off-white);
+        padding: 1.5rem;
+        border-radius: var(--radius-md);
     }
     
     .form-group {
         margin-bottom: 1.5rem;
     }
     
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+    
     .form-control {
         width: 100%;
         padding: 1rem;
         border: 1px solid var(--border-color);
-        border-radius: 8px;
+        border-radius: var(--radius-sm);
         transition: var(--transition);
         background-color: white;
+        font-size: 1rem;
     }
     
     .form-control:focus {
@@ -537,14 +864,17 @@
     }
     
     .btn-submit {
-        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        background: linear-gradient(135deg, var(--dark-teal) 0%, var(--dark-teal-hover) 100%);
         color: white;
         border: none;
         padding: 0.8rem 1.5rem;
-        border-radius: 8px;
+        border-radius: var(--radius-sm);
         font-weight: 500;
         transition: var(--transition);
         cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .btn-submit:hover {
@@ -558,14 +888,23 @@
     
     .alert {
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: var(--radius-sm);
         margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .alert-success {
         background-color: rgba(40, 167, 69, 0.1);
-        color: #28a745;
+        color: var(--success-color);
         border: 1px solid rgba(40, 167, 69, 0.2);
+    }
+    
+    .alert-error {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: var(--error-color);
+        border: 1px solid rgba(220, 53, 69, 0.2);
     }
     
     .comment-list {
@@ -590,33 +929,66 @@
         flex: 0 0 50px;
         height: 50px;
         border-radius: 50%;
-        background-color: var(--light-beige);
+        background: linear-gradient(135deg, var(--dark-teal) 0%, var(--dark-teal-hover) 100%);
         display: grid;
         place-items: center;
-        color: var(--dark-teal);
+        color: white;
         font-weight: bold;
         font-size: 1.2rem;
         text-transform: uppercase;
+        box-shadow: var(--card-shadow);
     }
     
     .comment-body {
         flex: 1;
     }
     
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
     .comment-author {
         font-weight: 600;
         color: var(--dark-teal);
-        margin-bottom: 0.3rem;
     }
     
     .comment-date {
         font-size: 0.8rem;
         color: var(--text-light);
-        margin-bottom: 0.8rem;
     }
     
     .comment-text {
         line-height: 1.7;
+        color: var(--text-dark);
+    }
+    
+    .comment-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.8rem;
+    }
+    
+    .comment-action {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .comment-action:hover {
+        color: var(--dark-teal);
+    }
+    
+    .no-comments {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-light);
+        font-style: italic;
     }
     
     /* Related Articles */
@@ -625,12 +997,18 @@
         background-color: white;
     }
     
+    .related-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
     .related-title {
-        font-size: 1.8rem;
-        font-weight: 600;
+        font-size: 2rem;
+        font-weight: 700;
         color: var(--dark-teal);
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         position: relative;
+        display: inline-block;
         padding-bottom: 0.8rem;
     }
     
@@ -638,36 +1016,47 @@
         content: '';
         position: absolute;
         bottom: 0;
-        right: 0;
-        width: 60px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 80px;
         height: 3px;
-        background: linear-gradient(to right, var(--dark-teal), #24585c);
+        background: linear-gradient(to right, var(--dark-teal), var(--dark-teal-hover));
         border-radius: 3px;
+    }
+    
+    .related-subtitle {
+        color: var(--text-light);
+        max-width: 600px;
+        margin: 0 auto;
     }
     
     .related-articles {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
+        gap: 2rem;
     }
     
     .related-article {
         background: white;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         overflow: hidden;
         box-shadow: var(--card-shadow);
         transition: var(--transition);
         border: 1px solid var(--border-color);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
     
     .related-article:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        box-shadow: var(--card-shadow-hover);
     }
     
     .article-image {
         height: 180px;
         overflow: hidden;
+        position: relative;
     }
     
     .article-image img {
@@ -677,20 +1066,46 @@
         transition: var(--transition);
     }
     
-    .related-article:hover img {
-        transform: scale(1.03);
+    .article-category {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: var(--dark-teal);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        z-index: 1;
+    }
+    
+    .related-article:hover .article-image img {
+        transform: scale(1.05);
     }
     
     .related-info {
-        padding: 1.2rem;
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
     }
     
     .related-article h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        color: var(--dark-teal);
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+        color: var(--text-dark);
         font-weight: 600;
         line-height: 1.4;
+        flex-grow: 1;
+    }
+    
+    .related-article h3 a {
+        color: inherit;
+        transition: var(--transition);
+    }
+    
+    .related-article h3 a:hover {
+        color: var(--dark-teal);
     }
     
     .related-meta {
@@ -698,7 +1113,16 @@
         justify-content: space-between;
         font-size: 0.8rem;
         color: var(--text-light);
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .related-excerpt {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
     
     .read-more {
@@ -708,15 +1132,84 @@
         color: var(--dark-teal);
         font-weight: 500;
         transition: var(--transition);
+        margin-top: auto;
     }
     
     .read-more:hover {
-        color: #24585c;
+        color: var(--dark-teal-hover);
+        gap: 0.7rem;
+    }
+    
+    /* Newsletter Section */
+    .newsletter-section {
+        background: linear-gradient(135deg, var(--dark-teal) 0%, var(--dark-teal-hover) 100%);
+        padding: 4rem 0;
+        color: white;
+        text-align: center;
+    }
+    
+    .newsletter-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    
+    .newsletter-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .newsletter-text {
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+    
+    .newsletter-form {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .newsletter-input {
+        flex: 1;
+        min-width: 250px;
+        padding: 0.8rem 1.2rem;
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 1rem;
+    }
+    
+    .newsletter-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+    
+    .newsletter-btn {
+        background: white;
+        color: var(--dark-teal);
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .newsletter-btn:hover {
+        background: var(--off-white);
+        transform: translateY(-2px);
+    }
+    
+    .newsletter-note {
+        font-size: 0.8rem;
+        opacity: 0.7;
     }
     
     /* Footer */
     .footer {
-        background: linear-gradient(135deg, var(--dark-teal) 0%, #24585c 100%);
+        background: linear-gradient(135deg, var(--dark-teal) 0%, var(--dark-teal-hover) 100%);
         padding: 6rem 0 3rem;
         color: white;
         position: relative;
@@ -744,7 +1237,7 @@
     
     .footer-logo {
         font-size: 2rem;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 1.8rem;
         color: white;
         display: flex;
@@ -840,6 +1333,35 @@
         font-size: 0.95rem;
     }
     
+    /* Back to Top Button */
+    .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--dark-teal);
+        color: white;
+        display: grid;
+        place-items: center;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .back-to-top:hover {
+        background: var(--dark-teal-hover);
+        transform: translateY(-5px);
+    }
+    
     /* Animations */
     @keyframes fadeInUp {
         from {
@@ -852,7 +1374,34 @@
         }
     }
     
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Loading Animation */
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255,255,255,.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
     /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+        .footer-content {
+            gap: 3rem;
+        }
+    }
+    
     @media (max-width: 992px) {
         .article-header {
             height: 50vh;
@@ -861,11 +1410,16 @@
         .footer-content {
             grid-template-columns: 1fr 1fr;
         }
+        
+        .toc-container {
+            position: static;
+        }
     }
     
     @media (max-width: 768px) {
         .article-header {
             height: 40vh;
+            min-height: 350px;
         }
         
         .article-meta {
@@ -879,6 +1433,11 @@
             align-items: flex-start;
         }
         
+        .share-buttons {
+            width: 100%;
+            justify-content: center;
+        }
+        
         .comment {
             flex-direction: column;
             gap: 1rem;
@@ -886,6 +1445,26 @@
         
         .comment-avatar {
             align-self: flex-start;
+        }
+        
+        .newsletter-form {
+            flex-direction: column;
+        }
+        
+        .newsletter-input {
+            width: 100%;
+        }
+        
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .back-to-top {
+            bottom: 1rem;
+            left: 1rem;
+            width: 40px;
+            height: 40px;
         }
     }
     
@@ -895,12 +1474,29 @@
             min-height: 300px;
         }
         
+        .article-title {
+            font-size: 1.8rem;
+        }
+        
         .related-articles {
             grid-template-columns: 1fr;
         }
         
-        .footer-content {
-            grid-template-columns: 1fr;
+        .navbar-brand {
+            font-size: 1.2rem;
+        }
+        
+        .logo-img {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+        }
+        
+        .related-title {
+            font-size: 1.5rem;
         }
     }
     
@@ -909,7 +1505,11 @@
         .welcome-bar,
         .navbar,
         .article-tools,
-        .footer {
+        .toc-container,
+        .comments-section,
+        .newsletter-section,
+        .footer,
+        .back-to-top {
             display: none;
         }
         
@@ -942,6 +1542,10 @@
         .article-content img {
             max-width: 100% !important;
             height: auto !important;
+        }
+        
+        .related-section {
+            page-break-before: always;
         }
     }
     </style>
@@ -983,6 +1587,17 @@
         </div>
     </nav>
     
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'country_home' country.slug %}">الرئيسية</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'category_view' country.slug article.category.slug %}">{{ article.category.name }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ article.title|truncatewords:5 }}</li>
+            </ol>
+        </nav>
+    </div>
+    
     <!-- هيدر المقال -->
     <header class="article-header" style="background-image: url('{% if article.image_url %}{{ article.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}')">
         <div class="header-overlay"></div>
@@ -1004,6 +1619,10 @@
                             {{ article.category.name }}
                         </a>
                     </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <span>دقيقة قراءة</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1014,6 +1633,7 @@
         <!-- أدوات المقال -->
         <div class="article-tools">
             <div class="share-buttons">
+                <span class="share-label">شارك:</span>
                 <a href="#" class="share-btn" onclick="shareOnFacebook()" aria-label="مشاركة على فيسبوك">
                     <i class="fab fa-facebook-f" aria-hidden="true"></i>
                 </a>
@@ -1043,7 +1663,7 @@
         
         <!-- جدول المحتويات -->
         <div class="toc-container" id="tocContainer">
-            <h2 class="toc-title">جدول المحتويات</h2>
+            <h2 class="toc-title"><i class="fas fa-list"></i> جدول المحتويات</h2>
             <ul class="toc-list" id="tocList">
                 <!-- سيتم ملؤه بواسطة JavaScript -->
             </ul>
@@ -1054,10 +1674,33 @@
             {{ article.content|safe }}
         </article>
         
+        <!-- قسم التصنيفات -->
+        <div class="article-tags">
+            <span class="tag-label">الكلمات المفتاحية:</span>
+            {% for tag in article.tags.all %}
+            <a href="{% url 'tag_view' country.slug tag.slug %}" class="tag">
+                <i class="fas fa-hashtag"></i> {{ tag.name }}
+            </a>
+            {% endfor %}
+        </div>
+        
+        <!-- تقييم المقال -->
+        <div class="rating-section">
+            <h3 class="rating-title">كيف تقيم هذا المقال؟</h3>
+            <div class="rating-stars">
+                <span class="rating-star" data-value="1"><i class="far fa-star"></i></span>
+                <span class="rating-star" data-value="2"><i class="far fa-star"></i></span>
+                <span class="rating-star" data-value="3"><i class="far fa-star"></i></span>
+                <span class="rating-star" data-value="4"><i class="far fa-star"></i></span>
+                <span class="rating-star" data-value="5"><i class="far fa-star"></i></span>
+            </div>
+            <p class="rating-text">اضغط على النجوم للتقييم</p>
+        </div>
+        
         <!-- أدوات المقال السفلية -->
         <div class="article-tools">
             <div class="share-buttons">
-                <span>شارك المقال:</span>
+                <span class="share-label">شارك المقال:</span>
                 <a href="#" class="share-btn" onclick="shareOnFacebook()" aria-label="مشاركة على فيسبوك">
                     <i class="fab fa-facebook-f" aria-hidden="true"></i>
                 </a>
@@ -1081,7 +1724,7 @@
         
         <!-- قسم التعليقات -->
         <section class="comments-section" id="comments">
-            <h2 class="section-title">التعليقات</h2>
+            <h2 class="section-title"><i class="fas fa-comments"></i> التعليقات ({{ comments.count }})</h2>
             
             <!-- نموذج إضافة تعليق -->
             <div class="comment-form">
@@ -1089,12 +1732,20 @@
                 <form method="post" id="commentForm">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="اسمك" required aria-label="اسمك">
+                        <label for="name" class="form-label">اسمك</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="أدخل اسمك" required aria-label="اسمك">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" name="content" placeholder="أدخل تعليقك" rows="4" required aria-label="نص التعليق"></textarea>
+                        <label for="email" class="form-label">البريد الإلكتروني (اختياري)</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" aria-label="البريد الإلكتروني">
                     </div>
-                    <button type="submit" class="btn-submit">إضافة تعليق</button>
+                    <div class="form-group">
+                        <label for="content" class="form-label">تعليقك</label>
+                        <textarea class="form-control" id="content" name="content" placeholder="أدخل تعليقك هنا..." rows="4" required aria-label="نص التعليق"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> إضافة تعليق
+                    </button>
                 </form>
             </div>
             
@@ -1103,6 +1754,7 @@
                 <div class="alert-messages">
                     {% for message in messages %}
                         <div class="alert alert-{{ message.tags }}">
+                            <i class="fas fa-{% if message.tags == 'success' %}check-circle{% else %}exclamation-circle{% endif %}"></i>
                             {{ message }}
                         </div>
                     {% endfor %}
@@ -1117,42 +1769,77 @@
                         {{ comment.name|slice:":1"|upper }}
                     </div>
                     <div class="comment-body">
-                        <h4 class="comment-author">{{ comment.name }}</h4>
-                        <time class="comment-date" datetime="{{ comment.created_at|date:'c' }}">{{ comment.created_at|date:"Y-m-d H:i" }}</time>
+                        <div class="comment-header">
+                            <h4 class="comment-author">{{ comment.name }}</h4>
+                            <time class="comment-date" datetime="{{ comment.created_at|date:'c' }}">{{ comment.created_at|date:"Y-m-d H:i" }}</time>
+                        </div>
                         <div class="comment-text">{{ comment.content }}</div>
+                        <div class="comment-actions">
+                            <span class="comment-action"><i class="fas fa-thumbs-up"></i> أعجبني</span>
+                            <span class="comment-action"><i class="fas fa-reply"></i> رد</span>
+                            <span class="comment-action"><i class="fas fa-flag"></i> report</span>
+                        </div>
                     </div>
                 </div>
                 {% empty %}
-                <p class="no-comments">لا توجد تعليقات حتى الآن.</p>
+                <p class="no-comments">لا توجد تعليقات حتى الآن. كن أول من يعلق!</p>
                 {% endfor %}
             </div>
         </section>
     </main>
 
-<!-- مقالات ذات صلة -->
-<hr>
-<div class="related-articles">
-    <h3>مقالات ذات صلة</h3>
-    <div class="row">
-        {% for related in related_articles %}
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>
+    <!-- مقالات ذات صلة -->
+    <section class="related-section">
+        <div class="container">
+            <div class="related-header">
+                <h2 class="related-title">مقالات ذات صلة</h2>
+                <p class="related-subtitle">اكتشف المزيد من المحتوى المشابه في {{ country.name }}</p>
+            </div>
+            
+            <div class="related-articles">
+                {% for related in related_articles %}
+                <div class="related-article">
+                    <div class="article-image">
+                        <span class="article-category">{{ related.category.name }}</span>
+                        <img src="{% if related.image_url %}{{ related.image_url }}{% else %}{% static 'images/default_article.jpg' %}{% endif %}" alt="{{ related.title }}" loading="lazy">
+                    </div>
+                    <div class="related-info">
+                        <h3>
                             <a href="{% url 'article_detail' country_slug=related.country.slug article_slug=related.slug %}">
                                 {{ related.title }}
                             </a>
-                        </h5>
-                        <p>{{ related.content|truncatewords:20 }}</p>
+                        </h3>
+                        <div class="related-meta">
+                            <span><i class="far fa-calendar"></i> {{ related.publish_date|date:"Y-m-d" }}</span>
+                            <span><i class="far fa-eye"></i> {{ related.views }} مشاهدة</span>
+                        </div>
+                        <p class="related-excerpt">{{ related.summary|truncatewords:20 }}</p>
+                        <a href="{% url 'article_detail' country_slug=related.country.slug article_slug=related.slug %}" class="read-more">
+                            اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                        </a>
                     </div>
                 </div>
+                {% empty %}
+                <div class="col-12 text-center">
+                    <p>لا توجد مقالات ذات صلة حالياً.</p>
+                </div>
+                {% endfor %}
             </div>
-        {% empty %}
-            <p>لا توجد مقالات ذات صلة حالياً.</p>
-        {% endfor %}
-    </div>
-</div>
+        </div>
+    </section>
 
+    <!-- قسم النشرة البريدية -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2 class="newsletter-title">اشترك في نشرتنا البريدية</h2>
+            <p class="newsletter-text">احصل على آخر المقالات والأخبار مباشرة في بريدك الإلكتروني</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="بريدك الإلكتروني" required aria-label="البريد الإلكتروني">
+                <button type="submit" class="newsletter-btn">اشترك الآن</button>
+            </form>
+            <p class="newsletter-note">نحن نحترم خصوصيتك ولن نشارك بريدك مع أي طرف ثالث.</p>
+        </div>
+    </section>
 
     <!-- الفوتر -->
     <footer class="footer">
@@ -1189,6 +1876,20 @@
                         {% for cat in categories|slice:":5" %}
                         <li><a href="{% url 'category_view' country.slug cat.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> {{ cat.name }}</a></li>
                         {% endfor %}
+                        {% if categories.count > 5 %}
+                        <li><a href="{% url 'categories' country.slug %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> عرض الكل</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>الدول</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-left" aria-hidden="true"></i> مصر</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left" aria-hidden="true"></i> السعودية</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left" aria-hidden="true"></i> الإمارات</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left" aria-hidden="true"></i> الأردن</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left" aria-hidden="true"></i> المزيد</a></li>
                     </ul>
                 </div>
             </div>
@@ -1198,6 +1899,11 @@
             </div>
         </div>
     </footer>
+    
+    <!-- زر العودة إلى الأعلى -->
+    <a href="#" class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </a>
     
     <!-- Load non-critical JS asynchronously -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" async defer></script>
@@ -1214,6 +1920,14 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
         }
         
         // Initialize scroll state
@@ -1225,6 +1939,12 @@
             window.clearTimeout(isScrolling);
             isScrolling = setTimeout(handleScroll, 50);
         }, {passive: true});
+        
+        // Back to top functionality
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            scrollToTop();
+        });
         
         // Generate Table of Contents
         function generateTOC() {
@@ -1248,6 +1968,7 @@
                 
                 if (heading.tagName === 'H3') {
                     link.style.paddingRight = '20px';
+                    link.style.fontSize = '0.95em';
                 }
                 
                 listItem.appendChild(link);
@@ -1349,9 +2070,81 @@
             }
         }
         
+        // Rating system
+        const ratingStars = document.querySelectorAll('.rating-star');
+        ratingStars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                
+                // Reset all stars
+                ratingStars.forEach(s => {
+                    s.innerHTML = '<i class="far fa-star"></i>';
+                    s.classList.remove('active');
+                });
+                
+                // Fill stars up to the clicked one
+                for (let i = 0; i < value; i++) {
+                    ratingStars[i].innerHTML = '<i class="fas fa-star"></i>';
+                    ratingStars[i].classList.add('active');
+                }
+                
+                // Send rating to server (you would implement this)
+                console.log('User rated:', value);
+                
+                // Show thank you message
+                document.querySelector('.rating-text').textContent = 'شكراً لتقييمك!';
+            });
+            
+            star.addEventListener('mouseover', function() {
+                const value = this.getAttribute('data-value');
+                
+                ratingStars.forEach(s => {
+                    s.innerHTML = '<i class="far fa-star"></i>';
+                });
+                
+                for (let i = 0; i < value; i++) {
+                    ratingStars[i].innerHTML = '<i class="fas fa-star"></i>';
+                }
+            });
+            
+            star.addEventListener('mouseout', function() {
+                const activeStar = document.querySelector('.rating-star.active');
+                if (!activeStar) {
+                    ratingStars.forEach(s => {
+                        s.innerHTML = '<i class="far fa-star"></i>';
+                    });
+                    return;
+                }
+                
+                const value = activeStar.getAttribute('data-value');
+                ratingStars.forEach(s => {
+                    s.innerHTML = '<i class="far fa-star"></i>';
+                });
+                
+                for (let i = 0; i < value; i++) {
+                    ratingStars[i].innerHTML = '<i class="fas fa-star"></i>';
+                }
+            });
+        });
+        
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                
+                // Here you would typically send the email to your server
+                console.log('Newsletter subscription:', email);
+                
+                // Show success message
+                this.innerHTML = '<p style="color:white; margin:0">شكراً للاشتراك في النشرة البريدية!</p>';
+            });
+        }
+        
         // Animate elements on scroll
         function animateOnScroll() {
-            const elements = document.querySelectorAll('.related-article, .article-content, .comments-section');
+            const elements = document.querySelectorAll('.related-article, .article-content, .comments-section, .rating-section');
             const windowHeight = window.innerHeight;
             
             elements.forEach((element, index) => {
@@ -1367,19 +2160,41 @@
         }
         
         // Initialize elements for animation
-        document.querySelectorAll('.related-article, .article-content, .comments-section').forEach(el => {
+        document.querySelectorAll('.related-article, .article-content, .comments-section, .rating-section').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease-out';
         });
         
+        // Reading time estimation
+        function calculateReadingTime() {
+            const articleContent = document.querySelector('.article-content');
+            if (!articleContent) return;
+            
+            const text = articleContent.textContent;
+            const wordCount = text.split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / 200); // 200 words per minute
+            
+            const readingTimeElement = document.querySelector('.meta-item:last-child span');
+            if (readingTimeElement) {
+                readingTimeElement.textContent = readingTime + ' دقيقة قراءة';
+            }
+        }
+        
         // Initialize components
         generateTOC();
         animateOnScroll();
+        calculateReadingTime();
         
         // Event listeners
         window.addEventListener('load', animateOnScroll);
         window.addEventListener('scroll', animateOnScroll, {passive: true});
+        
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
     });
     </script>
 </body>
